@@ -74,6 +74,223 @@ CREATE TABLE `gen_table_column` (
 
 /*Data for the table `gen_table_column` */
 
+/*Table structure for table `qrtz_blob_triggers` */
+
+DROP TABLE IF EXISTS `qrtz_blob_triggers`;
+
+CREATE TABLE `qrtz_blob_triggers` (
+  `sched_name` varchar(120) NOT NULL,
+  `trigger_name` varchar(200) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  `blob_data` blob,
+  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
+  CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `qrtz_blob_triggers` */
+
+/*Table structure for table `qrtz_calendars` */
+
+DROP TABLE IF EXISTS `qrtz_calendars`;
+
+CREATE TABLE `qrtz_calendars` (
+  `sched_name` varchar(120) NOT NULL,
+  `calendar_name` varchar(200) NOT NULL,
+  `calendar` blob NOT NULL,
+  PRIMARY KEY (`sched_name`,`calendar_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `qrtz_calendars` */
+
+/*Table structure for table `qrtz_cron_triggers` */
+
+DROP TABLE IF EXISTS `qrtz_cron_triggers`;
+
+CREATE TABLE `qrtz_cron_triggers` (
+  `sched_name` varchar(120) NOT NULL,
+  `trigger_name` varchar(200) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  `cron_expression` varchar(200) NOT NULL,
+  `time_zone_id` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
+  CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `qrtz_cron_triggers` */
+
+insert  into `qrtz_cron_triggers`(`sched_name`,`trigger_name`,`trigger_group`,`cron_expression`,`time_zone_id`) values 
+('RuoyiScheduler','TASK_CLASS_NAME1','DEFAULT','0/10 * * * * ?','Asia/Shanghai'),
+('RuoyiScheduler','TASK_CLASS_NAME2','DEFAULT','0/15 * * * * ?','Asia/Shanghai'),
+('RuoyiScheduler','TASK_CLASS_NAME3','DEFAULT','0/20 * * * * ?','Asia/Shanghai');
+
+/*Table structure for table `qrtz_fired_triggers` */
+
+DROP TABLE IF EXISTS `qrtz_fired_triggers`;
+
+CREATE TABLE `qrtz_fired_triggers` (
+  `sched_name` varchar(120) NOT NULL,
+  `entry_id` varchar(95) NOT NULL,
+  `trigger_name` varchar(200) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  `instance_name` varchar(200) NOT NULL,
+  `fired_time` bigint(13) NOT NULL,
+  `sched_time` bigint(13) NOT NULL,
+  `priority` int(11) NOT NULL,
+  `state` varchar(16) NOT NULL,
+  `job_name` varchar(200) DEFAULT NULL,
+  `job_group` varchar(200) DEFAULT NULL,
+  `is_nonconcurrent` varchar(1) DEFAULT NULL,
+  `requests_recovery` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`sched_name`,`entry_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `qrtz_fired_triggers` */
+
+/*Table structure for table `qrtz_job_details` */
+
+DROP TABLE IF EXISTS `qrtz_job_details`;
+
+CREATE TABLE `qrtz_job_details` (
+  `sched_name` varchar(120) NOT NULL,
+  `job_name` varchar(200) NOT NULL,
+  `job_group` varchar(200) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  `job_class_name` varchar(250) NOT NULL,
+  `is_durable` varchar(1) NOT NULL,
+  `is_nonconcurrent` varchar(1) NOT NULL,
+  `is_update_data` varchar(1) NOT NULL,
+  `requests_recovery` varchar(1) NOT NULL,
+  `job_data` blob,
+  PRIMARY KEY (`sched_name`,`job_name`,`job_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `qrtz_job_details` */
+
+insert  into `qrtz_job_details`(`sched_name`,`job_name`,`job_group`,`description`,`job_class_name`,`is_durable`,`is_nonconcurrent`,`is_update_data`,`requests_recovery`,`job_data`) values 
+('RuoyiScheduler','TASK_CLASS_NAME1','DEFAULT',NULL,'com.ruoyi.common.utils.job.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0\'com.ruoyi.project.monitor.domain.SysJob\0\0\0\0\0\0\0\0L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0statusq\0~\0	xr\0)com.ruoyi.framework.web.domain.BaseEntity\0\0\0\0\0\0\0\0\nL\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0	dataScopeq\0~\0	L\0endTimeq\0~\0	L\0paramsq\0~\0L\0remarkq\0~\0	L\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xpppt\0\0pppt\01t\00/10 * * * * ?t\0ryTask.ryNoParamst\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（无参）t\03t\01x\0'),
+('RuoyiScheduler','TASK_CLASS_NAME2','DEFAULT',NULL,'com.ruoyi.common.utils.job.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0\'com.ruoyi.project.monitor.domain.SysJob\0\0\0\0\0\0\0\0L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0statusq\0~\0	xr\0)com.ruoyi.framework.web.domain.BaseEntity\0\0\0\0\0\0\0\0\nL\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0	dataScopeq\0~\0	L\0endTimeq\0~\0	L\0paramsq\0~\0L\0remarkq\0~\0	L\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xpppt\0\0pppt\01t\00/15 * * * * ?t\0ryTask.ryParams(\'ry\')t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（有参）t\03t\01x\0'),
+('RuoyiScheduler','TASK_CLASS_NAME3','DEFAULT',NULL,'com.ruoyi.common.utils.job.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0\'com.ruoyi.project.monitor.domain.SysJob\0\0\0\0\0\0\0\0L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0statusq\0~\0	xr\0)com.ruoyi.framework.web.domain.BaseEntity\0\0\0\0\0\0\0\0\nL\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0	dataScopeq\0~\0	L\0endTimeq\0~\0	L\0paramsq\0~\0L\0remarkq\0~\0	L\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xpppt\0\0pppt\01t\00/20 * * * * ?t\08ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（多参）t\03t\01x\0');
+
+/*Table structure for table `qrtz_locks` */
+
+DROP TABLE IF EXISTS `qrtz_locks`;
+
+CREATE TABLE `qrtz_locks` (
+  `sched_name` varchar(120) NOT NULL,
+  `lock_name` varchar(40) NOT NULL,
+  PRIMARY KEY (`sched_name`,`lock_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `qrtz_locks` */
+
+insert  into `qrtz_locks`(`sched_name`,`lock_name`) values 
+('RuoyiScheduler','STATE_ACCESS'),
+('RuoyiScheduler','TRIGGER_ACCESS');
+
+/*Table structure for table `qrtz_paused_trigger_grps` */
+
+DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
+
+CREATE TABLE `qrtz_paused_trigger_grps` (
+  `sched_name` varchar(120) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  PRIMARY KEY (`sched_name`,`trigger_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `qrtz_paused_trigger_grps` */
+
+/*Table structure for table `qrtz_scheduler_state` */
+
+DROP TABLE IF EXISTS `qrtz_scheduler_state`;
+
+CREATE TABLE `qrtz_scheduler_state` (
+  `sched_name` varchar(120) NOT NULL,
+  `instance_name` varchar(200) NOT NULL,
+  `last_checkin_time` bigint(13) NOT NULL,
+  `checkin_interval` bigint(13) NOT NULL,
+  PRIMARY KEY (`sched_name`,`instance_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `qrtz_scheduler_state` */
+
+insert  into `qrtz_scheduler_state`(`sched_name`,`instance_name`,`last_checkin_time`,`checkin_interval`) values 
+('RuoyiScheduler','JL-PC1587785711907',1587787380431,15000);
+
+/*Table structure for table `qrtz_simple_triggers` */
+
+DROP TABLE IF EXISTS `qrtz_simple_triggers`;
+
+CREATE TABLE `qrtz_simple_triggers` (
+  `sched_name` varchar(120) NOT NULL,
+  `trigger_name` varchar(200) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  `repeat_count` bigint(7) NOT NULL,
+  `repeat_interval` bigint(12) NOT NULL,
+  `times_triggered` bigint(10) NOT NULL,
+  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
+  CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `qrtz_simple_triggers` */
+
+/*Table structure for table `qrtz_simprop_triggers` */
+
+DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
+
+CREATE TABLE `qrtz_simprop_triggers` (
+  `sched_name` varchar(120) NOT NULL,
+  `trigger_name` varchar(200) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  `str_prop_1` varchar(512) DEFAULT NULL,
+  `str_prop_2` varchar(512) DEFAULT NULL,
+  `str_prop_3` varchar(512) DEFAULT NULL,
+  `int_prop_1` int(11) DEFAULT NULL,
+  `int_prop_2` int(11) DEFAULT NULL,
+  `long_prop_1` bigint(20) DEFAULT NULL,
+  `long_prop_2` bigint(20) DEFAULT NULL,
+  `dec_prop_1` decimal(13,4) DEFAULT NULL,
+  `dec_prop_2` decimal(13,4) DEFAULT NULL,
+  `bool_prop_1` varchar(1) DEFAULT NULL,
+  `bool_prop_2` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
+  CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `qrtz_simprop_triggers` */
+
+/*Table structure for table `qrtz_triggers` */
+
+DROP TABLE IF EXISTS `qrtz_triggers`;
+
+CREATE TABLE `qrtz_triggers` (
+  `sched_name` varchar(120) NOT NULL,
+  `trigger_name` varchar(200) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  `job_name` varchar(200) NOT NULL,
+  `job_group` varchar(200) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  `next_fire_time` bigint(13) DEFAULT NULL,
+  `prev_fire_time` bigint(13) DEFAULT NULL,
+  `priority` int(11) DEFAULT NULL,
+  `trigger_state` varchar(16) NOT NULL,
+  `trigger_type` varchar(8) NOT NULL,
+  `start_time` bigint(13) NOT NULL,
+  `end_time` bigint(13) DEFAULT NULL,
+  `calendar_name` varchar(200) DEFAULT NULL,
+  `misfire_instr` smallint(2) DEFAULT NULL,
+  `job_data` blob,
+  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
+  KEY `sched_name` (`sched_name`,`job_name`,`job_group`),
+  CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `job_name`, `job_group`) REFERENCES `qrtz_job_details` (`sched_name`, `job_name`, `job_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `qrtz_triggers` */
+
+insert  into `qrtz_triggers`(`sched_name`,`trigger_name`,`trigger_group`,`job_name`,`job_group`,`description`,`next_fire_time`,`prev_fire_time`,`priority`,`trigger_state`,`trigger_type`,`start_time`,`end_time`,`calendar_name`,`misfire_instr`,`job_data`) values 
+('RuoyiScheduler','TASK_CLASS_NAME1','DEFAULT','TASK_CLASS_NAME1','DEFAULT',NULL,1587787310000,-1,5,'PAUSED','CRON',1587785712000,0,NULL,2,''),
+('RuoyiScheduler','TASK_CLASS_NAME2','DEFAULT','TASK_CLASS_NAME2','DEFAULT',NULL,1587785715000,-1,5,'PAUSED','CRON',1587785712000,0,NULL,2,''),
+('RuoyiScheduler','TASK_CLASS_NAME3','DEFAULT','TASK_CLASS_NAME3','DEFAULT',NULL,1587785720000,-1,5,'PAUSED','CRON',1587785712000,0,NULL,2,'');
+
 /*Table structure for table `sys_config` */
 
 DROP TABLE IF EXISTS `sys_config`;
@@ -255,7 +472,7 @@ CREATE TABLE `sys_job` (
 /*Data for the table `sys_job` */
 
 insert  into `sys_job`(`job_id`,`job_name`,`job_group`,`invoke_target`,`cron_expression`,`misfire_policy`,`concurrent`,`status`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
-(1,'系统默认（无参）','DEFAULT','ryTask.ryNoParams','0/10 * * * * ?','3','1','1','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1,'系统默认（无参）','DEFAULT','ryTask.ryNoParams','0/10 * * * * ?','3','1','1','admin','2018-03-16 11:33:00','ry','2020-04-25 12:01:48',''),
 (2,'系统默认（有参）','DEFAULT','ryTask.ryParams(\'ry\')','0/15 * * * * ?','3','1','1','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
 (3,'系统默认（多参）','DEFAULT','ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)','0/20 * * * * ?','3','1','1','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','');
 
@@ -273,9 +490,12 @@ CREATE TABLE `sys_job_log` (
   `exception_info` varchar(2000) DEFAULT '' COMMENT '异常信息',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`job_log_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='定时任务调度日志表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='定时任务调度日志表';
 
 /*Data for the table `sys_job_log` */
+
+insert  into `sys_job_log`(`job_log_id`,`job_name`,`job_group`,`invoke_target`,`job_message`,`status`,`exception_info`,`create_time`) values 
+(1,'系统默认（无参）','DEFAULT','ryTask.ryNoParams','系统默认（无参） 总共耗时：8毫秒','0','','2020-04-25 12:01:44');
 
 /*Table structure for table `sys_logininfor` */
 
@@ -292,7 +512,7 @@ CREATE TABLE `sys_logininfor` (
   `msg` varchar(255) DEFAULT '' COMMENT '提示消息',
   `login_time` datetime DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=169 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统访问记录';
 
 /*Data for the table `sys_logininfor` */
 
@@ -339,7 +559,33 @@ insert  into `sys_logininfor`(`info_id`,`user_name`,`ipaddr`,`login_location`,`b
 (139,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','退出成功','2020-03-05 15:01:35'),
 (140,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-05 15:02:42'),
 (141,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','退出成功','2020-03-05 15:02:52'),
-(142,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-05 15:02:58');
+(142,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-05 15:02:58'),
+(143,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','1','验证码错误','2020-03-05 17:30:10'),
+(144,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-05 17:30:18'),
+(145,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-05 19:51:04'),
+(146,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','退出成功','2020-03-05 20:03:30'),
+(147,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-05 20:03:38'),
+(148,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','退出成功','2020-03-05 20:04:30'),
+(149,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-05 20:04:36'),
+(150,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','退出成功','2020-03-05 20:07:39'),
+(151,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-05 20:09:24'),
+(152,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','退出成功','2020-03-05 20:10:03'),
+(153,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','1','验证码错误','2020-03-05 20:10:15'),
+(154,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-05 20:10:21'),
+(155,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-05 20:14:34'),
+(156,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','1','用户不存在/密码错误','2020-03-05 20:21:53'),
+(157,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-05 20:31:27'),
+(158,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-07 13:24:01'),
+(159,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-07 14:21:27'),
+(160,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','0','退出成功','2020-03-07 14:25:09'),
+(161,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-07 14:25:15'),
+(162,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-17 09:57:26'),
+(163,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-17 10:50:05'),
+(164,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','0','退出成功','2020-03-17 10:58:19'),
+(165,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-17 10:58:26'),
+(166,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','0','退出成功','2020-03-17 10:58:30'),
+(167,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-03-17 10:58:36'),
+(168,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2020-04-25 12:01:02');
 
 /*Table structure for table `sys_menu` */
 
@@ -355,6 +601,7 @@ CREATE TABLE `sys_menu` (
   `is_frame` int(1) DEFAULT '1' COMMENT '是否为外链（0是 1否）',
   `menu_type` char(1) DEFAULT '' COMMENT '菜单类型（M目录 C菜单 F按钮）',
   `visible` char(1) DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '菜单状态（0正常 1停用）',
   `perms` varchar(100) DEFAULT NULL COMMENT '权限标识',
   `icon` varchar(100) DEFAULT '#' COMMENT '菜单图标',
   `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
@@ -367,119 +614,119 @@ CREATE TABLE `sys_menu` (
 
 /*Data for the table `sys_menu` */
 
-insert  into `sys_menu`(`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`is_frame`,`menu_type`,`visible`,`perms`,`icon`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
-(1,'系统管理',0,1,'system',NULL,1,'M','0','','system','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','系统管理目录'),
-(2,'系统监控',0,2,'monitor',NULL,1,'M','0','','monitor','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','系统监控目录'),
-(3,'系统工具',0,3,'tool',NULL,1,'M','0','','tool','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','系统工具目录'),
-(4,'公众号管理',0,0,'wxmp',NULL,1,'M','0','','wechat','admin','2018-03-16 11:33:00','admin','2020-03-05 14:59:21','若依官网地址'),
-(100,'用户管理',1,1,'user','system/user/index',1,'C','0','system:user:list','user','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','用户管理菜单'),
-(101,'角色管理',1,2,'role','system/role/index',1,'C','0','system:role:list','peoples','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','角色管理菜单'),
-(102,'菜单管理',1,3,'menu','system/menu/index',1,'C','0','system:menu:list','tree-table','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','菜单管理菜单'),
-(103,'部门管理',1,4,'dept','system/dept/index',1,'C','0','system:dept:list','tree','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','部门管理菜单'),
-(104,'岗位管理',1,5,'post','system/post/index',1,'C','0','system:post:list','post','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','岗位管理菜单'),
-(105,'字典管理',1,6,'dict','system/dict/index',1,'C','0','system:dict:list','dict','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','字典管理菜单'),
-(106,'参数设置',1,7,'config','system/config/index',1,'C','0','system:config:list','edit','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','参数设置菜单'),
-(107,'通知公告',1,8,'notice','system/notice/index',1,'C','0','system:notice:list','message','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','通知公告菜单'),
-(108,'日志管理',1,9,'log','system/log/index',1,'M','0','','log','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','日志管理菜单'),
-(109,'在线用户',2,1,'online','monitor/online/index',1,'C','0','monitor:online:list','online','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','在线用户菜单'),
-(110,'定时任务',2,2,'job','monitor/job/index',1,'C','0','monitor:job:list','job','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','定时任务菜单'),
-(111,'数据监控',2,3,'druid','monitor/druid/index',1,'C','0','monitor:druid:list','druid','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','数据监控菜单'),
-(112,'服务监控',2,4,'server','monitor/server/index',1,'C','0','monitor:server:list','server','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','服务监控菜单'),
-(113,'表单构建',3,1,'build','tool/build/index',1,'C','0','tool:build:list','build','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','表单构建菜单'),
-(114,'代码生成',3,2,'gen','tool/gen/index',1,'C','0','tool:gen:list','code','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','代码生成菜单'),
-(115,'系统接口',3,3,'swagger','tool/swagger/index',1,'C','0','tool:swagger:list','swagger','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','系统接口菜单'),
-(500,'操作日志',108,1,'operlog','monitor/operlog/index',1,'C','0','monitor:operlog:list','form','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','操作日志菜单'),
-(501,'登录日志',108,2,'logininfor','monitor/logininfor/index',1,'C','0','monitor:logininfor:list','logininfor','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','登录日志菜单'),
-(1001,'用户查询',100,1,'','',1,'F','0','system:user:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1002,'用户新增',100,2,'','',1,'F','0','system:user:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1003,'用户修改',100,3,'','',1,'F','0','system:user:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1004,'用户删除',100,4,'','',1,'F','0','system:user:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1005,'用户导出',100,5,'','',1,'F','0','system:user:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1006,'用户导入',100,6,'','',1,'F','0','system:user:import','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1007,'重置密码',100,7,'','',1,'F','0','system:user:resetPwd','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1008,'角色查询',101,1,'','',1,'F','0','system:role:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1009,'角色新增',101,2,'','',1,'F','0','system:role:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1010,'角色修改',101,3,'','',1,'F','0','system:role:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1011,'角色删除',101,4,'','',1,'F','0','system:role:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1012,'角色导出',101,5,'','',1,'F','0','system:role:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1013,'菜单查询',102,1,'','',1,'F','0','system:menu:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1014,'菜单新增',102,2,'','',1,'F','0','system:menu:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1015,'菜单修改',102,3,'','',1,'F','0','system:menu:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1016,'菜单删除',102,4,'','',1,'F','0','system:menu:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1017,'部门查询',103,1,'','',1,'F','0','system:dept:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1018,'部门新增',103,2,'','',1,'F','0','system:dept:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1019,'部门修改',103,3,'','',1,'F','0','system:dept:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1020,'部门删除',103,4,'','',1,'F','0','system:dept:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1021,'岗位查询',104,1,'','',1,'F','0','system:post:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1022,'岗位新增',104,2,'','',1,'F','0','system:post:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1023,'岗位修改',104,3,'','',1,'F','0','system:post:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1024,'岗位删除',104,4,'','',1,'F','0','system:post:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1025,'岗位导出',104,5,'','',1,'F','0','system:post:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1026,'字典查询',105,1,'#','',1,'F','0','system:dict:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1027,'字典新增',105,2,'#','',1,'F','0','system:dict:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1028,'字典修改',105,3,'#','',1,'F','0','system:dict:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1029,'字典删除',105,4,'#','',1,'F','0','system:dict:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1030,'字典导出',105,5,'#','',1,'F','0','system:dict:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1031,'参数查询',106,1,'#','',1,'F','0','system:config:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1032,'参数新增',106,2,'#','',1,'F','0','system:config:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1033,'参数修改',106,3,'#','',1,'F','0','system:config:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1034,'参数删除',106,4,'#','',1,'F','0','system:config:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1035,'参数导出',106,5,'#','',1,'F','0','system:config:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1036,'公告查询',107,1,'#','',1,'F','0','system:notice:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1037,'公告新增',107,2,'#','',1,'F','0','system:notice:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1038,'公告修改',107,3,'#','',1,'F','0','system:notice:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1039,'公告删除',107,4,'#','',1,'F','0','system:notice:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1040,'操作查询',500,1,'#','',1,'F','0','monitor:operlog:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1041,'操作删除',500,2,'#','',1,'F','0','monitor:operlog:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1042,'日志导出',500,4,'#','',1,'F','0','monitor:operlog:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1043,'登录查询',501,1,'#','',1,'F','0','monitor:logininfor:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1044,'登录删除',501,2,'#','',1,'F','0','monitor:logininfor:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1045,'日志导出',501,3,'#','',1,'F','0','monitor:logininfor:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1046,'在线查询',109,1,'#','',1,'F','0','monitor:online:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1047,'批量强退',109,2,'#','',1,'F','0','monitor:online:batchLogout','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1048,'单条强退',109,3,'#','',1,'F','0','monitor:online:forceLogout','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1049,'任务查询',110,1,'#','',1,'F','0','monitor:job:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1050,'任务新增',110,2,'#','',1,'F','0','monitor:job:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1051,'任务修改',110,3,'#','',1,'F','0','monitor:job:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1052,'任务删除',110,4,'#','',1,'F','0','monitor:job:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1053,'状态修改',110,5,'#','',1,'F','0','monitor:job:changeStatus','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1054,'任务导出',110,7,'#','',1,'F','0','monitor:job:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1055,'生成查询',114,1,'#','',1,'F','0','tool:gen:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1056,'生成修改',114,2,'#','',1,'F','0','tool:gen:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1057,'生成删除',114,3,'#','',1,'F','0','tool:gen:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1058,'导入代码',114,2,'#','',1,'F','0','tool:gen:import','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1059,'预览代码',114,4,'#','',1,'F','0','tool:gen:preview','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(1060,'生成代码',114,5,'#','',1,'F','0','tool:gen:code','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
-(2000,'用户标签',4,10,'wxusertags','wxmp/wxusertags/index',1,'C','0','wxmp:wxusertags:list','tab','admin','2020-03-03 10:47:36','admin','2020-03-03 20:17:50',''),
-(2001,'修改标签',2000,10,'',NULL,1,'F','1','wxmp:wxusertags:edit','#','admin','2020-03-03 11:16:13','',NULL,''),
-(2002,'公众号用户',4,20,'wxuser','wxmp/wxuser/index',1,'C','0','wxmp:wxuser:index','peoples','admin','2020-03-04 10:13:30','',NULL,''),
-(2003,'用户消息',4,30,'wxmsg','wxmp/wxmsg/index',1,'C','0','wxmp:wxmsg:index','clipboard','admin','2020-03-04 10:15:47','',NULL,''),
-(2004,'素材管理',4,40,'wxmaterial','wxmp/wxmaterial/index',1,'C','0','wxmp:wxmsg:index','example','admin','2020-03-04 10:17:21','',NULL,''),
-(2005,'自定义菜单',4,50,'wxmenu','wxmp/wxmenu/detail',1,'C','0','wxmp:wxmenu:get','cascader','admin','2020-03-04 10:18:02','admin','2020-03-04 10:29:20',''),
-(2006,'消息自动回复',4,60,'wxautoreply','wxmp/wxautoreply/index',1,'C','0','wxmp:wxautoreply:index','dashboard','admin','2020-03-04 10:18:53','',NULL,''),
-(2007,'数据统计',4,70,'wxsummary','wxmp/wxsummary/index',1,'C','0',NULL,'druid','admin','2020-03-04 10:19:53','',NULL,''),
-(2008,'用户标签删除',2000,0,'',NULL,1,'F','0','wxmp:wxusertags:del','#','admin','2020-03-04 17:08:10','',NULL,''),
-(2009,'用户标签新增',2000,0,'',NULL,1,'F','0','wxmp:wxusertags:add','#','admin','2020-03-04 17:08:42','',NULL,''),
-(2010,'公众号用户新增',2002,0,'',NULL,1,'F','0','wxmp:wxuser:add','#','admin','2020-03-04 17:15:01','admin','2020-03-04 17:16:59',''),
-(2011,'公众号用户修改',2002,0,'',NULL,1,'F','0','wxmp:wxuser:edit','#','admin','2020-03-04 17:16:17','admin','2020-03-04 17:17:09',''),
-(2012,'公众号用户打标签',2002,0,'',NULL,1,'F','0','wxmp:wxuser:tagging','#','admin','2020-03-04 17:16:41','',NULL,''),
-(2013,'公众号用户备注修改',2002,0,'',NULL,1,'F','0','wxmp:wxuser:edit:remark','#','admin','2020-03-04 17:17:43','',NULL,''),
-(2014,'公众号用户同步',2002,0,'',NULL,1,'F','0','wxmp:wxuser:synchro','#','admin','2020-03-04 17:18:09','',NULL,''),
-(2015,'公众号用户删除',2002,0,'',NULL,1,'F','0','wxmp:wxuser:del','#','admin','2020-03-04 17:18:31','',NULL,''),
-(2016,'公众号用户详情',2002,0,'',NULL,1,'F','0','wxmp:wxuser:get','#','admin','2020-03-04 17:18:55','',NULL,''),
-(2017,'用户消息新增',2003,0,'',NULL,1,'F','0','wxmp:wxmsg:add','#','admin','2020-03-04 17:19:24','',NULL,''),
-(2018,'用户消息修改',2003,0,'',NULL,1,'F','0','wxmp:wxmsg:edit','#','admin','2020-03-04 17:19:45','',NULL,''),
-(2019,'用户消息删除',2003,0,'',NULL,1,'F','0','wxmp:wxmsg:del','#','admin','2020-03-04 17:20:03','',NULL,''),
-(2020,'用户消息详情',2003,0,'',NULL,1,'F','0','wxmp:wxmsg:get','#','admin','2020-03-04 17:20:21','',NULL,''),
-(2021,'素材新增',2004,0,'',NULL,1,'F','0','wxmp:wxmaterial:add','#','admin','2020-03-04 17:20:43','',NULL,''),
-(2022,'素材修改',2004,0,'',NULL,1,'F','0','wxmp:wxmaterial:edit','#','admin','2020-03-04 17:21:03','',NULL,''),
-(2023,'素材删除',2004,0,'',NULL,1,'F','0','wxmp:wxmaterial:del','#','admin','2020-03-04 17:21:24','',NULL,''),
-(2024,'素材详情',2004,0,'',NULL,1,'F','0','wxmp:wxmaterial:get','#','admin','2020-03-04 17:21:43','',NULL,''),
-(2025,'自定义菜单发布',2005,0,'',NULL,1,'F','0','wxmp:wxmenu:add','#','admin','2020-03-04 17:22:12','',NULL,''),
-(2026,'消息自动回复新增',2006,0,'',NULL,1,'F','0','wxmp:wxautoreply:add','#','admin','2020-03-04 17:22:43','',NULL,''),
-(2027,'消息自动回复修改',2006,0,'',NULL,1,'F','0','wxmp:wxautoreply:edit','#','admin','2020-03-04 17:23:05','',NULL,''),
-(2028,'消息自动回复删除',2006,0,'',NULL,1,'F','0','wxmp:wxautoreply:del','#','admin','2020-03-04 17:23:36','',NULL,''),
-(2029,'消息自动回复详情',2006,0,'',NULL,1,'F','0','wxmp:wxautoreply:get','#','admin','2020-03-04 17:23:59','',NULL,'');
+insert  into `sys_menu`(`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`is_frame`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
+(1,'系统管理',0,1,'system',NULL,1,'M','0','0','','system','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','系统管理目录'),
+(2,'系统监控',0,2,'monitor',NULL,1,'M','0','0','','monitor','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','系统监控目录'),
+(3,'系统工具',0,3,'tool',NULL,1,'M','0','0','','tool','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','系统工具目录'),
+(4,'公众号管理',0,0,'wxmp',NULL,1,'M','0','0','','wechat','admin','2018-03-16 11:33:00','admin','2020-03-05 14:59:21','若依官网地址'),
+(100,'用户管理',1,1,'user','system/user/index',1,'C','0','0','system:user:list','user','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','用户管理菜单'),
+(101,'角色管理',1,2,'role','system/role/index',1,'C','0','0','system:role:list','peoples','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','角色管理菜单'),
+(102,'菜单管理',1,3,'menu','system/menu/index',1,'C','0','0','system:menu:list','tree-table','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','菜单管理菜单'),
+(103,'部门管理',1,4,'dept','system/dept/index',1,'C','0','0','system:dept:list','tree','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','部门管理菜单'),
+(104,'岗位管理',1,5,'post','system/post/index',1,'C','0','0','system:post:list','post','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','岗位管理菜单'),
+(105,'字典管理',1,6,'dict','system/dict/index',1,'C','0','0','system:dict:list','dict','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','字典管理菜单'),
+(106,'参数设置',1,7,'config','system/config/index',1,'C','0','0','system:config:list','edit','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','参数设置菜单'),
+(107,'通知公告',1,8,'notice','system/notice/index',1,'C','0','0','system:notice:list','message','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','通知公告菜单'),
+(108,'日志管理',1,9,'log','system/log/index',1,'M','0','0','','log','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','日志管理菜单'),
+(109,'在线用户',2,1,'online','monitor/online/index',1,'C','0','0','monitor:online:list','online','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','在线用户菜单'),
+(110,'定时任务',2,2,'job','monitor/job/index',1,'C','0','0','monitor:job:list','job','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','定时任务菜单'),
+(111,'数据监控',2,3,'druid','monitor/druid/index',1,'C','0','0','monitor:druid:list','druid','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','数据监控菜单'),
+(112,'服务监控',2,4,'server','monitor/server/index',1,'C','0','0','monitor:server:list','server','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','服务监控菜单'),
+(113,'表单构建',3,1,'build','tool/build/index',1,'C','0','0','tool:build:list','build','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','表单构建菜单'),
+(114,'代码生成',3,2,'gen','tool/gen/index',1,'C','0','0','tool:gen:list','code','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','代码生成菜单'),
+(115,'系统接口',3,3,'swagger','tool/swagger/index',1,'C','0','0','tool:swagger:list','swagger','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','系统接口菜单'),
+(500,'操作日志',108,1,'operlog','monitor/operlog/index',1,'C','0','0','monitor:operlog:list','form','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','操作日志菜单'),
+(501,'登录日志',108,2,'logininfor','monitor/logininfor/index',1,'C','0','0','monitor:logininfor:list','logininfor','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','登录日志菜单'),
+(1001,'用户查询',100,1,'','',1,'F','0','0','system:user:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1002,'用户新增',100,2,'','',1,'F','0','0','system:user:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1003,'用户修改',100,3,'','',1,'F','0','0','system:user:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1004,'用户删除',100,4,'','',1,'F','0','0','system:user:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1005,'用户导出',100,5,'','',1,'F','0','0','system:user:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1006,'用户导入',100,6,'','',1,'F','0','0','system:user:import','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1007,'重置密码',100,7,'','',1,'F','0','0','system:user:resetPwd','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1008,'角色查询',101,1,'','',1,'F','0','0','system:role:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1009,'角色新增',101,2,'','',1,'F','0','0','system:role:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1010,'角色修改',101,3,'','',1,'F','0','0','system:role:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1011,'角色删除',101,4,'','',1,'F','0','0','system:role:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1012,'角色导出',101,5,'','',1,'F','0','0','system:role:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1013,'菜单查询',102,1,'','',1,'F','0','0','system:menu:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1014,'菜单新增',102,2,'','',1,'F','0','0','system:menu:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1015,'菜单修改',102,3,'','',1,'F','0','0','system:menu:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1016,'菜单删除',102,4,'','',1,'F','0','0','system:menu:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1017,'部门查询',103,1,'','',1,'F','0','0','system:dept:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1018,'部门新增',103,2,'','',1,'F','0','0','system:dept:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1019,'部门修改',103,3,'','',1,'F','0','0','system:dept:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1020,'部门删除',103,4,'','',1,'F','0','0','system:dept:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1021,'岗位查询',104,1,'','',1,'F','0','0','system:post:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1022,'岗位新增',104,2,'','',1,'F','0','0','system:post:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1023,'岗位修改',104,3,'','',1,'F','0','0','system:post:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1024,'岗位删除',104,4,'','',1,'F','0','0','system:post:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1025,'岗位导出',104,5,'','',1,'F','0','0','system:post:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1026,'字典查询',105,1,'#','',1,'F','0','0','system:dict:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1027,'字典新增',105,2,'#','',1,'F','0','0','system:dict:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1028,'字典修改',105,3,'#','',1,'F','0','0','system:dict:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1029,'字典删除',105,4,'#','',1,'F','0','0','system:dict:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1030,'字典导出',105,5,'#','',1,'F','0','0','system:dict:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1031,'参数查询',106,1,'#','',1,'F','0','0','system:config:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1032,'参数新增',106,2,'#','',1,'F','0','0','system:config:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1033,'参数修改',106,3,'#','',1,'F','0','0','system:config:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1034,'参数删除',106,4,'#','',1,'F','0','0','system:config:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1035,'参数导出',106,5,'#','',1,'F','0','0','system:config:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1036,'公告查询',107,1,'#','',1,'F','0','0','system:notice:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1037,'公告新增',107,2,'#','',1,'F','0','0','system:notice:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1038,'公告修改',107,3,'#','',1,'F','0','0','system:notice:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1039,'公告删除',107,4,'#','',1,'F','0','0','system:notice:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1040,'操作查询',500,1,'#','',1,'F','0','0','monitor:operlog:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1041,'操作删除',500,2,'#','',1,'F','0','0','monitor:operlog:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1042,'日志导出',500,4,'#','',1,'F','0','0','monitor:operlog:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1043,'登录查询',501,1,'#','',1,'F','0','0','monitor:logininfor:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1044,'登录删除',501,2,'#','',1,'F','0','0','monitor:logininfor:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1045,'日志导出',501,3,'#','',1,'F','0','0','monitor:logininfor:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1046,'在线查询',109,1,'#','',1,'F','0','0','monitor:online:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1047,'批量强退',109,2,'#','',1,'F','0','0','monitor:online:batchLogout','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1048,'单条强退',109,3,'#','',1,'F','0','0','monitor:online:forceLogout','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1049,'任务查询',110,1,'#','',1,'F','0','0','monitor:job:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1050,'任务新增',110,2,'#','',1,'F','0','0','monitor:job:add','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1051,'任务修改',110,3,'#','',1,'F','0','0','monitor:job:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1052,'任务删除',110,4,'#','',1,'F','0','0','monitor:job:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1053,'状态修改',110,5,'#','',1,'F','0','0','monitor:job:changeStatus','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1054,'任务导出',110,7,'#','',1,'F','0','0','monitor:job:export','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1055,'生成查询',114,1,'#','',1,'F','0','0','tool:gen:query','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1056,'生成修改',114,2,'#','',1,'F','0','0','tool:gen:edit','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1057,'生成删除',114,3,'#','',1,'F','0','0','tool:gen:remove','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1058,'导入代码',114,2,'#','',1,'F','0','0','tool:gen:import','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1059,'预览代码',114,4,'#','',1,'F','0','0','tool:gen:preview','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(1060,'生成代码',114,5,'#','',1,'F','0','0','tool:gen:code','#','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
+(2000,'用户标签',4,10,'wxusertags','wxmp/wxusertags/index',1,'C','0','0','wxmp:wxusertags:list','tab','admin','2020-03-03 10:47:36','admin','2020-03-03 20:17:50',''),
+(2001,'修改标签',2000,10,'',NULL,1,'F','1','0','wxmp:wxusertags:edit','#','admin','2020-03-03 11:16:13','',NULL,''),
+(2002,'公众号用户',4,20,'wxuser','wxmp/wxuser/index',1,'C','0','0','wxmp:wxuser:index','peoples','admin','2020-03-04 10:13:30','',NULL,''),
+(2003,'用户消息',4,30,'wxmsg','wxmp/wxmsg/index',1,'C','0','0','wxmp:wxmsg:index','clipboard','admin','2020-03-04 10:15:47','',NULL,''),
+(2004,'素材管理',4,40,'wxmaterial','wxmp/wxmaterial/index',1,'C','0','0','wxmp:wxmsg:index','example','admin','2020-03-04 10:17:21','',NULL,''),
+(2005,'自定义菜单',4,50,'wxmenu','wxmp/wxmenu/detail',1,'C','0','0','wxmp:wxmenu:get','cascader','admin','2020-03-04 10:18:02','admin','2020-03-04 10:29:20',''),
+(2006,'消息自动回复',4,60,'wxautoreply','wxmp/wxautoreply/index',1,'C','0','0','wxmp:wxautoreply:index','dashboard','admin','2020-03-04 10:18:53','',NULL,''),
+(2007,'数据统计',4,70,'wxsummary','wxmp/wxsummary/index',1,'C','0','0',NULL,'druid','admin','2020-03-04 10:19:53','',NULL,''),
+(2008,'用户标签删除',2000,0,'',NULL,1,'F','0','0','wxmp:wxusertags:del','#','admin','2020-03-04 17:08:10','',NULL,''),
+(2009,'用户标签新增',2000,0,'',NULL,1,'F','0','0','wxmp:wxusertags:add','#','admin','2020-03-04 17:08:42','',NULL,''),
+(2010,'公众号用户新增',2002,0,'',NULL,1,'F','0','0','wxmp:wxuser:add','#','admin','2020-03-04 17:15:01','admin','2020-03-04 17:16:59',''),
+(2011,'公众号用户修改',2002,0,'',NULL,1,'F','0','0','wxmp:wxuser:edit','#','admin','2020-03-04 17:16:17','admin','2020-03-04 17:17:09',''),
+(2012,'公众号用户打标签',2002,0,'',NULL,1,'F','0','0','wxmp:wxuser:tagging','#','admin','2020-03-04 17:16:41','',NULL,''),
+(2013,'公众号用户备注修改',2002,0,'',NULL,1,'F','0','0','wxmp:wxuser:edit:remark','#','admin','2020-03-04 17:17:43','',NULL,''),
+(2014,'公众号用户同步',2002,0,'',NULL,1,'F','0','0','wxmp:wxuser:synchro','#','admin','2020-03-04 17:18:09','',NULL,''),
+(2015,'公众号用户删除',2002,0,'',NULL,1,'F','0','0','wxmp:wxuser:del','#','admin','2020-03-04 17:18:31','',NULL,''),
+(2016,'公众号用户详情',2002,0,'',NULL,1,'F','0','0','wxmp:wxuser:get','#','admin','2020-03-04 17:18:55','',NULL,''),
+(2017,'用户消息新增',2003,0,'',NULL,1,'F','0','0','wxmp:wxmsg:add','#','admin','2020-03-04 17:19:24','',NULL,''),
+(2018,'用户消息修改',2003,0,'',NULL,1,'F','0','0','wxmp:wxmsg:edit','#','admin','2020-03-04 17:19:45','',NULL,''),
+(2019,'用户消息删除',2003,0,'',NULL,1,'F','0','0','wxmp:wxmsg:del','#','admin','2020-03-04 17:20:03','',NULL,''),
+(2020,'用户消息详情',2003,0,'',NULL,1,'F','0','0','wxmp:wxmsg:get','#','admin','2020-03-04 17:20:21','',NULL,''),
+(2021,'素材新增',2004,0,'',NULL,1,'F','0','0','wxmp:wxmaterial:add','#','admin','2020-03-04 17:20:43','',NULL,''),
+(2022,'素材修改',2004,0,'',NULL,1,'F','0','0','wxmp:wxmaterial:edit','#','admin','2020-03-04 17:21:03','',NULL,''),
+(2023,'素材删除',2004,0,'',NULL,1,'F','0','0','wxmp:wxmaterial:del','#','admin','2020-03-04 17:21:24','',NULL,''),
+(2024,'素材详情',2004,0,'',NULL,1,'F','0','0','wxmp:wxmaterial:get','#','admin','2020-03-04 17:21:43','',NULL,''),
+(2025,'自定义菜单发布',2005,0,'',NULL,1,'F','0','0','wxmp:wxmenu:add','#','admin','2020-03-04 17:22:12','',NULL,''),
+(2026,'消息自动回复新增',2006,0,'',NULL,1,'F','0','0','wxmp:wxautoreply:add','#','admin','2020-03-04 17:22:43','',NULL,''),
+(2027,'消息自动回复修改',2006,0,'',NULL,1,'F','0','0','wxmp:wxautoreply:edit','#','admin','2020-03-04 17:23:05','',NULL,''),
+(2028,'消息自动回复删除',2006,0,'',NULL,1,'F','0','0','wxmp:wxautoreply:del','#','admin','2020-03-04 17:23:36','',NULL,''),
+(2029,'消息自动回复详情',2006,0,'',NULL,1,'F','0','0','wxmp:wxautoreply:get','#','admin','2020-03-04 17:23:59','',NULL,'');
 
 /*Table structure for table `sys_notice` */
 
@@ -527,7 +774,7 @@ CREATE TABLE `sys_oper_log` (
   `error_msg` varchar(2000) DEFAULT '' COMMENT '错误消息',
   `oper_time` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`oper_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=155 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='操作日志记录';
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='操作日志记录';
 
 /*Data for the table `sys_oper_log` */
 
@@ -586,7 +833,13 @@ insert  into `sys_oper_log`(`oper_id`,`title`,`business_type`,`method`,`request_
 (151,'菜单管理',1,'com.ruoyi.project.system.controller.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"消息自动回复修改\",\"params\":{},\"parentId\":2006,\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"wxmp:wxautoreply:edit\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2020-03-04 17:23:05'),
 (152,'菜单管理',1,'com.ruoyi.project.system.controller.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"消息自动回复删除\",\"params\":{},\"parentId\":2006,\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"wxmp:wxautoreply:del\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2020-03-04 17:23:36'),
 (153,'菜单管理',1,'com.ruoyi.project.system.controller.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"消息自动回复详情\",\"params\":{},\"parentId\":2006,\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"wxmp:wxautoreply:get\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2020-03-04 17:23:59'),
-(154,'菜单管理',2,'com.ruoyi.project.system.controller.SysMenuController.edit()','PUT',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"wechat\",\"orderNum\":\"0\",\"menuName\":\"公众号管理\",\"params\":{},\"parentId\":0,\"path\":\"wxmp\",\"children\":[],\"createTime\":1521171180000,\"updateBy\":\"admin\",\"isFrame\":\"1\",\"menuId\":4,\"menuType\":\"M\",\"perms\":\"\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2020-03-05 14:59:21');
+(154,'菜单管理',2,'com.ruoyi.project.system.controller.SysMenuController.edit()','PUT',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"wechat\",\"orderNum\":\"0\",\"menuName\":\"公众号管理\",\"params\":{},\"parentId\":0,\"path\":\"wxmp\",\"children\":[],\"createTime\":1521171180000,\"updateBy\":\"admin\",\"isFrame\":\"1\",\"menuId\":4,\"menuType\":\"M\",\"perms\":\"\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2020-03-05 14:59:21'),
+(155,'角色管理',2,'com.ruoyi.project.system.controller.SysRoleController.edit()','PUT',1,'admin',NULL,'/system/role','127.0.0.1','内网IP','{\"flag\":false,\"roleId\":100,\"admin\":false,\"dataScope\":\"1\",\"delFlag\":\"0\",\"params\":{},\"roleSort\":\"0\",\"createTime\":1583312516000,\"updateBy\":\"admin\",\"roleKey\":\"test\",\"roleName\":\"test\",\"menuIds\":[2001,2002,2010,2011,2012,2013,2014,2015,2016,2003,2017,2018,2019,2020,2004,2021,2022,2023,2024,2005,2025,2006,2026,2027,2028,2029,2007,1,100,1001,1002,1003,1004,1005,1006,1007,101,1008,1009,1010,1011,1012,102,1013,1014,1015,1016,103,1017,1018,1019,1020,104,1021,1022,1023,1024,1025,105,1026,1027,1028,1029,1030,106,1031,1032,1033,1034,1035,107,1036,1037,1038,1039,108,500,1040,1041,1042,501,1043,1044,1045,4,2000],\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2020-03-05 20:09:40'),
+(156,'角色管理',2,'com.ruoyi.project.system.controller.SysRoleController.edit()','PUT',1,'admin',NULL,'/system/role','127.0.0.1','内网IP','{\"flag\":false,\"roleId\":100,\"admin\":false,\"dataScope\":\"1\",\"delFlag\":\"0\",\"params\":{},\"roleSort\":\"0\",\"createTime\":1583312516000,\"updateBy\":\"admin\",\"roleKey\":\"test\",\"roleName\":\"test\",\"menuIds\":[4,2000,2008,2009,2001,2002,2010,2011,2012,2013,2014,2015,2016,2003,2017,2018,2019,2020,2004,2021,2022,2023,2024,2005,2025,2006,2026,2027,2028,2029,2007,1,100,1001,1002,1003,1004,1005,1006,1007,101,1008,1009,1010,1011,1012,102,1013,1014,1015,1016,103,1017,1018,1019,1020,104,1021,1022,1023,1024,1025,105,1026,1027,1028,1029,1030,106,1031,1032,1033,1034,1035,107,1036,1037,1038,1039,108,500,1040,1041,1042,501,1043,1044,1045,2,109,1046,1047,1048,110,1049,1050,1051,1052,1053,1054,111,112,3,113,114,1055,1056,1058,1057,1059,1060,115],\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2020-03-05 20:09:59'),
+(157,'用户管理',2,'com.ruoyi.project.system.controller.SysUserController.edit()','PUT',1,'admin',NULL,'/system/user','127.0.0.1','内网IP','{\"roles\":[{\"flag\":false,\"roleId\":100,\"admin\":false,\"dataScope\":\"1\",\"params\":{},\"roleSort\":\"0\",\"roleKey\":\"test\",\"roleName\":\"test\",\"status\":\"0\"}],\"phonenumber\":\"18608549631\",\"admin\":false,\"delFlag\":\"0\",\"password\":\"\",\"updateBy\":\"admin\",\"postIds\":[],\"loginIp\":\"\",\"email\":\"1023536325@qq.com\",\"nickName\":\"test\",\"sex\":\"0\",\"deptId\":100,\"avatar\":\"\",\"dept\":{\"deptName\":\"若依科技\",\"leader\":\"若依\",\"deptId\":100,\"orderNum\":\"0\",\"params\":{},\"parentId\":0,\"children\":[],\"status\":\"0\"},\"params\":{},\"userName\":\"test\",\"userId\":100,\"createBy\":\"admin\",\"roleIds\":[100],\"createTime\":1583312549000,\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2020-03-17 10:58:41'),
+(158,'定时任务',2,'com.ruoyi.project.monitor.controller.SysJobController.run()','PUT',1,'test',NULL,'/monitor/job/run','127.0.0.1','内网IP','{\"jobGroup\":\"DEFAULT\",\"params\":{},\"jobId\":1,\"misfirePolicy\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2020-04-25 12:01:39'),
+(159,'定时任务',2,'com.ruoyi.project.monitor.controller.SysJobController.changeStatus()','PUT',1,'test',NULL,'/monitor/job/changeStatus','127.0.0.1','内网IP','{\"params\":{},\"jobId\":1,\"misfirePolicy\":\"0\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2020-04-25 12:01:44'),
+(160,'定时任务',2,'com.ruoyi.project.monitor.controller.SysJobController.changeStatus()','PUT',1,'test',NULL,'/monitor/job/changeStatus','127.0.0.1','内网IP','{\"params\":{},\"jobId\":1,\"misfirePolicy\":\"0\",\"status\":\"1\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2020-04-25 12:01:48');
 
 /*Table structure for table `sys_post` */
 
@@ -639,7 +892,7 @@ CREATE TABLE `sys_role` (
 insert  into `sys_role`(`role_id`,`role_name`,`role_key`,`role_sort`,`data_scope`,`status`,`del_flag`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
 (1,'管理员','admin',1,'1','0','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','管理员'),
 (2,'普通角色','common',2,'2','0','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','普通角色'),
-(100,'test','test',0,'1','0','0','admin','2020-03-04 17:01:56','',NULL,NULL);
+(100,'test','test',0,'1','0','0','admin','2020-03-04 17:01:56','admin','2020-03-05 20:09:59',NULL);
 
 /*Table structure for table `sys_role_dept` */
 
@@ -755,6 +1008,8 @@ insert  into `sys_role_menu`(`role_id`,`menu_id`) values
 (2,1059),
 (2,1060),
 (100,1),
+(100,2),
+(100,3),
 (100,4),
 (100,100),
 (100,101),
@@ -765,6 +1020,13 @@ insert  into `sys_role_menu`(`role_id`,`menu_id`) values
 (100,106),
 (100,107),
 (100,108),
+(100,109),
+(100,110),
+(100,111),
+(100,112),
+(100,113),
+(100,114),
+(100,115),
 (100,500),
 (100,501),
 (100,1001),
@@ -812,6 +1074,21 @@ insert  into `sys_role_menu`(`role_id`,`menu_id`) values
 (100,1043),
 (100,1044),
 (100,1045),
+(100,1046),
+(100,1047),
+(100,1048),
+(100,1049),
+(100,1050),
+(100,1051),
+(100,1052),
+(100,1053),
+(100,1054),
+(100,1055),
+(100,1056),
+(100,1057),
+(100,1058),
+(100,1059),
+(100,1060),
 (100,2000),
 (100,2001),
 (100,2002),
@@ -819,7 +1096,29 @@ insert  into `sys_role_menu`(`role_id`,`menu_id`) values
 (100,2004),
 (100,2005),
 (100,2006),
-(100,2007);
+(100,2007),
+(100,2008),
+(100,2009),
+(100,2010),
+(100,2011),
+(100,2012),
+(100,2013),
+(100,2014),
+(100,2015),
+(100,2016),
+(100,2017),
+(100,2018),
+(100,2019),
+(100,2020),
+(100,2021),
+(100,2022),
+(100,2023),
+(100,2024),
+(100,2025),
+(100,2026),
+(100,2027),
+(100,2028),
+(100,2029);
 
 /*Table structure for table `sys_user` */
 
@@ -853,7 +1152,7 @@ CREATE TABLE `sys_user` (
 insert  into `sys_user`(`user_id`,`dept_id`,`user_name`,`nick_name`,`user_type`,`email`,`phonenumber`,`sex`,`avatar`,`password`,`status`,`del_flag`,`login_ip`,`login_date`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
 (1,103,'admin','若依','00','ry@163.com','15888888888','1','','$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2','0','0','127.0.0.1','2018-03-16 11:33:00','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','管理员'),
 (2,105,'ry','若依','00','ry@qq.com','15666666666','1','','$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2','0','0','127.0.0.1','2018-03-16 11:33:00','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','测试员'),
-(100,100,'test','test','00','1023536325@qq.com','18608549631','0','','$2a$10$3jxuUvQAmkIuwtvYgXjNEOouJX89iv0lDZxWE2y.i9Ij0cIdB91Y6','0','0','',NULL,'admin','2020-03-04 17:02:29','admin','2020-03-04 17:03:28',NULL);
+(100,100,'test','test','00','1023536325@qq.com','18608549631','0','','$2a$10$3jxuUvQAmkIuwtvYgXjNEOouJX89iv0lDZxWE2y.i9Ij0cIdB91Y6','0','0','',NULL,'admin','2020-03-04 17:02:29','admin','2020-03-17 10:58:41',NULL);
 
 /*Table structure for table `sys_user_post` */
 
