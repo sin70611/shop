@@ -28,7 +28,7 @@ Maven >= 3.0
 
 ### [部署系统](https://gitee.com/joolun/JooLun-wx/wikis/B%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E7%B3%BB%E7%BB%9F?sort_id=2236020)
 
-### [公众号接入教程](https://gitee.com/joolun/JooLun-wx/wikis/C%20%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%A5%E5%85%A5%E6%95%99%E7%A8%8B?sort_id=2236061
+### [公众号接入教程](https://gitee.com/joolun/JooLun-wx/wikis/C%20%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%A5%E5%85%A5%E6%95%99%E7%A8%8B?sort_id=2236061)
 
 ### 内置功能
 
