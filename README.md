@@ -1,3 +1,4 @@
+### [阿里云领取￥2000红包，服务器低至￥91.80/年](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=ktp7i3ac)
 # JooLun微信管理平台开源版
 
 ### 平台简介
