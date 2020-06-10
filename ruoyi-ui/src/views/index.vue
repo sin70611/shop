@@ -5,7 +5,10 @@
     <p>公众号数据和后台数据同步</p>
     <p><el-link href="https://demo.joolun.com/" type="primary" target="_blank"><span style="font-size: 20px">多公众号版</span></el-link></p>
     <p><el-link href="https://demo.joolun.com/" type="success" target="_blank"><span style="font-size: 20px">小程序商城版</span></el-link></p>
-    <p><el-link href="https://www.aliyun.com/minisite/goods?userCode=ktp7i3ac" type="success" target="_blank">阿里云领取￥2000红包，服务器低至￥91.80/年</el-link></p>
+    <a href="https://www.aliyun.com/minisite/goods?userCode=ktp7i3ac" target="_blank">
+      <img src="https://23592599.s21i.faiusr.com/2/ABUIABACGAAgyPjr9gUop57p5gIwyAE4fg.jpg.webp">
+    </a>
+    <p><el-link href="https://www.aliyun.com/minisite/goods?userCode=ktp7i3ac" type="danger" target="_blank">阿里云领取￥2000红包，服务器低至￥91.80/年</el-link></p>
   </div>
 </template>
 
