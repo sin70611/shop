@@ -22,6 +22,7 @@ test/123456
 演示小程序：![输入图片说明](https://images.gitee.com/uploads/images/2020/0618/151046_ed7652af_5079715.jpeg "在这里输入图片标题")
 
 后台演示地址：http://demo.joolun.com
+官网地址：http://www.joolun.com
 ### 系统需求
 
 JDK >= 1.8
