@@ -7,7 +7,7 @@
 在[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)基础上集成了[MybatisPlus](https://github.com/baomidou/mybatis-plus)和[Avue](https://gitee.com/smallweigit/avue)，微信接口统一使用了[WxJava](https://gitee.com/binary/weixin-java-tools) SDK
 
 
-### 在线体验
+### 开源版在线体验
 
 演示公众号：![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/171054_0a84eb49_5079715.jpeg "qrcode_for_gh_e18eb0ef9a2d_258.jpg")
 
@@ -17,6 +17,11 @@
 test/123456
 ```
 文档地址：http://doc.ruoyi.vip
+### 商业版在线体验
+
+演示公众号：![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/171054_0a84eb49_5079715.jpeg "qrcode_for_gh_e18eb0ef9a2d_258.jpg")
+演示小程序：![输入图片说明](https://joolun-blog.oss-cn-zhangjiakou.aliyuncs.com/portal/gh_d01b456ef38a_258.jpg "在这里输入图片标题")
+后台演示地址：http://demo.joolun.com
 ### 系统需求
 
 JDK >= 1.8
