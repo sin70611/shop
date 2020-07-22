@@ -7,7 +7,7 @@
 在[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)基础上集成了[MybatisPlus](https://github.com/baomidou/mybatis-plus)和[Avue](https://gitee.com/smallweigit/avue)，微信接口统一使用了[WxJava](https://gitee.com/binary/weixin-java-tools) SDK
 
 
-### 开源版（MIT开源，可以免费使用）在线体验
+### 开源版（MIT开源，可以免费使用），在线体验
 
 演示公众号：![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/171054_0a84eb49_5079715.jpeg "qrcode_for_gh_e18eb0ef9a2d_258.jpg")
 后台演示地址：http://demo2.joolun.com
@@ -15,7 +15,7 @@
 账号/密码
 test/123456
 ```
-### 商业版（需购买才能源码，代码更规范、功能更强大）在线体验
+### 商业版（需购买才能源码，代码更规范、设计更合理、功能更强大），在线体验
 
 演示公众号：![输入图片说明](https://images.gitee.com/uploads/images/2020/0618/152053_f75a737c_5079715.jpeg "在这里输入图片标题")
 演示小程序：![输入图片说明](https://images.gitee.com/uploads/images/2020/0618/151046_ed7652af_5079715.jpeg "在这里输入图片标题")
