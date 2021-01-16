@@ -1,7 +1,7 @@
 ### [阿里云领取￥2000红包，服务器低至￥91.80/年](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=ktp7i3ac)
 
 ## 平台简介
-* 在[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)基础上集成了[MybatisPlus](https://github.com/baomidou/mybatis-plus)和[Avue](https://gitee.com/smallweigit/avue)，微信接口统一使用了[WxJava](https://gitee.com/binary/weixin-java-tools) SDK
+
 * 前端采用Vue、Element UI。
 * 后端采用Spring Boot、Spring Security、Redis & Jwt、Mybatis Plus。
 * 权限认证使用Jwt，支持多终端认证系统。
@@ -9,46 +9,8 @@
 * 高效率开发，使用代码生成器可以一键生成前后端代码。
 * 阿里云优惠券：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=ktp7i3ac)
 
-### 开源版（MIT开源，可以免费使用），在线体验
-
-演示公众号：![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/171054_0a84eb49_5079715.jpeg "qrcode_for_gh_e18eb0ef9a2d_258.jpg")
-
-后台演示地址：http://demo2.joolun.com
-```
-账号/密码
-test/123456
-```
-### 商业版（需购买才能源码，全新微服务架构、代码更规范、设计更合理、功能更强大），在线体验
-
-演示公众号：![输入图片说明](https://images.gitee.com/uploads/images/2020/0618/152053_f75a737c_5079715.jpeg "在这里输入图片标题")
-演示小程序：![输入图片说明](https://images.gitee.com/uploads/images/2020/0618/151046_ed7652af_5079715.jpeg "在这里输入图片标题")
-
-后台演示地址：http://demo.joolun.com
-
-官网地址：http://www.joolun.com
-### 系统需求
-
-JDK >= 1.8
-
-MySQL >= 5.8
-
-Maven >= 3.0
-
-### [运行系统](https://gitee.com/joolun/JooLun-wx/wikis/A%20%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C?sort_id=2235756)
-
-### [部署系统](https://gitee.com/joolun/JooLun-wx/wikis/B%20%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%83%A8%E7%BD%B2%E7%B3%BB%E7%BB%9F?sort_id=2236020)
-
-### [公众号接入教程](https://gitee.com/joolun/JooLun-wx/wikis/C%20%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%A5%E5%85%A5%E6%95%99%E7%A8%8B?sort_id=2236061)
-
 ## 内置功能
 
-1.  公众号用户标签管理
-1.  公众号用户管理
-1.  公众号用户消息管理
-1.  公众号素材管理
-1.  公众号自定义菜单管理
-1.  公众号消息自动回复管理
-1.  公众号营销数据统计
 1.  用户管理：用户是系统操作者，该功能主要完成系统用户配置。
 2.  部门管理：配置系统组织机构（公司、部门、小组），树结构展现支持数据权限。
 3.  岗位管理：配置系统用户所属担任职务。
@@ -68,13 +30,15 @@ Maven >= 3.0
 17. 在线构建器：拖动表单元素生成相应的HTML代码。
 18. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
 
+## 在线体验
+
+- admin/admin123  
+
+演示地址：http://demo2.joolun.com/  
+文档地址：http://doc.ruoyi.vip
 
 ## 演示图
-### 截图
-![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/161111_71e7f26a_5079715.png "QQ截图20200305161005.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/161314_7f067064_5079715.png "QQ截图20200305160938.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/161331_bae82a4f_5079715.png "QQ截图20200305160904.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/161342_d8e42604_5079715.png "QQ截图20200305160731.png")
+
 <table>
     <tr>
         <td><img src="https://oscimg.oschina.net/oscnet/cd1f90be5f2684f4560c9519c0f2a232ee8.jpg"/></td>
