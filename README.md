@@ -4,10 +4,11 @@
 * 基于[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)二开，集成了[MybatisPlus](https://github.com/baomidou/mybatis-plus)和[Avue](https://gitee.com/smallweigit/avue)，微信接口统一使用了[WxJava](https://gitee.com/binary/weixin-java-tools) SDK
 * 前端采用Vue、Element UI、Avue。
 * 后端采用Spring Boot、Spring Security、Redis & Jwt、Mybatis Plus。
+* 微信接口全部采用WxJava SDK调用。
+* 小程序端采用原生框架+Color UI。
 * 权限认证使用Jwt，支持多终端认证系统。
 * 支持加载动态权限菜单，多方式轻松权限控制。
 * 高效率开发，使用代码生成器可以一键生成前后端代码。
-* 近期会加入小程序商城模块
 * 阿里云优惠券：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=ktp7i3ac)
 
 ### 开源版（MIT开源，可以免费使用），在线体验
