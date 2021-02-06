@@ -22,13 +22,13 @@ test/123456
 ```
 ### 商业版（官网购买后获得源码，全新微服务架构、代码更规范、设计更合理、功能更强大），在线体验
 
-小程序商城版：
+- 小程序商城版：
 
 后台演示地址：http://demo.joolun.com
 
 演示商城：![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114507_937fd986_5079715.jpeg "qrcode_for_gh_6999ad5cfb2f_258.jpg")
 
-uniapp多店版：
+- uniapp多店版：
 
 后台演示地址：http://demo1.joolun.com
 
