@@ -25,6 +25,11 @@ test/123456
 |  产品名  |  后台演示地址  |  商城演示二维码  |
 |---|---|
 
+
+|  官网文档地址  |  https://www.yixiang.co |
+|---|---|
+| 管理后台演示地址：  |   https://demo2.yixiang.co |
+| 关注公众号点击单商户体验小程序与H5  |  ![输入图片说明](https://images.gitee.com/uploads/images/2021/0121/154904_12c09826_477893.png) |
 - 小程序商城版：后台演示地址：http://demo.joolun.com
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114507_937fd986_5079715.jpeg "qrcode_for_gh_6999ad5cfb2f_258.jpg")
