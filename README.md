@@ -30,7 +30,6 @@ uniapp多店版：
 后台演示地址：http://demo1.joolun.com
 演示商城：![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114525_cefaeb06_5079715.jpeg "qrcode_for_gh_ae23ad0d32af_258.jpg")
 
-官网地址：http://www.joolun.com
 ### 系统需求
 
 JDK >= 1.8
