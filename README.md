@@ -11,7 +11,7 @@
 * 高效率开发，使用代码生成器可以一键生成前后端代码。
 * 阿里云优惠券：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=ktp7i3ac)
 
-### 开源版（MIT开源，可以免费使用，项目使用请保留代码头部版权的代码作者即可），在线体验
+### 开源版（MIT开源，可以免费使用，项目使用请保留代码头部版权和代码原始作者即可），在线体验
 
 演示公众号：![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/171054_0a84eb49_5079715.jpeg "qrcode_for_gh_e18eb0ef9a2d_258.jpg")
 
