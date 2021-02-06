@@ -2,6 +2,7 @@
 
 ## 平台简介
 * 基于[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)二开，集成了[MybatisPlus](https://github.com/baomidou/mybatis-plus)和[Avue](https://gitee.com/smallweigit/avue)，微信接口统一使用了[WxJava](https://gitee.com/binary/weixin-java-tools) SDK
+* 专业的微信管理框架并集成流程完整的小程序商城，是用来学习和实际项目的不二选择
 * 前端采用Vue、Element UI、Avue。
 * 后端采用Spring Boot、Spring Security、Redis & Jwt、Mybatis Plus。
 * 微信接口全部采用WxJava SDK调用。
@@ -44,7 +45,12 @@ Maven >= 3.0
 ### [公众号接入教程](https://gitee.com/joolun/JooLun-wx/wikis/C%20%E5%85%AC%E4%BC%97%E5%8F%B7%E6%8E%A5%E5%85%A5%E6%95%99%E7%A8%8B?sort_id=2236061)
 
 ## 内置功能
-
+1.  小程序用户管理
+1.  商品分类
+1.  商品管理
+1.  订单管理
+1.  商城购物车
+1.  用户收货地址
 1.  公众号用户标签管理
 1.  公众号用户管理
 1.  公众号用户消息管理
