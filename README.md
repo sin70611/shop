@@ -2,7 +2,7 @@
 
 ## 平台简介
 * 基于[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)二开，集成了[MybatisPlus](https://github.com/baomidou/mybatis-plus)和[Avue](https://gitee.com/smallweigit/avue)，微信接口统一使用了[WxJava](https://gitee.com/binary/weixin-java-tools) SDK
-* 专业的微信管理框架并集成流程完整的小程序商城，是用来学习和实际项目的不二选择
+* 专业的微信管理框架并加入小程序商城，是用来学习和实际项目的不二选择
 * 前端采用Vue、Element UI、Avue。
 * 后端采用Spring Boot、Spring Security、Redis & Jwt、Mybatis Plus。
 * 微信接口全部采用WxJava SDK调用。
