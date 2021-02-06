@@ -4,7 +4,7 @@
 * 基于[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)二开，集成了[MybatisPlus](https://github.com/baomidou/mybatis-plus)、[Avue](https://gitee.com/smallweigit/avue)、[WxJava](https://gitee.com/binary/weixin-java-tools) SDK，MIT开源的微信二开利器，放心使用
 * 专业的微信管理框架并加入小程序商城，是用来学习和实际项目的不二选择
 * 前端采用Vue、Element UI、Avue。
-* 后端采用Spring Boot、Spring Security、Redis & Jwt、Mybatis Plus。
+* 后端采用Spring Boot、Spring Security、Redis & Jwt、Mybatis Plus、WxJava。
 * 小程序端采用原生框架+Color UI。
 * 权限认证使用Jwt，支持多终端认证系统。
 * 支持加载动态权限菜单，多方式轻松权限控制。
