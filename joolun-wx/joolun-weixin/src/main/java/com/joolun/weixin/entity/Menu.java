@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * 自定义菜单模型
  *
- * @author JL
+ * @author www.joolun.com
  */
 @Data
 public class Menu implements Serializable {

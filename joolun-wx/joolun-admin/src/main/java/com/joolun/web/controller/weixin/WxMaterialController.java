@@ -57,7 +57,7 @@ import java.util.Map;
 /**
  * 微信素材
  *
- * @author JL
+ * @author www.joolun.com
  * @date 2019-03-23 21:26:35
  */
 @Slf4j

@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v13.1.1 (64 bit)
-MySQL - 8.0.20 : Database - joolun_ry
+MySQL - 8.0.19 : Database - joolun_ry
 *********************************************************************
 */
 
@@ -15,6 +15,223 @@ MySQL - 8.0.20 : Database - joolun_ry
 CREATE DATABASE /*!32312 IF NOT EXISTS*/`joolun_ry` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
 USE `joolun_ry`;
+
+/*Table structure for table `QRTZ_BLOB_TRIGGERS` */
+
+DROP TABLE IF EXISTS `QRTZ_BLOB_TRIGGERS`;
+
+CREATE TABLE `QRTZ_BLOB_TRIGGERS` (
+  `sched_name` varchar(120) NOT NULL,
+  `trigger_name` varchar(200) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  `blob_data` blob,
+  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
+  CONSTRAINT `QRTZ_BLOB_TRIGGERS_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `QRTZ_TRIGGERS` (`sched_name`, `trigger_name`, `trigger_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `QRTZ_BLOB_TRIGGERS` */
+
+/*Table structure for table `QRTZ_CALENDARS` */
+
+DROP TABLE IF EXISTS `QRTZ_CALENDARS`;
+
+CREATE TABLE `QRTZ_CALENDARS` (
+  `sched_name` varchar(120) NOT NULL,
+  `calendar_name` varchar(200) NOT NULL,
+  `calendar` blob NOT NULL,
+  PRIMARY KEY (`sched_name`,`calendar_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `QRTZ_CALENDARS` */
+
+/*Table structure for table `QRTZ_CRON_TRIGGERS` */
+
+DROP TABLE IF EXISTS `QRTZ_CRON_TRIGGERS`;
+
+CREATE TABLE `QRTZ_CRON_TRIGGERS` (
+  `sched_name` varchar(120) NOT NULL,
+  `trigger_name` varchar(200) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  `cron_expression` varchar(200) NOT NULL,
+  `time_zone_id` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
+  CONSTRAINT `QRTZ_CRON_TRIGGERS_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `QRTZ_TRIGGERS` (`sched_name`, `trigger_name`, `trigger_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `QRTZ_CRON_TRIGGERS` */
+
+insert  into `QRTZ_CRON_TRIGGERS`(`sched_name`,`trigger_name`,`trigger_group`,`cron_expression`,`time_zone_id`) values 
+('RuoyiScheduler','TASK_CLASS_NAME1','DEFAULT','0/10 * * * * ?','Asia/Shanghai'),
+('RuoyiScheduler','TASK_CLASS_NAME2','DEFAULT','0/15 * * * * ?','Asia/Shanghai'),
+('RuoyiScheduler','TASK_CLASS_NAME3','DEFAULT','0/20 * * * * ?','Asia/Shanghai');
+
+/*Table structure for table `QRTZ_FIRED_TRIGGERS` */
+
+DROP TABLE IF EXISTS `QRTZ_FIRED_TRIGGERS`;
+
+CREATE TABLE `QRTZ_FIRED_TRIGGERS` (
+  `sched_name` varchar(120) NOT NULL,
+  `entry_id` varchar(95) NOT NULL,
+  `trigger_name` varchar(200) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  `instance_name` varchar(200) NOT NULL,
+  `fired_time` bigint NOT NULL,
+  `sched_time` bigint NOT NULL,
+  `priority` int NOT NULL,
+  `state` varchar(16) NOT NULL,
+  `job_name` varchar(200) DEFAULT NULL,
+  `job_group` varchar(200) DEFAULT NULL,
+  `is_nonconcurrent` varchar(1) DEFAULT NULL,
+  `requests_recovery` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`sched_name`,`entry_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `QRTZ_FIRED_TRIGGERS` */
+
+/*Table structure for table `QRTZ_JOB_DETAILS` */
+
+DROP TABLE IF EXISTS `QRTZ_JOB_DETAILS`;
+
+CREATE TABLE `QRTZ_JOB_DETAILS` (
+  `sched_name` varchar(120) NOT NULL,
+  `job_name` varchar(200) NOT NULL,
+  `job_group` varchar(200) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  `job_class_name` varchar(250) NOT NULL,
+  `is_durable` varchar(1) NOT NULL,
+  `is_nonconcurrent` varchar(1) NOT NULL,
+  `is_update_data` varchar(1) NOT NULL,
+  `requests_recovery` varchar(1) NOT NULL,
+  `job_data` blob,
+  PRIMARY KEY (`sched_name`,`job_name`,`job_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `QRTZ_JOB_DETAILS` */
+
+insert  into `QRTZ_JOB_DETAILS`(`sched_name`,`job_name`,`job_group`,`description`,`job_class_name`,`is_durable`,`is_nonconcurrent`,`is_update_data`,`requests_recovery`,`job_data`) values 
+('RuoyiScheduler','TASK_CLASS_NAME1','DEFAULT',NULL,'com.joolun.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.joolun.quartz.domain.SysJob\0\0\0\0\0\0\0\0L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0statusq\0~\0	xr\0(com.joolun.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0paramsq\0~\0L\0remarkq\0~\0	L\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xpt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0v�Ո�xpt\0\0pppt\01t\00/10 * * * * ?t\0ryTask.ryNoParamst\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（无参）t\03t\01x\0'),
+('RuoyiScheduler','TASK_CLASS_NAME2','DEFAULT',NULL,'com.joolun.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.joolun.quartz.domain.SysJob\0\0\0\0\0\0\0\0L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0statusq\0~\0	xr\0(com.joolun.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0paramsq\0~\0L\0remarkq\0~\0	L\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xpt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0v�Ո�xpt\0\0pppt\01t\00/15 * * * * ?t\0ryTask.ryParams(\'ry\')t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（有参）t\03t\01x\0'),
+('RuoyiScheduler','TASK_CLASS_NAME3','DEFAULT',NULL,'com.joolun.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.joolun.quartz.domain.SysJob\0\0\0\0\0\0\0\0L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0statusq\0~\0	xr\0(com.joolun.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0paramsq\0~\0L\0remarkq\0~\0	L\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xpt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0v�Ո�xpt\0\0pppt\01t\00/20 * * * * ?t\08ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（多参）t\03t\01x\0');
+
+/*Table structure for table `QRTZ_LOCKS` */
+
+DROP TABLE IF EXISTS `QRTZ_LOCKS`;
+
+CREATE TABLE `QRTZ_LOCKS` (
+  `sched_name` varchar(120) NOT NULL,
+  `lock_name` varchar(40) NOT NULL,
+  PRIMARY KEY (`sched_name`,`lock_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `QRTZ_LOCKS` */
+
+insert  into `QRTZ_LOCKS`(`sched_name`,`lock_name`) values 
+('RuoyiScheduler','STATE_ACCESS'),
+('RuoyiScheduler','TRIGGER_ACCESS');
+
+/*Table structure for table `QRTZ_PAUSED_TRIGGER_GRPS` */
+
+DROP TABLE IF EXISTS `QRTZ_PAUSED_TRIGGER_GRPS`;
+
+CREATE TABLE `QRTZ_PAUSED_TRIGGER_GRPS` (
+  `sched_name` varchar(120) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  PRIMARY KEY (`sched_name`,`trigger_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `QRTZ_PAUSED_TRIGGER_GRPS` */
+
+/*Table structure for table `QRTZ_SCHEDULER_STATE` */
+
+DROP TABLE IF EXISTS `QRTZ_SCHEDULER_STATE`;
+
+CREATE TABLE `QRTZ_SCHEDULER_STATE` (
+  `sched_name` varchar(120) NOT NULL,
+  `instance_name` varchar(200) NOT NULL,
+  `last_checkin_time` bigint NOT NULL,
+  `checkin_interval` bigint NOT NULL,
+  PRIMARY KEY (`sched_name`,`instance_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `QRTZ_SCHEDULER_STATE` */
+
+insert  into `QRTZ_SCHEDULER_STATE`(`sched_name`,`instance_name`,`last_checkin_time`,`checkin_interval`) values 
+('RuoyiScheduler','JL-PC1612532488023',1612533040943,15000);
+
+/*Table structure for table `QRTZ_SIMPLE_TRIGGERS` */
+
+DROP TABLE IF EXISTS `QRTZ_SIMPLE_TRIGGERS`;
+
+CREATE TABLE `QRTZ_SIMPLE_TRIGGERS` (
+  `sched_name` varchar(120) NOT NULL,
+  `trigger_name` varchar(200) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  `repeat_count` bigint NOT NULL,
+  `repeat_interval` bigint NOT NULL,
+  `times_triggered` bigint NOT NULL,
+  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
+  CONSTRAINT `QRTZ_SIMPLE_TRIGGERS_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `QRTZ_TRIGGERS` (`sched_name`, `trigger_name`, `trigger_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `QRTZ_SIMPLE_TRIGGERS` */
+
+/*Table structure for table `QRTZ_SIMPROP_TRIGGERS` */
+
+DROP TABLE IF EXISTS `QRTZ_SIMPROP_TRIGGERS`;
+
+CREATE TABLE `QRTZ_SIMPROP_TRIGGERS` (
+  `sched_name` varchar(120) NOT NULL,
+  `trigger_name` varchar(200) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  `str_prop_1` varchar(512) DEFAULT NULL,
+  `str_prop_2` varchar(512) DEFAULT NULL,
+  `str_prop_3` varchar(512) DEFAULT NULL,
+  `int_prop_1` int DEFAULT NULL,
+  `int_prop_2` int DEFAULT NULL,
+  `long_prop_1` bigint DEFAULT NULL,
+  `long_prop_2` bigint DEFAULT NULL,
+  `dec_prop_1` decimal(13,4) DEFAULT NULL,
+  `dec_prop_2` decimal(13,4) DEFAULT NULL,
+  `bool_prop_1` varchar(1) DEFAULT NULL,
+  `bool_prop_2` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
+  CONSTRAINT `QRTZ_SIMPROP_TRIGGERS_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `QRTZ_TRIGGERS` (`sched_name`, `trigger_name`, `trigger_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `QRTZ_SIMPROP_TRIGGERS` */
+
+/*Table structure for table `QRTZ_TRIGGERS` */
+
+DROP TABLE IF EXISTS `QRTZ_TRIGGERS`;
+
+CREATE TABLE `QRTZ_TRIGGERS` (
+  `sched_name` varchar(120) NOT NULL,
+  `trigger_name` varchar(200) NOT NULL,
+  `trigger_group` varchar(200) NOT NULL,
+  `job_name` varchar(200) NOT NULL,
+  `job_group` varchar(200) NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
+  `next_fire_time` bigint DEFAULT NULL,
+  `prev_fire_time` bigint DEFAULT NULL,
+  `priority` int DEFAULT NULL,
+  `trigger_state` varchar(16) NOT NULL,
+  `trigger_type` varchar(8) NOT NULL,
+  `start_time` bigint NOT NULL,
+  `end_time` bigint DEFAULT NULL,
+  `calendar_name` varchar(200) DEFAULT NULL,
+  `misfire_instr` smallint DEFAULT NULL,
+  `job_data` blob,
+  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
+  KEY `sched_name` (`sched_name`,`job_name`,`job_group`),
+  CONSTRAINT `QRTZ_TRIGGERS_ibfk_1` FOREIGN KEY (`sched_name`, `job_name`, `job_group`) REFERENCES `QRTZ_JOB_DETAILS` (`sched_name`, `job_name`, `job_group`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `QRTZ_TRIGGERS` */
+
+insert  into `QRTZ_TRIGGERS`(`sched_name`,`trigger_name`,`trigger_group`,`job_name`,`job_group`,`description`,`next_fire_time`,`prev_fire_time`,`priority`,`trigger_state`,`trigger_type`,`start_time`,`end_time`,`calendar_name`,`misfire_instr`,`job_data`) values 
+('RuoyiScheduler','TASK_CLASS_NAME1','DEFAULT','TASK_CLASS_NAME1','DEFAULT',NULL,1612532490000,-1,5,'PAUSED','CRON',1612532488000,0,NULL,2,''),
+('RuoyiScheduler','TASK_CLASS_NAME2','DEFAULT','TASK_CLASS_NAME2','DEFAULT',NULL,1612532490000,-1,5,'PAUSED','CRON',1612532490000,0,NULL,2,''),
+('RuoyiScheduler','TASK_CLASS_NAME3','DEFAULT','TASK_CLASS_NAME3','DEFAULT',NULL,1612532500000,-1,5,'PAUSED','CRON',1612532491000,0,NULL,2,'');
 
 /*Table structure for table `gen_table` */
 
@@ -213,222 +430,222 @@ insert  into `gen_table_column`(`column_id`,`table_id`,`column_name`,`column_com
 (120,'10','error_msg','错误消息','varchar(2000)','String','errorMsg','0','0',NULL,'1','1','1','1','EQ','textarea','',15,'admin','2021-01-14 17:10:34','',NULL),
 (121,'10','oper_time','操作时间','datetime','Date','operTime','0','0',NULL,'1','1','1','1','EQ','datetime','',16,'admin','2021-01-14 17:10:34','',NULL);
 
-/*Table structure for table `qrtz_blob_triggers` */
+/*Table structure for table `goods_category` */
 
-DROP TABLE IF EXISTS `qrtz_blob_triggers`;
+DROP TABLE IF EXISTS `goods_category`;
 
-CREATE TABLE `qrtz_blob_triggers` (
-  `sched_name` varchar(120) NOT NULL,
-  `trigger_name` varchar(200) NOT NULL,
-  `trigger_group` varchar(200) NOT NULL,
-  `blob_data` blob,
-  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
-  CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `goods_category` (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'PK',
+  `enable` char(2) NOT NULL COMMENT '（1：开启；0：关闭）',
+  `parent_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '父分类编号',
+  `name` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '名称',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '描述',
+  `pic_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '图片',
+  `sort` smallint DEFAULT NULL COMMENT '排序',
+  `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
+  `del_flag` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT '0' COMMENT '逻辑删除标记（0：显示；1：隐藏）',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='分类表';
 
-/*Data for the table `qrtz_blob_triggers` */
+/*Data for the table `goods_category` */
 
-/*Table structure for table `qrtz_calendars` */
+insert  into `goods_category`(`id`,`enable`,`parent_id`,`name`,`description`,`pic_url`,`sort`,`create_time`,`update_time`,`del_flag`) values 
+('1352217944631853057','1','0','JooLun','','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/joolun.png',1,'2021-01-21 19:34:15','2021-01-21 19:34:15','0'),
+('1352217984268025858','1','1352217944631853057','JooLun二开源码','','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/Joolun_logo.png',1,'2021-01-21 19:34:25','2021-01-21 19:34:25','0'),
+('1352218128409477121','1','0','鞋包','','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/%E5%88%86%E7%B1%BB-%E7%AE%B1%E5%8C%85%E9%85%8D%E9%A5%B0.png',4,'2021-01-21 19:34:59','2021-01-21 19:34:59','0'),
+('1353731419288924162','1','0','手机','','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/%E5%88%86%E7%B1%BB-%E6%89%8B%E6%9C%BA.png',2,'2021-01-25 23:48:16','2021-01-25 23:48:16','0'),
+('1355427201956208642','1','1353731419288924162','iPhone','','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/10952adc-cad0-4c53-8762-9906d1dde220.jpg',1,'2021-01-30 16:06:42','2021-01-30 16:06:42','0'),
+('1356512975786287105','1','1353731419288924162','Huawei','','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/goods-5.png',2,'2021-02-02 16:01:11','2021-02-02 16:01:11','0'),
+('1356950418000826369','1','0','服饰','','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/%E5%88%86%E7%B1%BB-%E6%9C%8D%E9%A5%B0.png',5,'2021-02-03 20:59:25','2021-02-03 20:59:25','0'),
+('1356973226344960001','1','0','电脑','','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/%E5%88%86%E7%B1%BB-%E7%94%B5%E8%84%91.png',3,'2021-02-03 22:30:03','2021-02-03 22:30:03','0');
 
-DROP TABLE IF EXISTS `qrtz_calendars`;
+/*Table structure for table `goods_spu` */
 
-CREATE TABLE `qrtz_calendars` (
-  `sched_name` varchar(120) NOT NULL,
-  `calendar_name` varchar(200) NOT NULL,
-  `calendar` blob NOT NULL,
-  PRIMARY KEY (`sched_name`,`calendar_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+DROP TABLE IF EXISTS `goods_spu`;
 
-/*Data for the table `qrtz_calendars` */
+CREATE TABLE `goods_spu` (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'PK',
+  `spu_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'spu编码',
+  `name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT 'spu名字',
+  `sell_point` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '卖点',
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '描述',
+  `category_first` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '一级分类ID',
+  `category_second` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '二级分类ID',
+  `pic_urls` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '商品图片',
+  `shelf` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '是否上架（1是 0否）',
+  `sort` int NOT NULL DEFAULT '0' COMMENT '排序字段',
+  `sales_price` decimal(10,2) DEFAULT NULL COMMENT '销售价格',
+  `market_price` decimal(10,2) DEFAULT NULL COMMENT '市场价',
+  `cost_price` decimal(10,2) DEFAULT NULL COMMENT '成本价',
+  `stock` int NOT NULL DEFAULT '0' COMMENT '库存',
+  `sale_num` int DEFAULT '0' COMMENT '销量',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
+  `del_flag` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：显示；1：隐藏）',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='商品表';
 
-/*Table structure for table `qrtz_cron_triggers` */
+/*Data for the table `goods_spu` */
 
-DROP TABLE IF EXISTS `qrtz_cron_triggers`;
+insert  into `goods_spu`(`id`,`spu_code`,`name`,`sell_point`,`description`,`category_first`,`category_second`,`pic_urls`,`shelf`,`sort`,`sales_price`,`market_price`,`cost_price`,`stock`,`sale_num`,`create_time`,`update_time`,`del_flag`) values 
+('1353738731164561410','1111','iPhone 12 Pro','Apple iPhone 12 Pro (A2408) 128GB 银色 支持移动联通电信5G 双卡双待手机','<p><img src=\"https://img13.360buyimg.com/cms/jfs/t1/120836/20/14832/819799/5f8604f8Eb381a921/5be9108f28a06b69.jpg\"></p>','1353731419288924162',NULL,'[\"http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/goods-4.png\"]','1',0,8499.00,8499.00,3000.00,998,87,'2021-01-26 00:17:19','2021-01-30 14:42:24','0'),
+('1355412081553190914','','HUAWEI P40 Pro+','华为 HUAWEI P40 Pro+ 麒麟990 5G SoC芯片 5000万超感知徕卡五摄 100倍双目变焦 8GB+256GB陶瓷白全网通5G','<p><img src=\"https://img30.360buyimg.com/sku/jfs/t1/130133/7/3307/52553/5efc4742E200565f5/6fa1f1a54b11acb1.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/142066/17/1894/134849/5efc4743Eac74a71f/28cf077ca55c34f5.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/148131/25/1904/192769/5efc4744E6eb9d7f3/60756a8b50447e1c.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/125899/31/5847/193351/5efc4744E35d465bd/9632ee231af86d46.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/134152/32/3459/193038/5efc4744Ef7727a34/24d8e547d9118e60.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/117607/12/11317/193929/5efc4744E4d7b8c68/0fdac90cc0c6e342.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/119971/26/6154/191622/5efc4744E084350ba/3696910ce86799c7.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/111365/35/11222/193594/5efc4744E89bf74f7/ba23d8e693c05899.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/112101/16/11491/190346/5efc4744Eb475216b/0f591e0dd6f4aa1f.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/126083/28/6084/122849/5efc4743Eb74f5730/afd5d279cea23a24.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/142626/35/1814/194436/5efc4744E5e88333b/109f6b80129f93d7.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/126006/14/5980/191887/5efc4744E4c04463f/3c54d7c9c7166e91.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/120527/1/6004/191704/5efc4744E6431ecaf/777cc9d3a7c0f7cf.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/123133/33/6138/195167/5efc4744E33f8f88d/13ece8fb7b02773a.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/111241/12/11280/188793/5efc4744E68d8897a/ad4e1f2c82902493.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/145365/38/1885/191184/5efc4744E67826c6c/e6393e2dc0aa5a42.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/122722/33/5964/192778/5efc4744E6e1590bb/c9ad4caac3dead33.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/148811/10/1874/190669/5efc4744Ecb41cf55/a10fea1ff0f3cae5.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/131817/38/3331/194435/5efc4744E75aea567/ada3e0cd88dd4f22.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/124719/11/5936/192993/5efc4744Eb5128be8/6be3d772b7a70d4a.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/125244/27/6027/189712/5efc4744E90d3dc7f/d4d6bb0539bd0fb3.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/143975/5/1798/190739/5efc4744E134f9107/e8a940cf3e0baca7.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/112510/20/11095/190039/5efc4744E0162060c/64e74f3ef3047c87.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/135166/16/3342/179489/5efc4744E15e0345f/0cb71014bd9f6c38.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/111410/36/11009/192128/5efc4744Ec568c450/56557756283c282f.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/120081/11/6015/192773/5efc4744E3afd8bfb/2c97e85528e61a46.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/128504/31/6088/190958/5efc4744Eb69b0e3f/75e5100614a80d74.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/118043/22/11395/193721/5efc4744E74454e7a/27678fe84482fc05.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/111081/40/11475/193430/5efc4744E5873afb5/66ea1428f6c318e6.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/135964/22/3408/191328/5efc4744E89841aad/ce62d8e74d50121a.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/125252/16/6085/93984/5efc4743Ee32e21f9/72d8eeb0167e9e24.jpg\"></p>','1353731419288924162','1356512975786287105','[\"http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/goods-7.png\"]','1',0,0.10,300.00,230.00,296,30,'2021-01-30 15:06:37','2021-01-30 15:06:37','0'),
+('1355440649314263041','','HUAWEI Mate 40 Pro+','麒麟 9000 5G SoC 芯片，体验震撼超前','<p><img src=\"https://img30.360buyimg.com/sku/jfs/t1/157372/6/954/597397/5fed99ffEb17acdf3/ee647667ca676950.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/158979/1/946/252212/5fed9a09E1c440a55/a013c59fe0aea1c0.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/127637/31/16778/194169/5f9bc4d9E211a89ca/37e8d05bdc190993.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/120464/35/16960/162360/5f9bc4d8E4f7982c3/187427af03ca09ad.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/136998/35/14081/187631/5f9bc4d9Ec474680a/a705d0a4eb7882fd.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/123445/39/16851/195095/5f9bc4d9Eaaed7687/c920bc2a6e033833.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/141780/33/12422/192173/5f9bc4d9Ecf53c668/d84d4eae9a6b7f39.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/148760/37/12642/191430/5f9bc4d9E1fb46d74/bd22a7057d8a5b87.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/121538/14/16737/184789/5f9bc4d9E33d0e445/4d53e8b18005beef.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/126592/29/16541/151671/5f9bc4d9E94955912/6933db658079bdcd.jpg\"><img src=\"https://img30.360buyimg.com/sku/jfs/t1/128715/7/16676/194348/5f9bc4daEaa5dfe97/896840ca8c00ce16.jpg\"></p>','1353731419288924162','1356512975786287105','[\"http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/goods-5.png\"]','1',0,8999.00,8999.00,8999.00,2000,33,'2021-01-30 17:00:08','2021-01-30 17:00:08','0'),
+('1356242467355213826','1','1','1','<p>1</p>','1353731419288924162','1355427201956208642','[\"http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/banner1.png\"]','0',0,1.00,1.00,1.00,1,1,'2021-02-01 22:06:17','2021-02-01 22:06:17','0'),
+('1356244176836083713','1','1','1','<p>1</p>','1353731419288924162','1355427201956208642','[\"http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/goods-1.png\"]','0',0,1.00,1.00,1.00,1,1,'2021-02-01 22:13:05','2021-02-01 22:13:05','0'),
+('1356246791175127041','1','1','1','<p>1</p>','1352217944631853057','1352217984268025858','[\"http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/goods-2.png\"]','0',0,1.00,1.00,1.00,1,1,'2021-02-01 22:23:28','2021-02-01 22:23:28','0');
 
-CREATE TABLE `qrtz_cron_triggers` (
-  `sched_name` varchar(120) NOT NULL,
-  `trigger_name` varchar(200) NOT NULL,
-  `trigger_group` varchar(200) NOT NULL,
-  `cron_expression` varchar(200) NOT NULL,
-  `time_zone_id` varchar(80) DEFAULT NULL,
-  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
-  CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*Table structure for table `order_info` */
 
-/*Data for the table `qrtz_cron_triggers` */
+DROP TABLE IF EXISTS `order_info`;
 
-insert  into `qrtz_cron_triggers`(`sched_name`,`trigger_name`,`trigger_group`,`cron_expression`,`time_zone_id`) values 
-('RuoyiScheduler','TASK_CLASS_NAME1','DEFAULT','0/10 * * * * ?','Asia/Shanghai'),
-('RuoyiScheduler','TASK_CLASS_NAME2','DEFAULT','0/15 * * * * ?','Asia/Shanghai'),
-('RuoyiScheduler','TASK_CLASS_NAME3','DEFAULT','0/20 * * * * ?','Asia/Shanghai');
+CREATE TABLE `order_info` (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'PK',
+  `del_flag` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：显示；1：隐藏）',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户id',
+  `order_no` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '订单单号',
+  `payment_way` char(2) NOT NULL COMMENT '支付方式1、货到付款；2、在线支付',
+  `is_pay` char(2) NOT NULL COMMENT '是否支付0、未支付 1、已支付',
+  `name` varchar(255) DEFAULT NULL COMMENT '订单名',
+  `status` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '订单状态1、待发货 2、待收货 3、确认收货/已完成 5、已关闭',
+  `freight_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '运费金额',
+  `sales_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '销售金额',
+  `payment_price` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '支付金额（销售金额+运费金额）',
+  `payment_time` datetime DEFAULT NULL COMMENT '付款时间',
+  `delivery_time` datetime DEFAULT NULL COMMENT '发货时间',
+  `receiver_time` datetime DEFAULT NULL COMMENT '收货时间',
+  `closing_time` datetime DEFAULT NULL COMMENT '成交时间',
+  `user_message` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '买家留言',
+  `transaction_id` varchar(32) DEFAULT NULL COMMENT '支付交易ID',
+  `logistics_id` varchar(32) DEFAULT NULL COMMENT '物流id',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_order_no` (`order_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='订单';
 
-/*Table structure for table `qrtz_fired_triggers` */
+/*Data for the table `order_info` */
 
-DROP TABLE IF EXISTS `qrtz_fired_triggers`;
+insert  into `order_info`(`id`,`del_flag`,`create_time`,`update_time`,`user_id`,`order_no`,`payment_way`,`is_pay`,`name`,`status`,`freight_price`,`sales_price`,`payment_price`,`payment_time`,`delivery_time`,`receiver_time`,`closing_time`,`user_message`,`transaction_id`,`logistics_id`,`remark`) values 
+('1354094503631306753','0','2021-01-26 23:51:02','2021-01-26 23:51:02','1352572935968165889','1354094503576731648','2','0',NULL,'5',0.00,0.00,0.00,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+('1354469715404148737','0','2021-01-28 00:41:59','2021-01-28 00:41:59','1352168072700571649','1354469713115086848','2','0','iPhone12白色','5',0.00,4999.00,4999.00,NULL,NULL,NULL,NULL,NULL,NULL,'1354469714800168962',NULL),
+('1354474070446510081','0','2021-01-28 00:59:17','2021-01-28 00:59:17','1354473059078176770','1354474068199342080','2','0','iPhone12白色','5',0.00,4999.00,4999.00,NULL,NULL,NULL,NULL,NULL,NULL,'1354474069813170178',NULL),
+('1354620399822884865','0','2021-01-28 10:40:45','2021-01-28 10:40:45','1354473059078176770','1354620397982580736','2','0','iPhone12白色','5',0.00,4999.00,4999.00,NULL,NULL,NULL,NULL,NULL,NULL,'1354620399231488001',NULL),
+('1354795347837304834','0','2021-01-28 22:15:56','2021-01-28 22:15:55','1354473059078176770','1354795346135351296','2','0','iPhone12白色','5',0.00,4999.00,4999.00,NULL,NULL,NULL,NULL,NULL,NULL,'1354795347308822530',NULL),
+('1354797185856794625','0','2021-01-28 22:23:14','2021-01-28 22:23:13','1354473059078176770','1354797183827705856','2','0','iPhone12白色','5',0.00,4999.00,4999.00,NULL,NULL,NULL,NULL,NULL,NULL,'1354797185185705985',NULL),
+('1354797794534137858','0','2021-01-28 22:25:39','2021-01-28 22:25:39','1354473059078176770','1354797792530268160','2','0','iPhone12白色','5',0.00,4999.00,4999.00,NULL,NULL,NULL,NULL,NULL,NULL,'1354797793913380865',NULL),
+('1354798824059609090','0','2021-01-28 22:29:45','2021-01-28 22:29:44','1354473059078176770','1354798822391283712','2','1','iPhone12白色','3',0.00,0.01,0.01,'2021-01-28 22:30:01','2021-01-28 23:16:51','2021-01-28 23:17:41',NULL,NULL,'4200000797202101287152815447','1354798823514349569',NULL),
+('1354798971141267457','0','2021-01-28 22:30:20','2021-01-28 22:30:19','1354473059078176770','1354798969477136384','2','1','iPhone12白色','3',0.00,0.01,0.01,'2021-01-28 22:32:33','2021-01-28 23:10:49','2021-01-28 23:16:19',NULL,NULL,'4200000808202101285235202004','1354798970596007937',NULL),
+('1355417350676951041','0','2021-01-30 15:27:33','2021-01-30 15:27:33','1355406809988345857','1355417348219076608','2','0','【时尚博主推荐】Daphne/达芙妮2020春季新款闪耀水晶扣时装鞋淑雅女单鞋 粉红112 38',NULL,0.00,0.20,0.20,NULL,NULL,NULL,NULL,NULL,NULL,'1355417349930364930',NULL),
+('1355418768053907457','0','2021-01-30 15:33:11','2021-01-30 15:33:11','1355406809988345857','1355418765948354560','2','0','Apple iPhone',NULL,0.00,6000.00,6000.00,NULL,NULL,NULL,NULL,NULL,NULL,'1355418767420567554',NULL),
+('1355426472587714562','0','2021-01-30 16:03:48','2021-01-30 16:03:48','1355406809988345857','1355426470679281664','2','1','【时尚博主推荐】Daphne/达芙妮2020春季新款闪耀水晶扣时装鞋淑雅女单鞋 粉红112 38','1',0.00,0.10,0.10,'2021-01-30 16:04:20',NULL,NULL,NULL,NULL,'4200000801202101302811163830','1355426471975346177',NULL),
+('1357673549756682241','0','2021-02-05 20:52:53','2021-02-05 20:52:52','1354473059078176770','1357673547845074944','2','0','iPhone 12 Pro','5',0.00,8499.00,8499.00,NULL,NULL,NULL,NULL,NULL,NULL,'1357673549135925250',NULL);
 
-CREATE TABLE `qrtz_fired_triggers` (
-  `sched_name` varchar(120) NOT NULL,
-  `entry_id` varchar(95) NOT NULL,
-  `trigger_name` varchar(200) NOT NULL,
-  `trigger_group` varchar(200) NOT NULL,
-  `instance_name` varchar(200) NOT NULL,
-  `fired_time` bigint NOT NULL,
-  `sched_time` bigint NOT NULL,
-  `priority` int NOT NULL,
-  `state` varchar(16) NOT NULL,
-  `job_name` varchar(200) DEFAULT NULL,
-  `job_group` varchar(200) DEFAULT NULL,
-  `is_nonconcurrent` varchar(1) DEFAULT NULL,
-  `requests_recovery` varchar(1) DEFAULT NULL,
-  PRIMARY KEY (`sched_name`,`entry_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*Table structure for table `order_item` */
 
-/*Data for the table `qrtz_fired_triggers` */
+DROP TABLE IF EXISTS `order_item`;
 
-/*Table structure for table `qrtz_job_details` */
+CREATE TABLE `order_item` (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'PK',
+  `del_flag` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：显示；1：隐藏）',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
+  `order_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '订单编号',
+  `spu_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '商品Id',
+  `spu_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '商品名',
+  `pic_url` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '图片',
+  `quantity` int NOT NULL COMMENT '商品数量',
+  `sales_price` decimal(10,2) NOT NULL COMMENT '购买单价',
+  `freight_price` decimal(10,2) DEFAULT '0.00' COMMENT '运费金额',
+  `payment_price` decimal(10,2) DEFAULT '0.00' COMMENT '支付金额（购买单价*商品数量+运费金额）',
+  `remark` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='订单详情';
 
-DROP TABLE IF EXISTS `qrtz_job_details`;
+/*Data for the table `order_item` */
 
-CREATE TABLE `qrtz_job_details` (
-  `sched_name` varchar(120) NOT NULL,
-  `job_name` varchar(200) NOT NULL,
-  `job_group` varchar(200) NOT NULL,
-  `description` varchar(250) DEFAULT NULL,
-  `job_class_name` varchar(250) NOT NULL,
-  `is_durable` varchar(1) NOT NULL,
-  `is_nonconcurrent` varchar(1) NOT NULL,
-  `is_update_data` varchar(1) NOT NULL,
-  `requests_recovery` varchar(1) NOT NULL,
-  `job_data` blob,
-  PRIMARY KEY (`sched_name`,`job_name`,`job_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+insert  into `order_item`(`id`,`del_flag`,`create_time`,`update_time`,`order_id`,`spu_id`,`spu_name`,`pic_url`,`quantity`,`sales_price`,`freight_price`,`payment_price`,`remark`) values 
+('1354469716075237378','0','2021-01-28 00:41:59','2021-01-28 00:41:59','1354469715404148737','1353738731164561410','iPhone12白色','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/category-9.png',1,4999.00,0.00,4999.00,NULL),
+('1354474071088238594','0','2021-01-28 00:59:18','2021-01-28 00:59:18','1354474070446510081','1353738731164561410','iPhone12白色','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/category-9.png',1,4999.00,0.00,4999.00,NULL),
+('1354620400435253249','0','2021-01-28 10:40:45','2021-01-28 10:40:45','1354620399822884865','1353738731164561410','iPhone12白色','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/category-9.png',1,4999.00,0.00,4999.00,NULL),
+('1354795348378370049','0','2021-01-28 22:15:55','2021-01-28 22:15:55','1354795347837304834','1353738731164561410','iPhone12白色','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/category-9.png',1,4999.00,0.00,4999.00,NULL),
+('1354797186527883265','0','2021-01-28 22:23:14','2021-01-28 22:23:14','1354797185856794625','1353738731164561410','iPhone12白色','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/category-9.png',1,4999.00,0.00,4999.00,NULL),
+('1354797795180060673','0','2021-01-28 22:25:39','2021-01-28 22:25:39','1354797794534137858','1353738731164561410','iPhone12白色','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/category-9.png',1,4999.00,0.00,4999.00,NULL),
+('1354798824613257217','0','2021-01-28 22:29:44','2021-01-28 22:29:44','1354798824059609090','1353738731164561410','iPhone12白色','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/category-9.png',1,0.01,0.00,0.01,NULL),
+('1354798971694915585','0','2021-01-28 22:30:19','2021-01-28 22:30:19','1354798971141267457','1353738731164561410','iPhone12白色','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/category-9.png',1,0.01,0.00,0.01,NULL),
+('1355417351444508674','0','2021-01-30 15:27:33','2021-01-30 15:27:33','1355417350676951041','1355412081553190914','【时尚博主推荐】Daphne/达芙妮2020春季新款闪耀水晶扣时装鞋淑雅女单鞋 粉红112 38','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/aed00a45-1598-490d-9ea9-b35c386ae6b3.png',2,0.10,0.00,0.20,NULL),
+('1355418768758550529','0','2021-01-30 15:33:11','2021-01-30 15:33:11','1355418768053907457','1353738731164561410','Apple iPhone','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/10952adc-cad0-4c53-8762-9906d1dde220.jpg',1,6000.00,0.00,6000.00,NULL),
+('1355418868545236994','0','2021-01-30 15:33:35','2021-01-30 15:33:35','1355418867987394561','1355412081553190914','【时尚博主推荐】Daphne/达芙妮2020春季新款闪耀水晶扣时装鞋淑雅女单鞋 粉红112 38','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/aed00a45-1598-490d-9ea9-b35c386ae6b3.png',1,0.10,0.00,0.10,NULL),
+('1355426473221054466','0','2021-01-30 16:03:48','2021-01-30 16:03:48','1355426472587714562','1355412081553190914','【时尚博主推荐】Daphne/达芙妮2020春季新款闪耀水晶扣时装鞋淑雅女单鞋 粉红112 38','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/aed00a45-1598-490d-9ea9-b35c386ae6b3.png',1,0.10,0.00,0.10,NULL),
+('1357673550390022145','0','2021-02-05 20:52:52','2021-02-05 20:52:52','1357673549756682241','1353738731164561410','iPhone 12 Pro','http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/goods-4.png',1,8499.00,0.00,8499.00,NULL);
 
-/*Data for the table `qrtz_job_details` */
+/*Table structure for table `order_logistics` */
 
-insert  into `qrtz_job_details`(`sched_name`,`job_name`,`job_group`,`description`,`job_class_name`,`is_durable`,`is_nonconcurrent`,`is_update_data`,`requests_recovery`,`job_data`) values 
-('RuoyiScheduler','TASK_CLASS_NAME1','DEFAULT',NULL,'com.joolun.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.joolun.quartz.domain.SysJob\0\0\0\0\0\0\0\0L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0statusq\0~\0	xr\0(com.joolun.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0paramsq\0~\0L\0remarkq\0~\0	L\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xpt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0v�Ո�xpt\0\0pppt\01t\00/10 * * * * ?t\0ryTask.ryNoParamst\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（无参）t\03t\01x\0'),
-('RuoyiScheduler','TASK_CLASS_NAME2','DEFAULT',NULL,'com.joolun.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.joolun.quartz.domain.SysJob\0\0\0\0\0\0\0\0L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0statusq\0~\0	xr\0(com.joolun.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0paramsq\0~\0L\0remarkq\0~\0	L\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xpt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0v�Ո�xpt\0\0pppt\01t\00/15 * * * * ?t\0ryTask.ryParams(\'ry\')t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（有参）t\03t\01x\0'),
-('RuoyiScheduler','TASK_CLASS_NAME3','DEFAULT',NULL,'com.joolun.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.joolun.quartz.domain.SysJob\0\0\0\0\0\0\0\0L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0statusq\0~\0	xr\0(com.joolun.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0paramsq\0~\0L\0remarkq\0~\0	L\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xpt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0v�Ո�xpt\0\0pppt\01t\00/20 * * * * ?t\08ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（多参）t\03t\01x\0');
+DROP TABLE IF EXISTS `order_logistics`;
 
-/*Table structure for table `qrtz_locks` */
+CREATE TABLE `order_logistics` (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'PK',
+  `del_flag` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：显示；1：隐藏）',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
+  `postal_code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '邮编',
+  `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '收货人名字',
+  `tel_num` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '电话号码',
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '详细地址',
+  `logistics` char(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '物流商家',
+  `logistics_no` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '物流单号',
+  `status` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '快递单当前状态，包括-1错误，0在途，1揽收，2疑难，3签收，4退签，5派件，6退回，7转投 等7个状态',
+  `is_check` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '签收标记（0：未签收；1：已签收）',
+  `message` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '相关信息',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='订单物流表';
 
-DROP TABLE IF EXISTS `qrtz_locks`;
+/*Data for the table `order_logistics` */
 
-CREATE TABLE `qrtz_locks` (
-  `sched_name` varchar(120) NOT NULL,
-  `lock_name` varchar(40) NOT NULL,
-  PRIMARY KEY (`sched_name`,`lock_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+insert  into `order_logistics`(`id`,`del_flag`,`create_time`,`update_time`,`postal_code`,`user_name`,`tel_num`,`address`,`logistics`,`logistics_no`,`status`,`is_check`,`message`) values 
+('1354469714800168962','0','2021-01-28 00:41:59','2021-01-28 00:41:59',NULL,'张三','18602513214','广东省广州市海珠区新港中路397号',NULL,NULL,NULL,NULL,NULL),
+('1354474069813170178','0','2021-01-28 00:59:17','2021-01-28 00:59:17',NULL,'张三','18563265321','广东省广州市海珠区新港中路397号',NULL,NULL,NULL,NULL,NULL),
+('1354620399231488001','0','2021-01-28 10:40:45','2021-01-28 10:40:45',NULL,'张三','18563265321','广东省广州市海珠区新港中路397号',NULL,NULL,NULL,NULL,NULL),
+('1354795347308822530','0','2021-01-28 22:15:55','2021-01-28 22:15:55',NULL,'张三','18563265321','广东省广州市海珠区新港中路397号',NULL,NULL,NULL,NULL,NULL),
+('1354797185185705985','0','2021-01-28 22:23:13','2021-01-28 22:23:13',NULL,'张三','18563265321','广东省广州市海珠区新港中路397号',NULL,NULL,NULL,NULL,NULL),
+('1354797793913380865','0','2021-01-28 22:25:38','2021-01-28 22:25:38',NULL,'张三','18563265321','广东省广州市海珠区新港中路397号',NULL,NULL,NULL,NULL,NULL),
+('1354798823514349569','0','2021-01-28 22:29:44','2021-01-28 22:29:44',NULL,'张三','18563265321','广东省广州市海珠区新港中路397号','yunda','48466513213213165','1',NULL,NULL),
+('1354798970596007937','0','2021-01-28 22:30:19','2021-01-28 22:30:19',NULL,'张三','18563265321','广东省广州市海珠区新港中路397号',NULL,NULL,NULL,NULL,NULL),
+('1355417349930364930','0','2021-01-30 15:27:33','2021-01-30 15:27:33',NULL,'张三','15580802543','北京市北京市东城区大冲地铁口',NULL,NULL,NULL,NULL,NULL),
+('1355418767420567554','0','2021-01-30 15:33:11','2021-01-30 15:33:11',NULL,'张三','15580802543','北京市北京市东城区大冲地铁口',NULL,NULL,NULL,NULL,NULL),
+('1355418867316305921','0','2021-01-30 15:33:35','2021-01-30 15:33:35',NULL,'张三','15580802543','北京市北京市东城区大冲地铁口',NULL,NULL,NULL,NULL,NULL),
+('1355426471975346177','0','2021-01-30 16:03:48','2021-01-30 16:03:48',NULL,'张三','15580802543','北京市北京市东城区大冲地铁口',NULL,NULL,NULL,NULL,NULL),
+('1357673549135925250','0','2021-02-05 20:52:52','2021-02-05 20:52:52',NULL,'张三','18563265321','广东省广州市海珠区新港中路397号',NULL,NULL,NULL,NULL,NULL);
 
-/*Data for the table `qrtz_locks` */
+/*Table structure for table `shopping_cart` */
 
-insert  into `qrtz_locks`(`sched_name`,`lock_name`) values 
-('RuoyiScheduler','STATE_ACCESS'),
-('RuoyiScheduler','TRIGGER_ACCESS');
+DROP TABLE IF EXISTS `shopping_cart`;
 
-/*Table structure for table `qrtz_paused_trigger_grps` */
+CREATE TABLE `shopping_cart` (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'PK',
+  `del_flag` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：显示；1：隐藏）',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户编号',
+  `spu_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '商品SPU',
+  `quantity` int NOT NULL COMMENT '数量',
+  `spu_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '加入时的spu名字',
+  `add_price` decimal(10,2) DEFAULT NULL COMMENT '加入时价格',
+  `pic_url` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '图片',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='购物车';
 
-DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
+/*Data for the table `shopping_cart` */
 
-CREATE TABLE `qrtz_paused_trigger_grps` (
-  `sched_name` varchar(120) NOT NULL,
-  `trigger_group` varchar(200) NOT NULL,
-  PRIMARY KEY (`sched_name`,`trigger_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-/*Data for the table `qrtz_paused_trigger_grps` */
-
-/*Table structure for table `qrtz_scheduler_state` */
-
-DROP TABLE IF EXISTS `qrtz_scheduler_state`;
-
-CREATE TABLE `qrtz_scheduler_state` (
-  `sched_name` varchar(120) NOT NULL,
-  `instance_name` varchar(200) NOT NULL,
-  `last_checkin_time` bigint NOT NULL,
-  `checkin_interval` bigint NOT NULL,
-  PRIMARY KEY (`sched_name`,`instance_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-/*Data for the table `qrtz_scheduler_state` */
-
-insert  into `qrtz_scheduler_state`(`sched_name`,`instance_name`,`last_checkin_time`,`checkin_interval`) values 
-('RuoyiScheduler','JL-PC1610724997874',1610726530603,15000);
-
-/*Table structure for table `qrtz_simple_triggers` */
-
-DROP TABLE IF EXISTS `qrtz_simple_triggers`;
-
-CREATE TABLE `qrtz_simple_triggers` (
-  `sched_name` varchar(120) NOT NULL,
-  `trigger_name` varchar(200) NOT NULL,
-  `trigger_group` varchar(200) NOT NULL,
-  `repeat_count` bigint NOT NULL,
-  `repeat_interval` bigint NOT NULL,
-  `times_triggered` bigint NOT NULL,
-  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
-  CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-/*Data for the table `qrtz_simple_triggers` */
-
-/*Table structure for table `qrtz_simprop_triggers` */
-
-DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
-
-CREATE TABLE `qrtz_simprop_triggers` (
-  `sched_name` varchar(120) NOT NULL,
-  `trigger_name` varchar(200) NOT NULL,
-  `trigger_group` varchar(200) NOT NULL,
-  `str_prop_1` varchar(512) DEFAULT NULL,
-  `str_prop_2` varchar(512) DEFAULT NULL,
-  `str_prop_3` varchar(512) DEFAULT NULL,
-  `int_prop_1` int DEFAULT NULL,
-  `int_prop_2` int DEFAULT NULL,
-  `long_prop_1` bigint DEFAULT NULL,
-  `long_prop_2` bigint DEFAULT NULL,
-  `dec_prop_1` decimal(13,4) DEFAULT NULL,
-  `dec_prop_2` decimal(13,4) DEFAULT NULL,
-  `bool_prop_1` varchar(1) DEFAULT NULL,
-  `bool_prop_2` varchar(1) DEFAULT NULL,
-  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
-  CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-/*Data for the table `qrtz_simprop_triggers` */
-
-/*Table structure for table `qrtz_triggers` */
-
-DROP TABLE IF EXISTS `qrtz_triggers`;
-
-CREATE TABLE `qrtz_triggers` (
-  `sched_name` varchar(120) NOT NULL,
-  `trigger_name` varchar(200) NOT NULL,
-  `trigger_group` varchar(200) NOT NULL,
-  `job_name` varchar(200) NOT NULL,
-  `job_group` varchar(200) NOT NULL,
-  `description` varchar(250) DEFAULT NULL,
-  `next_fire_time` bigint DEFAULT NULL,
-  `prev_fire_time` bigint DEFAULT NULL,
-  `priority` int DEFAULT NULL,
-  `trigger_state` varchar(16) NOT NULL,
-  `trigger_type` varchar(8) NOT NULL,
-  `start_time` bigint NOT NULL,
-  `end_time` bigint DEFAULT NULL,
-  `calendar_name` varchar(200) DEFAULT NULL,
-  `misfire_instr` smallint DEFAULT NULL,
-  `job_data` blob,
-  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
-  KEY `sched_name` (`sched_name`,`job_name`,`job_group`),
-  CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `job_name`, `job_group`) REFERENCES `qrtz_job_details` (`sched_name`, `job_name`, `job_group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-/*Data for the table `qrtz_triggers` */
-
-insert  into `qrtz_triggers`(`sched_name`,`trigger_name`,`trigger_group`,`job_name`,`job_group`,`description`,`next_fire_time`,`prev_fire_time`,`priority`,`trigger_state`,`trigger_type`,`start_time`,`end_time`,`calendar_name`,`misfire_instr`,`job_data`) values 
-('RuoyiScheduler','TASK_CLASS_NAME1','DEFAULT','TASK_CLASS_NAME1','DEFAULT',NULL,1610725000000,-1,5,'PAUSED','CRON',1610724997000,0,NULL,2,''),
-('RuoyiScheduler','TASK_CLASS_NAME2','DEFAULT','TASK_CLASS_NAME2','DEFAULT',NULL,1610725005000,-1,5,'PAUSED','CRON',1610724997000,0,NULL,2,''),
-('RuoyiScheduler','TASK_CLASS_NAME3','DEFAULT','TASK_CLASS_NAME3','DEFAULT',NULL,1610725000000,-1,5,'PAUSED','CRON',1610724998000,0,NULL,2,'');
+insert  into `shopping_cart`(`id`,`del_flag`,`create_time`,`update_time`,`user_id`,`spu_id`,`quantity`,`spu_name`,`add_price`,`pic_url`) values 
+('1353755369452634114','0','2021-01-26 01:23:26','2021-01-26 01:29:11','1352233320682930178','1353738731164561410',1,'iPhone12白色',4999.00,NULL),
+('1354094384559210498','0','2021-01-26 23:50:33','2021-01-26 23:50:33','1352572935968165889','1353738731164561410',1,'iPhone12白色',4999.00,'http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/category-9.png'),
+('1355427342960320514','0','2021-01-30 16:07:16','2021-01-30 16:07:16','1355406809988345857','1353738731164561410',1,'Apple iPhone',6000.00,'http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/10952adc-cad0-4c53-8762-9906d1dde220.jpg'),
+('1357249438573252609','0','2021-02-04 16:47:37','2021-02-04 16:47:37','1356171782972882945','1355440649314263041',1,'HUAWEI Mate 40 Pro+',8999.00,'http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/goods-5.png'),
+('1357249497834573826','0','2021-02-04 16:47:51','2021-02-04 16:47:51','1356171782972882945','1355412081553190914',1,'HUAWEI P40 Pro+',0.10,'http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/goods-7.png'),
+('1357673715054202882','0','2021-02-05 20:53:31','2021-02-05 20:53:31','1354473059078176770','1353738731164561410',1,'iPhone 12 Pro',8499.00,'http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/goods-4.png');
 
 /*Table structure for table `sys_config` */
 
@@ -480,16 +697,16 @@ CREATE TABLE `sys_dept` (
 /*Data for the table `sys_dept` */
 
 insert  into `sys_dept`(`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`phone`,`email`,`status`,`del_flag`,`create_by`,`create_time`,`update_by`,`update_time`) values 
-(100,0,'0','JooLun科技',0,'JooLun','15888888888','JooLun@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:01:09'),
-(101,100,'0,100','深圳总公司',1,'JooLun','15888888888','JooLun@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:00:57'),
-(102,100,'0,100','长沙分公司',2,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:01:09'),
-(103,101,'0,100,101','研发部门',1,'JooLun','15888888888','JooLun@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:00:40'),
-(104,101,'0,100,101','市场部门',2,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:00:45'),
-(105,101,'0,100,101','测试部门',3,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:00:48'),
-(106,101,'0,100,101','财务部门',4,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:00:54'),
-(107,101,'0,100,101','运维部门',5,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:00:57'),
-(108,102,'0,100,102','市场部门',1,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:01:05'),
-(109,102,'0,100,102','财务部门',2,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:01:09');
+(100,0,'0','JooLun',0,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:07:55'),
+(101,100,'0,100','深圳总公司',1,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:07:45'),
+(102,100,'0,100','长沙分公司',2,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:07:55'),
+(103,101,'0,100,101','研发部门',1,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:07:34'),
+(104,101,'0,100,101','市场部门',2,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:07:37'),
+(105,101,'0,100,101','测试部门',3,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:07:39'),
+(106,101,'0,100,101','财务部门',4,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:07:42'),
+(107,101,'0,100,101','运维部门',5,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:07:45'),
+(108,102,'0,100,102','市场部门',1,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:07:52'),
+(109,102,'0,100,102','财务部门',2,'JooLun','15888888888','ry@qq.com','0','0','admin','2021-01-14 15:39:13','admin','2021-01-16 00:07:55');
 
 /*Table structure for table `sys_dict_data` */
 
@@ -638,7 +855,7 @@ CREATE TABLE `sys_logininfor` (
   `msg` varchar(255) DEFAULT '' COMMENT '提示消息',
   `login_time` datetime DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=324 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统访问记录';
 
 /*Data for the table `sys_logininfor` */
 
@@ -672,9 +889,201 @@ insert  into `sys_logininfor`(`info_id`,`user_name`,`ipaddr`,`login_location`,`b
 (126,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-01-15 20:52:33'),
 (127,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','退出成功','2021-01-15 20:53:38'),
 (128,'test','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-01-15 20:53:44'),
-(129,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','1','用户不存在/密码错误','2021-01-15 23:18:44'),
-(130,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','1','用户不存在/密码错误','2021-01-15 23:18:50'),
-(131,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-01-15 23:18:56');
+(129,'admin','220.202.217.37','XX XX','Chrome 8','Windows 10','1','用户不存在/密码错误','2021-01-15 22:05:36'),
+(130,'admin','220.202.217.37','XX XX','Chrome 8','Windows 10','1','验证码错误','2021-01-15 22:05:40'),
+(131,'admin','220.202.217.37','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-15 22:05:45'),
+(132,'test','61.145.151.235','XX XX','Chrome','Windows 10','0','登录成功','2021-01-15 22:42:07'),
+(133,'admin','220.202.217.37','XX XX','Chrome 8','Windows 10','0','退出成功','2021-01-15 23:17:46'),
+(134,'test','220.202.217.37','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-15 23:17:49'),
+(135,'test','220.202.217.37','XX XX','Chrome 8','Windows 10','0','退出成功','2021-01-15 23:19:23'),
+(136,'test','220.202.217.37','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-15 23:19:29'),
+(137,'test','220.202.217.37','XX XX','Chrome 8','Windows 10','0','退出成功','2021-01-15 23:19:49'),
+(138,'admin','220.202.217.37','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-15 23:19:54'),
+(139,'test','91.74.20.206','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-15 23:33:00'),
+(140,'test','220.202.217.37','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 00:05:46'),
+(141,'test','220.202.217.37','XX XX','Chrome 8','Windows 10','0','退出成功','2021-01-16 00:06:56'),
+(142,'admin','220.202.217.37','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 00:07:01'),
+(143,'test','221.218.98.34','XX XX','Chrome 58','Windows 7','0','登录成功','2021-01-16 01:25:39'),
+(144,'test','142.47.103.147','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 08:57:19'),
+(145,'test','60.2.125.182','XX XX','Chrome 61','Windows 10','0','登录成功','2021-01-16 10:15:53'),
+(146,'test','223.88.17.147','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 10:53:10'),
+(147,'test','60.2.125.182','XX XX','Chrome 61','Windows 10','1','验证码已失效','2021-01-16 11:07:07'),
+(148,'test','142.47.103.147','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 11:09:24'),
+(149,'test','60.2.125.182','XX XX','Chrome 61','Windows 10','1','验证码已失效','2021-01-16 11:09:43'),
+(150,'test','60.2.125.182','XX XX','Chrome 61','Windows 10','1','验证码错误','2021-01-16 11:09:49'),
+(151,'test','60.2.125.182','XX XX','Chrome 61','Windows 10','0','登录成功','2021-01-16 11:10:01'),
+(152,'test','1.192.246.73','XX XX','Chrome','Windows 10','0','登录成功','2021-01-16 11:31:28'),
+(153,'test','220.202.217.37','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 11:55:44'),
+(154,'test','113.246.79.30','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 12:09:58'),
+(155,'test','223.72.41.225','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 12:11:40'),
+(156,'test','142.47.103.147','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 12:29:44'),
+(157,'test','223.72.85.86','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 12:59:50'),
+(158,'test','60.2.125.182','XX XX','Chrome 61','Windows 10','0','登录成功','2021-01-16 13:40:26'),
+(159,'test','111.20.153.212','XX XX','Chrome 8','Mac OS X','0','登录成功','2021-01-16 14:49:17'),
+(160,'test','14.212.14.199','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 15:17:47'),
+(161,'test','220.112.121.26','XX XX','Chrome 8','Mac OS X','0','登录成功','2021-01-16 16:23:42'),
+(162,'test','183.25.125.34','XX XX','Firefox 8','Windows 10','0','登录成功','2021-01-16 16:54:52'),
+(163,'test','120.245.112.232','XX XX','Chrome','Windows 10','0','登录成功','2021-01-16 17:02:56'),
+(164,'test','183.14.31.241','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 17:12:50'),
+(165,'test','47.96.85.57','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 17:31:38'),
+(166,'test','223.73.132.192','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 17:36:37'),
+(167,'test','47.96.85.57','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 18:40:53'),
+(168,'test','59.175.14.204','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 20:30:45'),
+(169,'test','223.78.203.183','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 21:09:21'),
+(170,'test','59.175.14.204','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 22:06:09'),
+(171,'test','125.210.251.204','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 22:59:08'),
+(172,'test','125.210.223.184','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-16 23:30:12'),
+(173,'test','101.224.95.230','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-17 00:32:32'),
+(174,'test','112.0.112.224','XX XX','Chrome','Windows 10','0','登录成功','2021-01-17 09:42:17'),
+(175,'test','111.205.43.226','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-17 09:57:16'),
+(176,'test','223.167.21.235','XX XX','Chrome 8','Mac OS X','1','验证码已失效','2021-01-17 10:10:28'),
+(177,'test','223.167.21.235','XX XX','Chrome 8','Mac OS X','0','登录成功','2021-01-17 10:10:33'),
+(178,'test','112.0.112.224','XX XX','Chrome','Windows 10','0','登录成功','2021-01-17 10:24:57'),
+(179,'test','171.44.170.121','XX XX','Chrome 59','Windows 10','0','登录成功','2021-01-17 12:19:42'),
+(180,'test','8.210.254.1','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-17 12:57:56'),
+(181,'test','111.75.252.92','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-17 15:27:34'),
+(182,'test','124.202.200.82','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-17 16:58:13'),
+(183,'test','59.109.153.189','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-17 17:21:27'),
+(184,'test','117.136.33.225','XX XX','Chrome 8','Mac OS X','0','登录成功','2021-01-17 21:51:57'),
+(185,'test','27.38.236.28','XX XX','Chrome 8','Mac OS X','0','登录成功','2021-01-17 22:28:51'),
+(186,'test','125.210.251.204','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-17 22:40:18'),
+(187,'test','101.88.58.166','XX XX','Safari','Mac OS X','0','登录成功','2021-01-18 00:26:42'),
+(188,'test','113.66.41.106','XX XX','Chrome','Windows 10','0','登录成功','2021-01-18 02:39:11'),
+(189,'test','140.207.90.173','XX XX','Chrome 8','Windows 10','1','验证码错误','2021-01-18 08:59:19'),
+(190,'test','140.207.90.173','XX XX','Chrome 8','Windows 10','1','验证码已失效','2021-01-18 09:04:16'),
+(191,'test','140.207.90.173','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 09:04:21'),
+(192,'test','222.133.7.18','XX XX','Chrome','Windows 10','0','登录成功','2021-01-18 09:12:08'),
+(193,'test','119.254.252.189','XX XX','Chrome 8','Windows 7','0','登录成功','2021-01-18 09:43:40'),
+(194,'test','112.30.39.71','XX XX','Chrome 8','Windows 7','0','登录成功','2021-01-18 11:52:40'),
+(195,'test','218.94.111.114','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 12:56:09'),
+(196,'test','220.248.209.209','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 13:21:43'),
+(197,'test','112.49.134.248','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 14:05:04'),
+(198,'test','222.212.90.35','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 14:48:42'),
+(199,'test','43.247.230.78','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 14:53:41'),
+(200,'test','222.212.90.35','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 15:04:14'),
+(201,'test','140.243.12.66','XX XX','Safari','Mac OS X','0','登录成功','2021-01-18 15:13:51'),
+(202,'test','61.159.254.233','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 15:36:47'),
+(203,'test','122.10.38.137','XX XX','Chrome 65','Windows 10','0','登录成功','2021-01-18 15:41:25'),
+(204,'test','175.10.220.250','XX XX','Chrome 8','Mac OS X','0','登录成功','2021-01-18 15:55:27'),
+(205,'test','175.153.195.94','XX XX','Chrome','Windows 10','0','登录成功','2021-01-18 16:20:32'),
+(206,'test','221.205.74.216','XX XX','Chrome 8','Windows 10','1','验证码错误','2021-01-18 16:22:17'),
+(207,'test','221.205.74.216','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 16:22:21'),
+(208,'test','103.8.207.241','XX XX','Chrome 8','Mac OS X','0','登录成功','2021-01-18 16:28:07'),
+(209,'test','223.104.213.169','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 16:33:48'),
+(210,'test','103.8.207.241','XX XX','Chrome 8','Mac OS X','0','登录成功','2021-01-18 16:34:26'),
+(211,'test','1.85.30.162','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 16:47:00'),
+(212,'test','220.178.164.188','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 17:01:39'),
+(213,'test','113.132.23.193','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 17:06:28'),
+(214,'test','120.230.139.76','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 17:17:10'),
+(215,'test','110.185.17.93','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 17:19:14'),
+(216,'test','103.8.207.241','XX XX','Chrome 8','Mac OS X','0','登录成功','2021-01-18 18:14:22'),
+(217,'test','120.230.139.76','XX XX','Chrome 8','Windows 10','1','验证码错误','2021-01-18 18:17:19'),
+(218,'test','120.230.139.76','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 18:17:24'),
+(219,'test','221.205.74.216','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 18:19:06'),
+(220,'test','124.127.132.138','XX XX','Chrome 8','Windows 10','1','验证码错误','2021-01-18 18:51:05'),
+(221,'test','124.127.132.138','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 18:51:10'),
+(222,'test','223.104.6.17','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 19:38:58'),
+(223,'test','218.28.24.138','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 19:46:14'),
+(224,'test','125.210.251.204','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 23:17:01'),
+(225,'test','61.243.41.118','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-18 23:34:18'),
+(226,'test','36.27.39.190','XX XX','Chrome 8','Windows 7','0','登录成功','2021-01-18 23:49:19'),
+(227,'test','114.241.237.31','XX XX','Chrome 8','Mac OS X','0','登录成功','2021-01-19 04:56:56'),
+(228,'test','113.66.228.190','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 08:37:46'),
+(229,'test','211.136.253.191','XX XX','Chrome 8','Windows 7','1','验证码错误','2021-01-19 08:56:02'),
+(230,'test','211.136.253.191','XX XX','Chrome 8','Windows 7','0','登录成功','2021-01-19 08:56:10'),
+(231,'test','36.57.153.64','XX XX','Chrome 8','Mac OS X','0','登录成功','2021-01-19 09:44:27'),
+(232,'test','218.66.80.159','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 11:13:15'),
+(233,'test','222.188.241.8','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 11:27:51'),
+(234,'test','60.208.209.207','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 11:44:07'),
+(235,'test','123.149.115.180','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 12:28:42'),
+(236,'test','27.154.58.146','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 13:18:22'),
+(237,'test','112.48.29.75','XX XX','Chrome 8','Windows 7','0','登录成功','2021-01-19 13:26:34'),
+(238,'test','60.208.209.207','XX XX','Chrome 8','Windows 10','1','验证码错误','2021-01-19 14:21:52'),
+(239,'test','60.208.209.207','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 14:22:00'),
+(240,'test','27.27.235.134','XX XX','Chrome','Windows 10','0','登录成功','2021-01-19 14:22:32'),
+(241,'test','106.117.97.117','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 14:28:35'),
+(242,'test','45.76.75.125','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 14:28:54'),
+(243,'test','183.238.224.138','XX XX','Chrome','Windows 10','0','登录成功','2021-01-19 14:29:49'),
+(244,'test','106.114.180.243','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 14:33:21'),
+(245,'test','106.117.97.117','XX XX','Chrome 8','Windows 10','0','退出成功','2021-01-19 14:35:33'),
+(246,'test','221.192.178.108','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 14:35:51'),
+(247,'test','123.149.115.180','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 14:53:29'),
+(248,'test','27.19.120.211','XX XX','Chrome','Windows 10','0','登录成功','2021-01-19 15:15:28'),
+(249,'test','115.214.70.4','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 15:50:59'),
+(250,'test','60.2.125.182','XX XX','Chrome 61','Windows 10','0','登录成功','2021-01-19 16:05:26'),
+(251,'test','223.11.3.53','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 16:20:03'),
+(252,'test','218.200.109.70','XX XX','Chrome 55','Windows 10','0','登录成功','2021-01-19 16:24:38'),
+(253,'test','125.76.212.101','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 16:32:55'),
+(254,'test','117.14.73.96','XX XX','Chrome 8','Mac OS X','0','登录成功','2021-01-19 16:42:52'),
+(255,'test','218.81.11.192','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 17:25:11'),
+(256,'test','120.227.36.71','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 17:32:10'),
+(257,'test','116.55.48.5','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 17:44:43'),
+(258,'test','218.81.11.192','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 18:07:22'),
+(259,'test','221.216.138.206','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 19:09:05'),
+(260,'test','218.81.11.192','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 19:19:11'),
+(261,'test','125.116.132.238','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 19:35:12'),
+(262,'test','222.76.36.97','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 20:06:59'),
+(263,'test','122.247.153.194','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 20:11:54'),
+(264,'test','222.76.36.97','XX XX','Chrome 8','Windows 10','0','登录成功','2021-01-19 21:01:39'),
+(265,'test','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-19 22:28:16'),
+(266,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-01-21 15:20:36'),
+(267,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-01-21 17:43:05'),
+(268,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','退出成功','2021-01-21 17:49:53'),
+(269,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-01-21 17:50:03'),
+(270,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-01-21 19:29:40'),
+(271,'test','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-21 20:14:16'),
+(272,'test','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','退出成功','2021-01-21 20:15:05'),
+(273,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','1','验证码错误','2021-01-21 20:15:11'),
+(274,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','1','用户不存在/密码错误','2021-01-21 20:15:15'),
+(275,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','1','验证码错误','2021-01-21 20:15:24'),
+(276,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','1','用户不存在/密码错误','2021-01-21 20:15:26'),
+(277,'test','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-21 20:15:33'),
+(278,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-01-22 10:44:57'),
+(279,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-01-22 12:06:10'),
+(280,'test','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-22 19:12:47'),
+(281,'test','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','退出成功','2021-01-22 19:13:05'),
+(282,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-22 19:13:31'),
+(283,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','1','验证码错误','2021-01-25 21:36:22'),
+(284,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','1','用户不存在/密码错误','2021-01-25 21:36:25'),
+(285,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-25 21:37:03'),
+(286,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','退出成功','2021-01-25 22:16:06'),
+(287,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-25 22:16:12'),
+(288,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-25 23:03:30'),
+(289,'test','192.168.0.101','内网IP','Chrome 8','Mac OS X','1','验证码错误','2021-01-26 01:23:53'),
+(290,'test','192.168.0.101','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-26 01:23:56'),
+(291,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-26 01:24:14'),
+(292,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-01-26 21:55:38'),
+(293,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-26 22:36:07'),
+(294,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-27 00:06:16'),
+(295,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','1','验证码已失效','2021-01-28 22:28:35'),
+(296,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-01-28 22:28:39'),
+(297,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','退出成功','2021-01-28 22:39:52'),
+(298,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-01-28 22:40:03'),
+(299,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-30 14:36:28'),
+(300,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-30 16:06:11'),
+(301,'admin','127.0.0.1','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-01-30 16:58:26'),
+(302,'test','127.0.0.1, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-02-01 18:03:38'),
+(303,'test','127.0.0.1, 111.22.249.94','内网IP','Chrome 56','Mac OS X','1','验证码已失效','2021-02-01 18:07:33'),
+(304,'test','127.0.0.1, 111.22.249.94','内网IP','Chrome 56','Mac OS X','0','登录成功','2021-02-01 18:07:40'),
+(305,'test','192.168.0.100, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-02-01 18:28:32'),
+(306,'test','192.168.0.100, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-02-01 21:47:31'),
+(307,'test','192.168.0.100, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','退出成功','2021-02-01 22:00:42'),
+(308,'admin','192.168.0.100, 111.22.249.94','内网IP','Chrome 8','Mac OS X','1','用户不存在/密码错误','2021-02-01 22:00:51'),
+(309,'admin','192.168.0.100, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-02-01 22:01:15'),
+(310,'test','192.168.0.100, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-02-01 23:26:26'),
+(311,'test','192.168.0.100, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','退出成功','2021-02-01 23:26:42'),
+(312,'admin','192.168.0.100, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-02-01 23:26:51'),
+(313,'admin','127.0.0.1, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-02-02 15:13:42'),
+(314,'admin','127.0.0.1, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-02-02 18:23:56'),
+(315,'admin','127.0.0.1, 111.22.249.94','内网IP','Chrome 8','Mac OS X','1','验证码错误','2021-02-03 18:28:32'),
+(316,'admin','127.0.0.1, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-02-03 18:28:36'),
+(317,'admin','127.0.0.1, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-02-03 19:36:37'),
+(318,'admin','192.168.0.100, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-02-03 20:55:51'),
+(319,'admin','192.168.0.100, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-02-03 22:12:00'),
+(320,'admin','127.0.0.1, 111.22.249.94','内网IP','Chrome 8','Mac OS X','1','验证码已失效','2021-02-04 16:41:37'),
+(321,'admin','127.0.0.1, 111.22.249.94','内网IP','Chrome 8','Mac OS X','0','登录成功','2021-02-04 16:41:41'),
+(322,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-02-05 20:51:44'),
+(323,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-02-05 21:32:46');
 
 /*Table structure for table `sys_menu` */
 
@@ -700,15 +1109,15 @@ CREATE TABLE `sys_menu` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) DEFAULT '' COMMENT '备注',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2033 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='菜单权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=2052 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='菜单权限表';
 
 /*Data for the table `sys_menu` */
 
 insert  into `sys_menu`(`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`component`,`is_frame`,`is_cache`,`menu_type`,`visible`,`status`,`perms`,`icon`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
-(1,'系统管理',0,1,'system',NULL,1,0,'M','0','0','','system','admin','2021-01-14 15:39:13','',NULL,'系统管理目录'),
-(2,'系统监控',0,2,'monitor',NULL,1,0,'M','0','0','','monitor','admin','2021-01-14 15:39:13','',NULL,'系统监控目录'),
-(3,'系统工具',0,3,'tool',NULL,1,0,'M','0','0','','tool','admin','2021-01-14 15:39:13','',NULL,'系统工具目录'),
-(4,'公众号管理',0,0,'wxmp',NULL,1,0,'M','0','0','','wechat','admin','2018-03-16 11:33:00','admin','2020-03-05 14:59:21','公众号管理'),
+(1,'系统管理',0,10,'system',NULL,1,0,'M','0','0','','system','admin','2021-01-14 15:39:13','admin','2021-01-21 17:43:31','系统管理目录'),
+(2,'系统监控',0,20,'monitor',NULL,1,0,'M','0','0','','monitor','admin','2021-01-14 15:39:13','admin','2021-01-21 17:43:38','系统监控目录'),
+(3,'系统工具',0,30,'tool',NULL,1,0,'M','0','0','','tool','admin','2021-01-14 15:39:13','admin','2021-01-21 17:43:43','系统工具目录'),
+(4,'公众号管理',0,0,'wxmp',NULL,1,0,'M','0','0','','wechat','admin','2018-03-16 11:33:00','admin','2020-03-05 14:59:21','若依官网地址'),
 (100,'用户管理',1,1,'user','system/user/index',1,0,'C','0','0','system:user:list','user','admin','2021-01-14 15:39:13','',NULL,'用户管理菜单'),
 (101,'角色管理',1,2,'role','system/role/index',1,0,'C','0','0','system:role:list','peoples','admin','2021-01-14 15:39:13','',NULL,'角色管理菜单'),
 (102,'菜单管理',1,3,'menu','system/menu/index',1,0,'C','0','0','system:menu:list','tree-table','admin','2021-01-14 15:39:13','',NULL,'菜单管理菜单'),
@@ -817,7 +1226,26 @@ insert  into `sys_menu`(`menu_id`,`menu_name`,`parent_id`,`order_num`,`path`,`co
 (2026,'消息自动回复新增',2006,0,'',NULL,1,0,'F','0','0','wxmp:wxautoreply:add','#','admin','2020-03-04 17:22:43','',NULL,''),
 (2027,'消息自动回复修改',2006,0,'',NULL,1,0,'F','0','0','wxmp:wxautoreply:edit','#','admin','2020-03-04 17:23:05','',NULL,''),
 (2028,'消息自动回复删除',2006,0,'',NULL,1,0,'F','0','0','wxmp:wxautoreply:del','#','admin','2020-03-04 17:23:36','',NULL,''),
-(2029,'消息自动回复详情',2006,0,'',NULL,1,0,'F','0','0','wxmp:wxautoreply:get','#','admin','2020-03-04 17:23:59','',NULL,'');
+(2029,'消息自动回复详情',2006,0,'',NULL,1,0,'F','0','0','wxmp:wxautoreply:get','#','admin','2020-03-04 17:23:59','',NULL,''),
+(2033,'商城管理',0,5,'mall',NULL,1,0,'M','0','0',NULL,'shopping','admin','2021-01-21 17:44:55','',NULL,''),
+(2034,'商品分类',2033,10,'goodscategory','mall/goodscategory/index',1,0,'C','0','0','mall:goodscategory:index','build','admin','2021-01-21 17:47:43','admin','2021-01-21 17:48:30',''),
+(2035,'商品类目查询',2034,0,'',NULL,1,0,'F','0','0','mall:goodscategory:get','#','admin','2021-01-21 17:48:23','',NULL,''),
+(2036,'新增商品类目',2034,0,'',NULL,1,0,'F','0','0','mall:goodscategory:add','#','admin','2021-01-21 17:48:51','',NULL,''),
+(2037,'修改商品类目',2034,0,'',NULL,1,0,'F','0','0','mall:goodscategory:edit','#','admin','2021-01-21 17:49:11','',NULL,''),
+(2038,'删除商品类目',2034,0,'',NULL,1,0,'F','0','0','mall:goodscategory:del','#','admin','2021-01-21 17:49:31','',NULL,''),
+(2039,'商品管理',2033,10,'goodsspu','mall/goodsspu/index',1,0,'C','0','0','mall:goodsspu:index','shopping','admin','2021-01-25 22:10:44','admin','2021-01-25 22:12:13',''),
+(2040,'商品查询',2039,0,'',NULL,1,0,'F','0','0','mall:goodsspu:get','#','admin','2021-01-25 22:13:08','',NULL,''),
+(2041,'新增商品',2039,0,'',NULL,1,0,'F','0','0','mall:goodsspu:add','#','admin','2021-01-25 22:14:55','',NULL,''),
+(2042,'修改商品',2039,0,'',NULL,1,0,'F','0','0','mall:goodsspu:edit','#','admin','2021-01-25 22:15:14','',NULL,''),
+(2043,'删除商品',2039,0,'',NULL,1,0,'F','0','0','mall:goodsspu:del','#','admin','2021-01-25 22:15:35','',NULL,''),
+(2044,'订单管理',2033,10,'orderinfo','mall/orderinfo/index',1,0,'C','0','0','mall:orderinfo:index','list','admin','2021-01-27 00:07:14','admin','2021-01-27 00:07:45',''),
+(2045,'订单查询',2044,0,'',NULL,1,0,'F','0','0','mall:orderinfo:get','#','admin','2021-01-27 00:08:28','',NULL,''),
+(2046,'商城订单修改',2044,0,'',NULL,1,0,'F','0','0','mall:orderinfo:edit','#','admin','2021-01-28 22:38:58','',NULL,''),
+(2047,'商城订单新增',2044,0,'',NULL,1,0,'F','0','0','mall:orderinfo:add','#','admin','2021-01-28 22:39:21','',NULL,''),
+(2048,'商城订单删除',2044,0,'',NULL,1,0,'F','0','0','mall:orderinfo:del','#','admin','2021-01-28 22:39:41','',NULL,''),
+(2049,'小程序管理',0,3,'wxma',NULL,1,0,'M','0','0',NULL,'phone','admin','2021-01-28 23:45:03','',NULL,''),
+(2050,'小程序用户',2049,10,'wxuser-ma','wxma/wxuser/index',1,0,'C','0','0','wxmp:wxuser:index','peoples','admin','2021-01-28 23:54:34','',NULL,''),
+(2051,'小程序用户查询',2050,0,'',NULL,1,0,'F','0','0','wxmp:wxuser:get','#','admin','2021-01-28 23:57:07','',NULL,'');
 
 /*Table structure for table `sys_notice` */
 
@@ -840,6 +1268,7 @@ CREATE TABLE `sys_notice` (
 /*Data for the table `sys_notice` */
 
 insert  into `sys_notice`(`notice_id`,`notice_title`,`notice_type`,`notice_content`,`status`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
+(1,'温馨提醒：2018-07-01 若依新版本发布啦','2','新版本内容','0','admin','2021-01-14 15:39:14','',NULL,'管理员'),
 (11,'ewtwet','1',NULL,'0','admin','2021-01-14 17:45:06','',NULL,NULL);
 
 /*Table structure for table `sys_oper_log` */
@@ -864,7 +1293,7 @@ CREATE TABLE `sys_oper_log` (
   `error_msg` varchar(2000) DEFAULT '' COMMENT '错误消息',
   `oper_time` datetime DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`oper_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='操作日志记录';
+) ENGINE=InnoDB AUTO_INCREMENT=164 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='操作日志记录';
 
 /*Data for the table `sys_oper_log` */
 
@@ -889,19 +1318,50 @@ insert  into `sys_oper_log`(`oper_id`,`title`,`business_type`,`method`,`request_
 (117,'用户管理',3,'com.joolun.web.controller.system.SysUserController.remove()','DELETE',1,'admin',NULL,'/system/user/2','127.0.0.1','内网IP','{userIds=2}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-15 20:52:42'),
 (118,'用户管理',1,'com.joolun.web.controller.system.SysUserController.add()','POST',1,'admin',NULL,'/system/user','127.0.0.1','内网IP','{\"admin\":false,\"password\":\"$2a$10$KTBu09ed743F.IS1Y5TCluX8Jg17xnef5VBwDHjoi.MsgpU.fsQQa\",\"postIds\":[],\"nickName\":\"test\",\"sex\":\"0\",\"deptId\":100,\"params\":{},\"userName\":\"test\",\"userId\":100,\"createBy\":\"admin\",\"roleIds\":[],\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-15 20:52:55'),
 (119,'用户管理',2,'com.joolun.web.controller.system.SysUserController.edit()','PUT',1,'admin',NULL,'/system/user','127.0.0.1','内网IP','{\"roles\":[],\"phonenumber\":\"\",\"admin\":false,\"delFlag\":\"0\",\"password\":\"\",\"updateBy\":\"admin\",\"postIds\":[],\"loginIp\":\"\",\"email\":\"\",\"nickName\":\"test\",\"sex\":\"0\",\"deptId\":100,\"avatar\":\"\",\"dept\":{\"deptName\":\"若依科技\",\"leader\":\"若依\",\"deptId\":100,\"orderNum\":\"0\",\"params\":{},\"parentId\":0,\"children\":[],\"status\":\"0\"},\"params\":{},\"userName\":\"test\",\"userId\":100,\"createBy\":\"admin\",\"roleIds\":[2],\"createTime\":1610715175000,\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-15 20:53:33'),
-(120,'用户管理',2,'com.joolun.web.controller.system.SysUserController.edit()','PUT',1,'admin',NULL,'/system/user','127.0.0.1','内网IP','{\"roles\":[{\"flag\":false,\"roleId\":1,\"admin\":true,\"dataScope\":\"1\",\"params\":{},\"roleSort\":\"1\",\"deptCheckStrictly\":false,\"menuCheckStrictly\":false,\"roleKey\":\"admin\",\"roleName\":\"超级管理员\",\"status\":\"0\"}],\"phonenumber\":\"15888888888\",\"admin\":true,\"loginDate\":1610609953000,\"remark\":\"管理员\",\"delFlag\":\"0\",\"password\":\"\",\"postIds\":[1],\"loginIp\":\"127.0.0.1\",\"email\":\"joolun@163.com\",\"nickName\":\"JooLun\",\"sex\":\"0\",\"deptId\":103,\"avatar\":\"\",\"dept\":{\"deptName\":\"研发部门\",\"leader\":\"若依\",\"deptId\":103,\"orderNum\":\"1\",\"params\":{},\"parentId\":101,\"children\":[],\"status\":\"0\"},\"params\":{},\"userName\":\"admin\",\"userId\":1,\"createBy\":\"admin\",\"roleIds\":[1],\"createTime\":1610609953000,\"status\":\"0\"}','null',1,'不允许操作超级管理员用户','2021-01-15 23:53:12'),
-(121,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','127.0.0.1','内网IP','{\"deptName\":\"JooLun科技\",\"leader\":\"JooLun\",\"deptId\":100,\"orderNum\":\"0\",\"delFlag\":\"0\",\"params\":{},\"parentId\":0,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0\",\"email\":\"JooLun@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-15 23:54:04'),
-(122,'通知公告',3,'com.joolun.web.controller.system.SysNoticeController.remove()','DELETE',1,'admin',NULL,'/system/notice/1','127.0.0.1','内网IP','{noticeIds=1}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-15 23:54:17'),
-(123,'代码生成',8,'com.joolun.generator.controller.GenController.batchGenCode()','GET',1,'admin',NULL,'/tool/gen/batchGenCode','127.0.0.1','内网IP','{}','null',0,NULL,'2021-01-15 23:54:41'),
-(124,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','127.0.0.1','内网IP','{\"deptName\":\"深圳总公司\",\"leader\":\"JooLun\",\"deptId\":101,\"orderNum\":\"1\",\"delFlag\":\"0\",\"params\":{},\"parentId\":100,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100\",\"email\":\"JooLun@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:00:29'),
-(125,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','127.0.0.1','内网IP','{\"deptName\":\"研发部门\",\"leader\":\"JooLun\",\"deptId\":103,\"orderNum\":\"1\",\"delFlag\":\"0\",\"params\":{},\"parentId\":101,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,101\",\"email\":\"JooLun@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:00:40'),
-(126,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','127.0.0.1','内网IP','{\"deptName\":\"市场部门\",\"leader\":\"JooLun\",\"deptId\":104,\"orderNum\":\"2\",\"delFlag\":\"0\",\"params\":{},\"parentId\":101,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,101\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:00:45'),
-(127,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','127.0.0.1','内网IP','{\"deptName\":\"测试部门\",\"leader\":\"JooLun\",\"deptId\":105,\"orderNum\":\"3\",\"delFlag\":\"0\",\"params\":{},\"parentId\":101,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,101\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:00:48'),
-(128,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','127.0.0.1','内网IP','{\"deptName\":\"财务部门\",\"leader\":\"JooLun\",\"deptId\":106,\"orderNum\":\"4\",\"delFlag\":\"0\",\"params\":{},\"parentId\":101,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,101\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:00:54'),
-(129,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','127.0.0.1','内网IP','{\"deptName\":\"运维部门\",\"leader\":\"JooLun\",\"deptId\":107,\"orderNum\":\"5\",\"delFlag\":\"0\",\"params\":{},\"parentId\":101,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,101\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:00:57'),
-(130,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','127.0.0.1','内网IP','{\"deptName\":\"长沙分公司\",\"leader\":\"JooLun\",\"deptId\":102,\"orderNum\":\"2\",\"delFlag\":\"0\",\"params\":{},\"parentId\":100,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:01:00'),
-(131,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','127.0.0.1','内网IP','{\"deptName\":\"市场部门\",\"leader\":\"JooLun\",\"deptId\":108,\"orderNum\":\"1\",\"delFlag\":\"0\",\"params\":{},\"parentId\":102,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,102\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:01:05'),
-(132,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','127.0.0.1','内网IP','{\"deptName\":\"财务部门\",\"leader\":\"JooLun\",\"deptId\":109,\"orderNum\":\"2\",\"delFlag\":\"0\",\"params\":{},\"parentId\":102,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,102\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:01:09');
+(120,'角色管理',2,'com.joolun.web.controller.system.SysRoleController.edit()','PUT',1,'admin',NULL,'/system/role','220.202.217.37','XX XX','{\"flag\":false,\"roleId\":2,\"admin\":false,\"remark\":\"普通角色\",\"dataScope\":\"2\",\"delFlag\":\"0\",\"params\":{},\"roleSort\":\"2\",\"deptCheckStrictly\":true,\"createTime\":1610609953000,\"updateBy\":\"admin\",\"menuCheckStrictly\":true,\"roleKey\":\"common\",\"roleName\":\"普通角色\",\"menuIds\":[4,2000,2008,2009,2001,2002,2010,2011,2012,2013,2014,2015,2016,2003,2017,2018,2019,2020,2004,2021,2022,2023,2024,2005,2025,2006,2026,2027,2028,2029,2007,1,100,1001,1002,1003,1004,1005,1006,1007,101,1008,1009,1010,1011,1012,102,1013,1014,1015,1016,103,1017,1018,1019,1020,104,1021,1022,1023,1024,1025,105,1026,1027,1028,1029,1030,106,1031,1032,1033,1034,1035,107,1036,1037,1038,1039,108,500,1040,1041,1042,501,1043,1044,1045,2,109,1046,1047,1048,110,1049,1050,1051,1052,1053,1054,111,112,113,3,114,115,1055,1056,1058,1057,1059,1060,116],\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-15 23:17:30'),
+(121,'用户管理',2,'com.joolun.web.controller.system.SysUserController.edit()','PUT',1,'admin',NULL,'/system/user','220.202.217.37','XX XX','{\"roles\":[{\"flag\":false,\"roleId\":2,\"admin\":false,\"dataScope\":\"2\",\"params\":{},\"roleSort\":\"2\",\"deptCheckStrictly\":false,\"menuCheckStrictly\":false,\"roleKey\":\"common\",\"roleName\":\"普通角色\",\"status\":\"0\"}],\"phonenumber\":\"18608549631\",\"admin\":false,\"remark\":\"111\",\"delFlag\":\"0\",\"password\":\"\",\"updateBy\":\"admin\",\"postIds\":[],\"loginIp\":\"\",\"email\":\"1023536325@qq.com\",\"nickName\":\"test\",\"sex\":\"0\",\"deptId\":100,\"avatar\":\"\",\"dept\":{\"deptName\":\"若依科技\",\"leader\":\"若依\",\"deptId\":100,\"orderNum\":\"0\",\"params\":{},\"parentId\":0,\"children\":[],\"status\":\"0\"},\"params\":{},\"userName\":\"test\",\"userId\":100,\"createBy\":\"admin\",\"roleIds\":[2],\"createTime\":1583312549000,\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-15 23:17:40'),
+(122,'用户管理',2,'com.joolun.web.controller.system.SysUserController.edit()','PUT',1,'admin',NULL,'/system/user','220.202.217.37','XX XX','{\"roles\":[{\"flag\":false,\"roleId\":1,\"admin\":true,\"dataScope\":\"1\",\"params\":{},\"roleSort\":\"1\",\"deptCheckStrictly\":false,\"menuCheckStrictly\":false,\"roleKey\":\"admin\",\"roleName\":\"超级管理员\",\"status\":\"0\"}],\"phonenumber\":\"15888888888\",\"admin\":true,\"loginDate\":1521171180000,\"remark\":\"管理员\",\"delFlag\":\"0\",\"password\":\"\",\"postIds\":[1],\"loginIp\":\"127.0.0.1\",\"email\":\"ry@163.com\",\"nickName\":\"JooLun\",\"sex\":\"1\",\"deptId\":103,\"avatar\":\"\",\"dept\":{\"deptName\":\"研发部门\",\"leader\":\"若依\",\"deptId\":103,\"orderNum\":\"1\",\"params\":{},\"parentId\":101,\"children\":[],\"status\":\"0\"},\"params\":{},\"userName\":\"admin\",\"userId\":1,\"createBy\":\"admin\",\"roleIds\":[1],\"createTime\":1521171180000,\"status\":\"0\"}','null',1,'不允许操作超级管理员用户','2021-01-16 00:07:15'),
+(123,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','220.202.217.37','XX XX','{\"deptName\":\"JooLun\",\"leader\":\"JooLun\",\"deptId\":100,\"orderNum\":\"0\",\"delFlag\":\"0\",\"params\":{},\"parentId\":0,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:07:28'),
+(124,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','220.202.217.37','XX XX','{\"deptName\":\"深圳总公司\",\"leader\":\"JooLun\",\"deptId\":101,\"orderNum\":\"1\",\"delFlag\":\"0\",\"params\":{},\"parentId\":100,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:07:32'),
+(125,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','220.202.217.37','XX XX','{\"deptName\":\"研发部门\",\"leader\":\"JooLun\",\"deptId\":103,\"orderNum\":\"1\",\"delFlag\":\"0\",\"params\":{},\"parentId\":101,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,101\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:07:34'),
+(126,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','220.202.217.37','XX XX','{\"deptName\":\"市场部门\",\"leader\":\"JooLun\",\"deptId\":104,\"orderNum\":\"2\",\"delFlag\":\"0\",\"params\":{},\"parentId\":101,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,101\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:07:37'),
+(127,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','220.202.217.37','XX XX','{\"deptName\":\"测试部门\",\"leader\":\"JooLun\",\"deptId\":105,\"orderNum\":\"3\",\"delFlag\":\"0\",\"params\":{},\"parentId\":101,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,101\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:07:39'),
+(128,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','220.202.217.37','XX XX','{\"deptName\":\"财务部门\",\"leader\":\"JooLun\",\"deptId\":106,\"orderNum\":\"4\",\"delFlag\":\"0\",\"params\":{},\"parentId\":101,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,101\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:07:42'),
+(129,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','220.202.217.37','XX XX','{\"deptName\":\"运维部门\",\"leader\":\"JooLun\",\"deptId\":107,\"orderNum\":\"5\",\"delFlag\":\"0\",\"params\":{},\"parentId\":101,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,101\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:07:45'),
+(130,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','220.202.217.37','XX XX','{\"deptName\":\"长沙分公司\",\"leader\":\"JooLun\",\"deptId\":102,\"orderNum\":\"2\",\"delFlag\":\"0\",\"params\":{},\"parentId\":100,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:07:48'),
+(131,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','220.202.217.37','XX XX','{\"deptName\":\"市场部门\",\"leader\":\"JooLun\",\"deptId\":108,\"orderNum\":\"1\",\"delFlag\":\"0\",\"params\":{},\"parentId\":102,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,102\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:07:52'),
+(132,'部门管理',2,'com.joolun.web.controller.system.SysDeptController.edit()','PUT',1,'admin',NULL,'/system/dept','220.202.217.37','XX XX','{\"deptName\":\"财务部门\",\"leader\":\"JooLun\",\"deptId\":109,\"orderNum\":\"2\",\"delFlag\":\"0\",\"params\":{},\"parentId\":102,\"createBy\":\"admin\",\"children\":[],\"createTime\":1610609953000,\"phone\":\"15888888888\",\"updateBy\":\"admin\",\"ancestors\":\"0,100,102\",\"email\":\"ry@qq.com\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-16 00:07:55'),
+(133,'代码生成',8,'com.joolun.generator.controller.GenController.batchGenCode()','GET',1,'test',NULL,'/tool/gen/batchGenCode','175.153.195.94','XX XX','{}','null',0,NULL,'2021-01-18 16:22:18'),
+(134,'代码生成',8,'com.joolun.generator.controller.GenController.batchGenCode()','GET',1,'test',NULL,'/tool/gen/batchGenCode','120.230.139.76','XX XX','{}','null',0,NULL,'2021-01-18 17:38:43'),
+(135,'代码生成',8,'com.joolun.generator.controller.GenController.batchGenCode()','GET',1,'test',NULL,'/tool/gen/batchGenCode','60.208.209.207','XX XX','{}','null',0,NULL,'2021-01-19 11:45:50'),
+(136,'菜单管理',2,'com.joolun.web.controller.system.SysMenuController.edit()','PUT',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"system\",\"orderNum\":\"10\",\"menuName\":\"系统管理\",\"params\":{},\"parentId\":0,\"isCache\":\"0\",\"path\":\"system\",\"children\":[],\"createTime\":1610609953000,\"updateBy\":\"admin\",\"isFrame\":\"1\",\"menuId\":1,\"menuType\":\"M\",\"perms\":\"\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-21 17:43:31'),
+(137,'菜单管理',2,'com.joolun.web.controller.system.SysMenuController.edit()','PUT',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"monitor\",\"orderNum\":\"20\",\"menuName\":\"系统监控\",\"params\":{},\"parentId\":0,\"isCache\":\"0\",\"path\":\"monitor\",\"children\":[],\"createTime\":1610609953000,\"updateBy\":\"admin\",\"isFrame\":\"1\",\"menuId\":2,\"menuType\":\"M\",\"perms\":\"\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-21 17:43:38'),
+(138,'菜单管理',2,'com.joolun.web.controller.system.SysMenuController.edit()','PUT',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"tool\",\"orderNum\":\"30\",\"menuName\":\"系统工具\",\"params\":{},\"parentId\":0,\"isCache\":\"0\",\"path\":\"tool\",\"children\":[],\"createTime\":1610609953000,\"updateBy\":\"admin\",\"isFrame\":\"1\",\"menuId\":3,\"menuType\":\"M\",\"perms\":\"\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-21 17:43:43'),
+(139,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"shopping\",\"orderNum\":\"5\",\"menuName\":\"商城管理\",\"params\":{},\"parentId\":0,\"isCache\":\"0\",\"path\":\"mall\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"M\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-21 17:44:55'),
+(140,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"build\",\"orderNum\":\"10\",\"menuName\":\"商城分类\",\"params\":{},\"parentId\":2033,\"isCache\":\"0\",\"path\":\"goodscategory\",\"component\":\"mall/goodscategory/index\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"C\",\"perms\":\"mall:goodscategory:index\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-21 17:47:44'),
+(141,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"商品类目查询\",\"params\":{},\"parentId\":2034,\"isCache\":\"0\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"mall:goodscategory:get\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-21 17:48:23'),
+(142,'菜单管理',2,'com.joolun.web.controller.system.SysMenuController.edit()','PUT',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"build\",\"orderNum\":\"10\",\"menuName\":\"商品分类\",\"params\":{},\"parentId\":2033,\"isCache\":\"0\",\"path\":\"goodscategory\",\"component\":\"mall/goodscategory/index\",\"children\":[],\"createTime\":1611222463000,\"updateBy\":\"admin\",\"isFrame\":\"1\",\"menuId\":2034,\"menuType\":\"C\",\"perms\":\"mall:goodscategory:index\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-21 17:48:30'),
+(143,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"新增商品类目\",\"params\":{},\"parentId\":2034,\"isCache\":\"0\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"mall:goodscategory:add\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-21 17:48:52'),
+(144,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"修改商品类目\",\"params\":{},\"parentId\":2034,\"isCache\":\"0\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"mall:goodscategory:edit\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-21 17:49:11'),
+(145,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"删除商品类目\",\"params\":{},\"parentId\":2034,\"isCache\":\"0\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"mall:goodscategory:del\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-21 17:49:32'),
+(146,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"shopping\",\"orderNum\":\"2\",\"menuName\":\"商品管理\",\"params\":{},\"parentId\":2033,\"isCache\":\"0\",\"path\":\"goods:spuu\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"C\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-25 22:10:44'),
+(147,'菜单管理',2,'com.joolun.web.controller.system.SysMenuController.edit()','PUT',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"shopping\",\"orderNum\":\"2\",\"menuName\":\"商品管理\",\"params\":{},\"parentId\":2033,\"isCache\":\"0\",\"path\":\"mall\",\"component\":\"mall:goodsspu:index\",\"children\":[],\"createTime\":1611583844000,\"updateBy\":\"admin\",\"isFrame\":\"1\",\"menuId\":2039,\"menuType\":\"C\",\"perms\":\"mall:goodsspu:index\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-25 22:11:20'),
+(148,'菜单管理',2,'com.joolun.web.controller.system.SysMenuController.edit()','PUT',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"shopping\",\"orderNum\":\"2\",\"menuName\":\"商品管理\",\"params\":{},\"parentId\":2033,\"isCache\":\"0\",\"path\":\"goodsspu\",\"component\":\"mall:goodsspu:index\",\"children\":[],\"createTime\":1611583844000,\"updateBy\":\"admin\",\"isFrame\":\"1\",\"menuId\":2039,\"menuType\":\"C\",\"perms\":\"mall:goodsspu:index\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-25 22:11:44'),
+(149,'菜单管理',2,'com.joolun.web.controller.system.SysMenuController.edit()','PUT',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"shopping\",\"orderNum\":\"10\",\"menuName\":\"商品管理\",\"params\":{},\"parentId\":2033,\"isCache\":\"0\",\"path\":\"goodsspu\",\"component\":\"mall:goodsspu:index\",\"children\":[],\"createTime\":1611583844000,\"updateBy\":\"admin\",\"isFrame\":\"1\",\"menuId\":2039,\"menuType\":\"C\",\"perms\":\"mall:goodsspu:index\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-25 22:11:54'),
+(150,'菜单管理',2,'com.joolun.web.controller.system.SysMenuController.edit()','PUT',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"shopping\",\"orderNum\":\"10\",\"menuName\":\"商品管理\",\"params\":{},\"parentId\":2033,\"isCache\":\"0\",\"path\":\"goodsspu\",\"component\":\"mall/goodsspu/index\",\"children\":[],\"createTime\":1611583844000,\"updateBy\":\"admin\",\"isFrame\":\"1\",\"menuId\":2039,\"menuType\":\"C\",\"perms\":\"mall:goodsspu:index\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-25 22:12:13'),
+(151,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"商品查询\",\"params\":{},\"parentId\":2039,\"isCache\":\"0\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"mall:goodsspu:get\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-25 22:13:08'),
+(152,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"新增商品\",\"params\":{},\"parentId\":2039,\"isCache\":\"0\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"mall:goodsspu:add\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-25 22:14:55'),
+(153,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"修改商品\",\"params\":{},\"parentId\":2039,\"isCache\":\"0\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"mall:goodsspu:edit\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-25 22:15:14'),
+(154,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"删除商品\",\"params\":{},\"parentId\":2039,\"isCache\":\"0\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"mall:goodsspu:del\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-25 22:15:35'),
+(155,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"list\",\"orderNum\":\"10\",\"menuName\":\"订单管理\",\"params\":{},\"parentId\":2033,\"isCache\":\"0\",\"path\":\"orderinfo\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"C\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-27 00:07:14'),
+(156,'菜单管理',2,'com.joolun.web.controller.system.SysMenuController.edit()','PUT',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"list\",\"orderNum\":\"10\",\"menuName\":\"订单管理\",\"params\":{},\"parentId\":2033,\"isCache\":\"0\",\"path\":\"orderinfo\",\"component\":\"mall/orderinfo/index\",\"children\":[],\"createTime\":1611677234000,\"updateBy\":\"admin\",\"isFrame\":\"1\",\"menuId\":2044,\"menuType\":\"C\",\"perms\":\"mall:orderinfo:index\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-27 00:07:45'),
+(157,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"订单查询\",\"params\":{},\"parentId\":2044,\"isCache\":\"0\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"mall:orderinfo:get\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-27 00:08:28'),
+(158,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"商城订单修改\",\"params\":{},\"parentId\":2044,\"isCache\":\"0\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"mall:orderinfo:edit\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-28 22:38:59'),
+(159,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"商城订单新增\",\"params\":{},\"parentId\":2044,\"isCache\":\"0\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"mall:orderinfo:add\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-28 22:39:21'),
+(160,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"商城订单删除\",\"params\":{},\"parentId\":2044,\"isCache\":\"0\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"mall:orderinfo:del\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-28 22:39:41'),
+(161,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"phone\",\"orderNum\":\"3\",\"menuName\":\"小程序管理\",\"params\":{},\"parentId\":0,\"isCache\":\"0\",\"path\":\"wxma\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"M\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-28 23:45:04'),
+(162,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"icon\":\"peoples\",\"orderNum\":\"10\",\"menuName\":\"小程序用户\",\"params\":{},\"parentId\":2049,\"isCache\":\"0\",\"path\":\"wxuser-ma\",\"component\":\"wxma/wxuser/index\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"C\",\"perms\":\"wxmp:wxuser:index\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-28 23:54:34'),
+(163,'菜单管理',1,'com.joolun.web.controller.system.SysMenuController.add()','POST',1,'admin',NULL,'/system/menu','127.0.0.1','内网IP','{\"visible\":\"0\",\"orderNum\":\"0\",\"menuName\":\"小程序用户查询\",\"params\":{},\"parentId\":2050,\"isCache\":\"0\",\"createBy\":\"admin\",\"children\":[],\"isFrame\":\"1\",\"menuType\":\"F\",\"perms\":\"wxmp:wxuser:get\",\"status\":\"0\"}','{\"msg\":\"操作成功\",\"code\":200}',0,NULL,'2021-01-28 23:57:07');
 
 /*Table structure for table `sys_post` */
 
@@ -955,7 +1415,7 @@ CREATE TABLE `sys_role` (
 
 insert  into `sys_role`(`role_id`,`role_name`,`role_key`,`role_sort`,`data_scope`,`menu_check_strictly`,`dept_check_strictly`,`status`,`del_flag`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
 (1,'超级管理员','admin',1,'1',1,1,'0','0','admin','2021-01-14 15:39:13','',NULL,'超级管理员'),
-(2,'普通角色','common',2,'2',1,1,'0','0','admin','2021-01-14 15:39:13','',NULL,'普通角色');
+(2,'普通角色','common',2,'2',1,1,'0','0','admin','2021-01-14 15:39:13','admin','2021-01-15 23:17:30','普通角色');
 
 /*Table structure for table `sys_role_dept` */
 
@@ -1010,7 +1470,6 @@ insert  into `sys_role_menu`(`role_id`,`menu_id`) values
 (2,116),
 (2,500),
 (2,501),
-(2,1000),
 (2,1001),
 (2,1002),
 (2,1003),
@@ -1070,7 +1529,37 @@ insert  into `sys_role_menu`(`role_id`,`menu_id`) values
 (2,1057),
 (2,1058),
 (2,1059),
-(2,1060);
+(2,1060),
+(2,2000),
+(2,2001),
+(2,2002),
+(2,2003),
+(2,2004),
+(2,2005),
+(2,2006),
+(2,2007),
+(2,2008),
+(2,2009),
+(2,2010),
+(2,2011),
+(2,2012),
+(2,2013),
+(2,2014),
+(2,2015),
+(2,2016),
+(2,2017),
+(2,2018),
+(2,2019),
+(2,2020),
+(2,2021),
+(2,2022),
+(2,2023),
+(2,2024),
+(2,2025),
+(2,2026),
+(2,2027),
+(2,2028),
+(2,2029);
 
 /*Table structure for table `sys_user` */
 
@@ -1097,7 +1586,7 @@ CREATE TABLE `sys_user` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户信息表';
 
 /*Data for the table `sys_user` */
 
@@ -1137,6 +1626,34 @@ insert  into `sys_user_role`(`user_id`,`role_id`) values
 (1,1),
 (100,2);
 
+/*Table structure for table `user_address` */
+
+DROP TABLE IF EXISTS `user_address`;
+
+CREATE TABLE `user_address` (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT 'PK',
+  `del_flag` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0' COMMENT '逻辑删除标记（0：显示；1：隐藏）',
+  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后更新时间',
+  `user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '用户编号',
+  `user_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '收货人名字',
+  `postal_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '邮编',
+  `province_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '省名',
+  `city_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '市名',
+  `county_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '区名',
+  `detail_info` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '详情地址',
+  `tel_num` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '电话号码',
+  `is_default` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '是否默认 1是0否',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='用户地址';
+
+/*Data for the table `user_address` */
+
+insert  into `user_address`(`id`,`del_flag`,`create_time`,`update_time`,`user_id`,`user_name`,`postal_code`,`province_name`,`city_name`,`county_name`,`detail_info`,`tel_num`,`is_default`) values 
+('1354441894547988481','0','2021-01-27 22:51:26','2021-01-27 22:51:26','1352168072700571649','张三',NULL,'广东省','广州市','海珠区','新港中路397号','18602513214','1'),
+('1354474056307511297','0','2021-01-28 00:59:14','2021-01-28 00:59:14','1354473059078176770','张三',NULL,'广东省','广州市','海珠区','新港中路397号','18563265321','1'),
+('1355417330850476033','0','2021-01-30 15:27:29','2021-01-30 15:27:29','1355406809988345857','张三',NULL,'北京市','北京市','东城区','大冲地铁口','15580802543','1');
+
 /*Table structure for table `wx_auto_reply` */
 
 DROP TABLE IF EXISTS `wx_auto_reply`;
@@ -1168,10 +1685,6 @@ CREATE TABLE `wx_auto_reply` (
 
 /*Data for the table `wx_auto_reply` */
 
-insert  into `wx_auto_reply`(`id`,`create_id`,`create_time`,`update_id`,`update_time`,`remark`,`del_flag`,`type`,`req_key`,`req_type`,`rep_type`,`rep_mate`,`rep_content`,`rep_media_id`,`rep_name`,`rep_desc`,`rep_url`,`rep_hq_url`,`rep_thumb_media_id`,`rep_thumb_url`,`content`) values 
-('1349737556672020482',NULL,'2021-01-14 23:18:05',NULL,NULL,NULL,'0','1',NULL,NULL,'text',NULL,'sgwetey',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-('1350048965070979074',NULL,'2021-01-15 19:55:30',NULL,NULL,NULL,'0','2',NULL,'text','text',NULL,'6699',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
-
 /*Table structure for table `wx_menu` */
 
 DROP TABLE IF EXISTS `wx_menu`;
@@ -1202,11 +1715,6 @@ CREATE TABLE `wx_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='自定义菜单表';
 
 /*Data for the table `wx_menu` */
-
-insert  into `wx_menu`(`id`,`del_flag`,`create_time`,`update_time`,`sort`,`parent_id`,`type`,`name`,`url`,`ma_app_id`,`ma_page_path`,`rep_type`,`rep_content`,`rep_media_id`,`rep_name`,`rep_desc`,`rep_url`,`rep_hq_url`,`rep_thumb_media_id`,`rep_thumb_url`,`content`) values 
-('1350048385221033986','0','2021-01-15 19:54:31',NULL,1,'1350048716038373377','click','子菜单名称',NULL,NULL,NULL,'text','sdgsdgsdg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'{}'),
-('1350048385221033987','0','2021-01-15 19:54:31',NULL,2,'1350048716038373377','click','子菜单名称',NULL,NULL,NULL,'text','66699',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-('1350048716038373377','0','2021-01-15 19:54:31',NULL,1,'0',NULL,'菜单名称',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `wx_msg` */
 
@@ -1246,24 +1754,6 @@ CREATE TABLE `wx_msg` (
 
 /*Data for the table `wx_msg` */
 
-insert  into `wx_msg`(`id`,`create_id`,`create_time`,`update_id`,`update_time`,`remark`,`del_flag`,`app_name`,`app_logo`,`wx_user_id`,`nick_name`,`headimg_url`,`type`,`rep_type`,`rep_event`,`rep_content`,`rep_media_id`,`rep_name`,`rep_desc`,`rep_url`,`rep_hq_url`,`content`,`rep_thumb_media_id`,`rep_thumb_url`,`rep_location_x`,`rep_location_y`,`rep_scale`,`read_flag`) values 
-('1350046611835748353',NULL,'2021-01-15 19:46:10',NULL,'2021-01-15 19:51:13',NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','1','text',NULL,' hhh',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1'),
-('1350046688146915330',NULL,'2021-01-15 19:46:28',NULL,'2021-01-15 19:51:13',NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','1','event','unsubscribe',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1'),
-('1350048042097606657',NULL,'2021-01-15 19:51:51',NULL,'2021-01-15 19:52:14',NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','1','event','subscribe',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1'),
-('1350048042122772482',NULL,'2021-01-15 19:51:52',NULL,NULL,NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','2','text',NULL,'sgwetey',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1'),
-('1350048154626588674',NULL,'2021-01-15 19:52:17',NULL,NULL,NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','2','text',NULL,'666',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1'),
-('1350048909433536514',NULL,'2021-01-15 19:55:17',NULL,NULL,NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','1','text',NULL,'fgg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'0'),
-('1350048983534305282',NULL,'2021-01-15 19:55:35',NULL,NULL,NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','1','text',NULL,'jjj',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'0'),
-('1350048983622385666',NULL,'2021-01-15 19:55:36',NULL,NULL,NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','2','text',NULL,'6699',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1'),
-('1350050472625537025',NULL,'2021-01-15 20:01:30',NULL,NULL,NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','1','event','CLICK',NULL,NULL,'子菜单名称',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'0'),
-('1350050472680062978',NULL,'2021-01-15 20:01:31',NULL,NULL,NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','2','text',NULL,'sdgsdgsdg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1'),
-('1350050498693136385',NULL,'2021-01-15 20:01:36',NULL,NULL,NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','1','event','CLICK',NULL,NULL,'子菜单名称',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'0'),
-('1350050498789605377',NULL,'2021-01-15 20:01:37',NULL,NULL,NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','2','text',NULL,'66699',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1'),
-('1350050512110714882',NULL,'2021-01-15 20:01:39',NULL,NULL,NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','1','event','CLICK',NULL,NULL,'子菜单名称',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'0'),
-('1350050512135880705',NULL,'2021-01-15 20:01:40',NULL,NULL,NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','2','text',NULL,'sdgsdgsdg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1'),
-('1350050524488105985',NULL,'2021-01-15 20:01:42',NULL,NULL,NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','1','event','CLICK',NULL,NULL,'子菜单名称',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'0'),
-('1350050524584574978',NULL,'2021-01-15 20:01:43',NULL,NULL,NULL,'0',NULL,NULL,'1349736631303700482','JL','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132','2','text',NULL,'66699',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'1');
-
 /*Table structure for table `wx_user` */
 
 DROP TABLE IF EXISTS `wx_user`;
@@ -1299,25 +1789,32 @@ CREATE TABLE `wx_user` (
   `longitude` double DEFAULT NULL COMMENT '地理位置经度',
   `precision` double DEFAULT NULL COMMENT '地理位置精度',
   `session_key` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '会话密钥',
-  `mall_user_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '商城用户ID',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_openid` (`open_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='微信用户';
 
 /*Data for the table `wx_user` */
 
-insert  into `wx_user`(`id`,`create_id`,`create_time`,`update_id`,`update_time`,`remark`,`del_flag`,`app_type`,`subscribe`,`subscribe_scene`,`subscribe_time`,`subscribe_num`,`cancel_subscribe_time`,`open_id`,`nick_name`,`sex`,`city`,`country`,`province`,`phone`,`language`,`headimg_url`,`union_id`,`group_id`,`tagid_list`,`qr_scene_str`,`latitude`,`longitude`,`precision`,`session_key`,`mall_user_id`) values 
-('1349736631261757441',NULL,'2021-01-14 23:14:24',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-01-06 14:14:44',1,NULL,'o3QwG1QnY-BOe4M724t0dvVQaUUo','魂散','0','','','',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/PiajxSqBRaEK4NgUCJLPziclZYMfTnaYFXvz1GajlxariavaOkbKsXzXMoVHO6E5LKUWaaxxQccLVaicYR2Zqv5ZnA/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL,NULL),
-('1349736631282728961',NULL,'2021-01-14 23:14:24',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-10-29 23:34:34',1,NULL,'o3QwG1YepdGeVJZv_2bfIEjwnb_I','愈辉','1','','亚美尼亚','',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/lV0d907m3OWXHibcSriareU9XpBCdBgkOd286EialAX0BtrWEdrhunepPEUq82E6wneLbtNttjKDMJSM7Y9HOnaRA/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL,NULL),
-('1349736631291117570',NULL,'2021-01-14 23:14:24',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-11-09 11:36:47',1,NULL,'o3QwG1ThD7gJ-qIXTDF88rly1VHg','八爪鱼','1','','中国','北京',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/lV0d907m3OW2BkZicF01PtUQera34FdW1Ga68DhZxQ7MlGMLDG3DZIBMm2Cibjueb6NMDvRMMRZFqjMVEogD9Oibw/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL,NULL),
-('1349736631299506177',NULL,'2021-01-14 23:14:24',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-12-05 16:04:40',1,NULL,'o3QwG1ZP0s_alsf-PuhDU7CmLQ24','十万伏特','1','成都','中国','四川',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/J6c32680OdZUtzqT9zvNO2QR8jG1jdPiaFFQVA91Szrnpke0ga7UCCXGTKqZIppyibuhv6NTRX3OXqPtSQey8Ww0qgzhqicUgGR/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL,NULL),
-('1349736631303700482',NULL,'2021-01-14 23:14:24',NULL,'2021-01-15 19:46:27','','0','2','1','ADD_SCENE_QR_CODE','2021-01-15 19:51:49',2,'2021-01-15 19:46:28','o3QwG1UuAz7VYM24e9rmihxyKJvg','JL','1','深圳','中国','广东',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132',NULL,'{}','[]','',NULL,NULL,NULL,NULL,NULL),
-('1349736631312089090',NULL,'2021-01-14 23:14:24',NULL,'2021-01-14 23:14:33','99','0','2','1','ADD_SCENE_QR_CODE','2021-01-11 17:43:37',1,NULL,'o3QwG1XWOtVl_ifcXYbPuiaPPnMc','redis','1','','中国','',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/lV0d907m3OU18kicFJhIBibV0XlvEnWzKN09tvVz3wyryA2cysGibW8BarSLyia8HeuOx8YDibGE192BibXG1xTtfC2nXf0x3MZS1x/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL,NULL),
-('1349736631312089091',NULL,'2021-01-14 23:14:24',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-03-16 10:32:31',1,NULL,'o3QwG1ecy727RcaP3XyevHbPK33M','、','1','厦门','中国','福建',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/OT05QvwvgZYuck1R4BqYzwFzicuAicDHSeJTKI21VvxgrUxEWnVxiaEseEVLnM2tzibxTIfUiaZ1aSLn4hJ8FSgu7EBgeID2LCh9s/132',NULL,'{}','[2]','1',NULL,NULL,NULL,NULL,NULL),
-('1349736631328866305',NULL,'2021-01-14 23:14:24',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-11-09 20:41:24',1,NULL,'o3QwG1RLqJDTP-KZfNxMrMOKpl1U','gameover!!!','1','武汉','中国','湖北',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/upjJ1bex0ocf0rsbPbSW6yorFpT2SicGibyia5bYRjqLpWDgnYR4icEtQ87TcDibO3qujm8wkhDib4CPQCldShq1FHovW9J2ibSsfFH/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL,NULL),
-('1349736631328866306',NULL,'2021-01-14 23:14:24',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-10-14 14:32:49',1,NULL,'o3QwG1f7sT5V_FV_EVj4kaQ09Zzs','壹杯淸茶。','1','青岛','中国','山东',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/ajNVdqHZLLCYmmGPrvvXcib0iaiaGQba4yFtwt35zEUgOAzGwPcwG2GIqmejmo8fxRibwQzSDibejrXV4dia1uiaanvXrZ3SKZyZiaEo3G2K8WhDTjs/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL,NULL),
-('1349736631328866307',NULL,'2021-01-14 23:14:24',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-02-24 16:49:28',1,NULL,'o3QwG1eaqyTxxW4VisfbaKL0BcWY','.Llkoi','1','长沙','中国','湖南',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/TBfgdHR2VFWloL25J3r1DfDE3a5R3yctJD3wc5CSoe3xWmy4lZPzxRZpj2x14dl87ndzlRXAN1ZN2W7w1n8bYtKWOMxG8ahq/132',NULL,'{}','[2]','1',NULL,NULL,NULL,NULL,NULL),
-('1349736631337254914',NULL,'2021-01-14 23:14:24',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-06-17 22:14:41',1,NULL,'o3QwG1d4Bq8lg-NbUOOYdaaVWhnE','Quentin','1','南京','中国','江苏',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/ceebSkrkkFTBe1cSDicrLGq05uMsfRkzNWhKp3JY6eISxwCoiagt6q2L4RGcGh61jnWWTI3xeXsAmFCEpozdSIDQKBhNosic8TY/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL,NULL),
-('1349736631337254915',NULL,'2021-01-14 23:14:24',NULL,NULL,'后来','0','2','1','ADD_SCENE_QR_CODE','2019-06-04 22:22:21',1,NULL,'o3QwG1aKxN5AMEaNSbDV-vHJHtvM','安安晨晨','2','益阳','中国','湖南',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/ceebSkrkkFTRWgtVgYzPOETJtkqz0TIOzpVber8ic5DlUTky6zpgTGJHic6gG4wH7B7iay12QHo7BF3Iv0r6vTfS2GkcdywCmN8/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL,NULL);
+insert  into `wx_user`(`id`,`create_id`,`create_time`,`update_id`,`update_time`,`remark`,`del_flag`,`app_type`,`subscribe`,`subscribe_scene`,`subscribe_time`,`subscribe_num`,`cancel_subscribe_time`,`open_id`,`nick_name`,`sex`,`city`,`country`,`province`,`phone`,`language`,`headimg_url`,`union_id`,`group_id`,`tagid_list`,`qr_scene_str`,`latitude`,`longitude`,`precision`,`session_key`) values 
+('1352168072700571649',NULL,'2021-01-21 16:16:05',NULL,'2021-01-21 16:37:22',NULL,'0','1',NULL,NULL,NULL,NULL,NULL,'ol3ea5DyEplVd0B5lD9gLwCme8zw','JL','1','深圳','中国','广东',NULL,'zh_CN','https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKRsdzV55M85n8DAsVhH7wrS05ficLFjQMLlZUdUichYqZKKCB2GyibRGJNZ3JvPzVWg5hVVRx9hACEw/132',NULL,NULL,'[]',NULL,NULL,NULL,NULL,'CNKq11a69WSezik2aobqsA=='),
+('1352233320682930178',NULL,'2021-01-21 20:35:21',NULL,'2021-01-21 21:16:01',NULL,'0','1',NULL,NULL,NULL,NULL,NULL,'ol3ea5HBFdkSYTC4uzf9gvW3cutU','NULL','1','长沙','中国','湖南',NULL,'zh_CN','https://thirdwx.qlogo.cn/mmopen/vi_32/chMqczIChvg1AXBmBran0EzkD4f52jKEpRFmIweBDN1QpeC4JPN5HKE3fgUYFNAFN4warrIQhEj69SCkY2zyYA/132',NULL,NULL,'[]',NULL,NULL,NULL,NULL,'jSa/lKtJmYPVHZcTl7r5kw=='),
+('1352572935968165889',NULL,'2021-01-22 19:04:52',NULL,'2021-01-22 19:05:20',NULL,'0','1',NULL,NULL,NULL,NULL,NULL,'ol3ea5HWkzS2_iL2nBoao-nsxlgI','Ethan.D','1','益阳','中国','湖南',NULL,'zh_CN','https://thirdwx.qlogo.cn/mmopen/vi_32/5DPIvtrqFPv2hcU09UmW3fGQXzIwmO8iciajsHNTzz1NrlwBeVm5ou8HCaO7kXIDmVwhoqnicIibI4BXf8GlKFN7YA/132',NULL,NULL,'[]',NULL,NULL,NULL,NULL,'G87A8PJ+HeqJzeVxW/tYpA=='),
+('1354473059078176770',NULL,'2021-01-28 00:55:16',NULL,'2021-01-28 00:55:23',NULL,'0','1',NULL,NULL,NULL,NULL,NULL,'oJ-q55T2ZXs-p68eMcouJR7IFVQw','JL','1','深圳','中国','广东',NULL,'zh_CN','https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJru7MZse3ErXMMsSSQ3rcrBoESJN5F9p7xibr1u54DaGv3NGb6Z9tSTsJ07VsYCBFW7GWkQhIJc2A/132',NULL,NULL,'[]',NULL,NULL,NULL,NULL,'GBjWD9tblJKwNeicj7G2pA=='),
+('1355406809988345857',NULL,'2021-01-30 14:45:40',NULL,'2021-01-30 14:50:37',NULL,'0','1',NULL,NULL,NULL,NULL,NULL,'oJ-q55eVbz74-EiU2f-j1Rie_BwM','NULL','1','长沙','中国','湖南',NULL,'zh_CN','https://thirdwx.qlogo.cn/mmopen/vi_32/cuTB5LL4dia7CJLqAxV2ibE8OiawFCcF4yRduugIxZTnJBmye7wddrErqShW1JkmXgYibDSKgib2cicURicLaPPknGGjw/132',NULL,NULL,'[]',NULL,NULL,NULL,NULL,'YM7Jk6qAfQ3yr8jNNbj2ww=='),
+('1356171782972882945',NULL,'2021-02-01 17:25:25',NULL,'2021-02-02 22:44:21',NULL,'0','1',NULL,NULL,NULL,NULL,NULL,'oJ-q55a_buCs7ozlJOBHYgm6b_ko','Ethan.D','1','益阳','中国','湖南',NULL,'zh_CN','https://thirdwx.qlogo.cn/mmopen/vi_32/XdqjFObB4mmxQMURhIr5XzUgicRic3qOuXhz74OQnmHg4wKf5NUSm11ib0rXBsaIsJxGjicz1AY3a2Pz46iacqibfNqg/132',NULL,NULL,'[]',NULL,NULL,NULL,NULL,'oknUXi+2mvSjisq3vyGrtw=='),
+('1357673320701546498',NULL,'2021-02-05 20:51:57',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-01-06 14:14:44',1,NULL,'o3QwG1QnY-BOe4M724t0dvVQaUUo','魂散','0','','','',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/PiajxSqBRaEK4NgUCJLPziclZYMfTnaYFXvz1GajlxariavaOkbKsXzXMoVHO6E5LKUWaaxxQccLVaicYR2Zqv5ZnA/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL),
+('1357673320701546499',NULL,'2021-02-05 20:51:57',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-10-29 23:34:34',1,NULL,'o3QwG1YepdGeVJZv_2bfIEjwnb_I','愈辉','1','','亚美尼亚','',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/lV0d907m3OWXHibcSriareU9XpBCdBgkOd286EialAX0BtrWEdrhunepPEUq82E6wneLbtNttjKDMJSM7Y9HOnaRA/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL),
+('1357673320714129409',NULL,'2021-02-05 20:51:57',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-11-09 11:36:47',1,NULL,'o3QwG1ThD7gJ-qIXTDF88rly1VHg','八爪鱼','1','','中国','北京',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/lV0d907m3OW2BkZicF01PtUQera34FdW1Ga68DhZxQ7MlGMLDG3DZIBMm2Cibjueb6NMDvRMMRZFqjMVEogD9Oibw/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL),
+('1357673320722518017',NULL,'2021-02-05 20:51:58',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-12-05 16:04:40',1,NULL,'o3QwG1ZP0s_alsf-PuhDU7CmLQ24','十万伏特','1','成都','中国','四川',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/J6c32680OdZUtzqT9zvNO2QR8jG1jdPiaFFQVA91Szrnpke0ga7UCCXGTKqZIppyibuhv6NTRX3OXqPtSQey8Ww0qgzhqicUgGR/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL),
+('1357673320730906626',NULL,'2021-02-05 20:51:58',NULL,NULL,'备注','0','2','1','ADD_SCENE_QR_CODE','2021-01-23 11:54:59',1,NULL,'o3QwG1Z4EZBdLwtKbK9TozDunLZw','Allen','1','成都','中国','四川',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/OT05QvwvgZZ3KeIaQ25CrjHF9rQTpZhO4RM1szUEcUdfLjEcFoicD3snicPq8GIqiayc1Ned8CIY5Gk5kCInF4TrR07Isicn4gFS/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL),
+('1357673320739295234',NULL,'2021-02-05 20:51:58',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2021-01-18 14:27:13',1,NULL,'o3QwG1UuAz7VYM24e9rmihxyKJvg','JL','1','深圳','中国','广东',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/dMKNvxZfIaEco8NogUXngnPhXrEEzLoY69XP5ymS2RWFIyXpOGE8trxiaqydnIibicluloYMWO06qmmibuvZR6GEbYR1HmVCq41R/132',NULL,'{}','[107,2]','1',NULL,NULL,NULL,NULL),
+('1357673320747683841',NULL,'2021-02-05 20:51:58',NULL,NULL,'99','0','2','1','ADD_SCENE_QR_CODE','2021-01-11 17:43:37',1,NULL,'o3QwG1XWOtVl_ifcXYbPuiaPPnMc','redis','1','','中国','',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/lV0d907m3OU18kicFJhIBibV0XlvEnWzKN09tvVz3wyryA2cysGibW8BarSLyia8HeuOx8YDibGE192BibXG1xTtfC2nXf0x3MZS1x/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL),
+('1357673320747683842',NULL,'2021-02-05 20:51:58',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-03-16 10:32:31',1,NULL,'o3QwG1ecy727RcaP3XyevHbPK33M','、','1','厦门','中国','福建',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/OT05QvwvgZYuck1R4BqYzwFzicuAicDHSeJTKI21VvxgrUxEWnVxiaEseEVLnM2tzibxTIfUiaZ1aSLn4hJ8FSgu7EBgeID2LCh9s/132',NULL,'{}','[2]','1',NULL,NULL,NULL,NULL),
+('1357673320747683843',NULL,'2021-02-05 20:51:58',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-11-09 20:41:24',1,NULL,'o3QwG1RLqJDTP-KZfNxMrMOKpl1U','gameover!!!','1','武汉','中国','湖北',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/upjJ1bex0ocf0rsbPbSW6yorFpT2SicGibyia5bYRjqLpWDgnYR4icEtQ87TcDibO3qujm8wkhDib4CPQCldShq1FHovW9J2ibSsfFH/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL),
+('1357673320747683844',NULL,'2021-02-05 20:51:58',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-10-14 14:32:49',1,NULL,'o3QwG1f7sT5V_FV_EVj4kaQ09Zzs','壹杯淸茶。','1','青岛','中国','山东',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/ajNVdqHZLLCYmmGPrvvXcib0iaiaGQba4yFtwt35zEUgOAzGwPcwG2GIqmejmo8fxRibwQzSDibejrXV4dia1uiaanvXrZ3SKZyZiaEo3G2K8WhDTjs/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL),
+('1357673320756072449',NULL,'2021-02-05 20:51:58',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-02-24 16:49:28',1,NULL,'o3QwG1eaqyTxxW4VisfbaKL0BcWY','.Llkoi','1','长沙','中国','湖南',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/TBfgdHR2VFWloL25J3r1DfDE3a5R3yctJD3wc5CSoe3xWmy4lZPzxRZpj2x14dl87ndzlRXAN1ZN2W7w1n8bYtKWOMxG8ahq/132',NULL,'{}','[2]','1',NULL,NULL,NULL,NULL),
+('1357673320760266753',NULL,'2021-02-05 20:51:58',NULL,NULL,'','0','2','1','ADD_SCENE_QR_CODE','2020-06-17 22:14:41',1,NULL,'o3QwG1d4Bq8lg-NbUOOYdaaVWhnE','Quentin','1','南京','中国','江苏',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/ceebSkrkkFTBe1cSDicrLGq05uMsfRkzNWhKp3JY6eISxwCoiagt6q2L4RGcGh61jnWWTI3xeXsAmFCEpozdSIDQKBhNosic8TY/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL),
+('1357673320760266754',NULL,'2021-02-05 20:51:58',NULL,NULL,'后来','0','2','1','ADD_SCENE_QR_CODE','2019-06-04 22:22:21',1,NULL,'o3QwG1aKxN5AMEaNSbDV-vHJHtvM','安安晨晨','2','益阳','中国','湖南',NULL,'zh_CN','http://thirdwx.qlogo.cn/mmopen/ceebSkrkkFTRWgtVgYzPOETJtkqz0TIOzpVber8ic5DlUTky6zpgTGJHic6gG4wH7B7iay12QHo7BF3Iv0r6vTfS2GkcdywCmN8/132',NULL,'{}','[]','1',NULL,NULL,NULL,NULL);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

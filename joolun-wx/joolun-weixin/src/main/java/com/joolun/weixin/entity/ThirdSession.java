@@ -30,10 +30,6 @@ import java.io.Serializable;
 @Data
 public class ThirdSession implements Serializable {
 	/**
-	 * 所属租户
-	 */
-	private String tenantId;
-	/**
 	 * 微信用户ID
 	 */
 	private String wxUserId;
@@ -49,8 +45,4 @@ public class ThirdSession implements Serializable {
 	 * 用户标识
 	 */
 	private String openId;
-	/**
-	 * 商城用户ID
-	 */
-	private String mallUserId;
 }

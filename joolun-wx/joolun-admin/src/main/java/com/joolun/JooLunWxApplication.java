@@ -16,15 +16,6 @@ public class JooLunWxApplication
     {
         // System.setProperty("spring.devtools.restart.enabled", "false");
         SpringApplication.run(JooLunWxApplication.class, args);
-        System.out.println("(♥◠‿◠)ﾉﾞ  JooLun管理系统启动成功   ლ(´ڡ`ლ)ﾞ  \n" +
-                " .-------.       ____     __        \n" +
-                " |  _ _   \\      \\   \\   /  /    \n" +
-                " | ( ' )  |       \\  _. /  '       \n" +
-                " |(_ o _) /        _( )_ .'         \n" +
-                " | (_,_).' __  ___(_ o _)'          \n" +
-                " |  |\\ \\  |  ||   |(_,_)'         \n" +
-                " |  | \\ `'   /|   `-'  /           \n" +
-                " |  |  \\    /  \\      /           \n" +
-                " ''-'   `'-'    `-..-'              ");
+        System.out.println("JooLun微信管理系统启动成功");
     }
 }

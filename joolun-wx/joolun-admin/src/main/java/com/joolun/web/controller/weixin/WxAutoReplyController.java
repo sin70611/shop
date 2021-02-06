@@ -40,7 +40,7 @@ import java.util.List;
 /**
  * 消息自动回复
  *
- * @author JL
+ * @author www.joolun.com
  * @date 2019-04-18 15:40:39
  */
 @RestController

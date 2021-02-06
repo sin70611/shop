@@ -8,8 +8,7 @@
           </div>
           <div class="body">
             <img src="https://images.gitee.com/uploads/images/2020/0305/171054_0a84eb49_5079715.jpeg" alt="donate"/>
-            <p>扫码查看演示公众号</p>
-            <p>公众号数据和后台数据同步</p>
+            <p>此公众号对接了该平台，和该后台数据同步</p>
           </div>
           <el-row>
             <el-col :span="12">
@@ -33,8 +32,7 @@
                 <li>AVue</li>
                 <li>Element-ui</li>
                 <li>Axios</li>
-                <li>Sass</li>
-                <li>Quill</li>
+                <li>小程序原生</li>
                 <li>...</li>
               </ul>
             </el-col>
@@ -57,7 +55,7 @@
       <el-col :sm="24" :lg="16" style="padding-left: 20px">
         <el-card class="update-log">
           <div slot="header" class="clearfix">
-            <span>微服务商业版本</span>
+            <span style="color: red; font-weight: bold">微服务商业版本（功能更完善，代码更严谨）</span>
           </div>
           <div class="body">
             <el-row :gutter="20">
@@ -84,9 +82,12 @@
                     <h4>前端技术</h4>
                     <ul>
                       <li>Vue2</li>
+                      <li>Vuex</li>
+                      <li>Axios</li>
                       <li>Element-UI</li>
                       <li>Avue</li>
                       <li>color-ui</li>
+                      <li>小程序原生</li>
                       <li>...</li>
                     </ul>
                   </el-col>
@@ -102,7 +103,7 @@
                     size="mini"
                     icon="el-icon-s-home"
                     plain
-                    @click="goTarget('https://www.joolun.com/')">访问官网</el-button>
+                    @click="goTarget('https://www.joolun.com/xcxscb.html')">获取源码</el-button>
                 </p>
               </el-col>
               <el-col :sm="24" :lg="12">
@@ -116,6 +117,8 @@
                       <li>Spring Security OAuth2</li>
                       <li>Spring Cloud Gateway</li>
                       <li>Nacos</li>
+                      <li>Sentinel</li>
+                      <li>Seata</li>
                       <li>OpenFeign</li>
                       <li>MyBatis-Plus</li>
                       <li>Druid</li>
@@ -128,10 +131,13 @@
                     <h4>前端技术</h4>
                     <ul>
                       <li>Vue2</li>
+                      <li>Vuex</li>
+                      <li>Axios</li>
                       <li>Element-UI</li>
                       <li>Avue</li>
                       <li>color-ui</li>
-                      <li>UniApp</li>
+                      <li>UniApp多端编译</li>
+                      <li>小程序、H5、ios App、安卓App</li>
                       <li>极光IM</li>
                       <li>...</li>
                     </ul>
@@ -148,7 +154,7 @@
                     size="mini"
                     icon="el-icon-s-home"
                     plain
-                    @click="goTarget('https://www.joolun.com/')">访问官网</el-button>
+                    @click="goTarget('https://www.joolun.com/uniappddb.html')">获取源码</el-button>
                 </p>
               </el-col>
             </el-row>

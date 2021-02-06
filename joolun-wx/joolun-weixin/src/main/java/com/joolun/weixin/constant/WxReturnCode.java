@@ -27,7 +27,7 @@ import me.chanjar.weixin.common.error.WxErrorException;
 
 /**
  * 微信接口全局返回码
- * @author jl
+ * @author www.joolun.com
  *
  */
 public enum WxReturnCode {

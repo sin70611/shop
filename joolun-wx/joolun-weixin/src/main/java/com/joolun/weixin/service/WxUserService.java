@@ -24,13 +24,15 @@ SOFTWARE.
 package com.joolun.weixin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.joolun.common.core.domain.AjaxResult;
+import com.joolun.weixin.entity.WxOpenDataDTO;
 import com.joolun.weixin.entity.WxUser;
 import me.chanjar.weixin.common.error.WxErrorException;
 
 /**
  * 微信用户
  *
- * @author JL
+ * @author www.joolun.com
  * @date 2019-03-25 15:39:39
  */
 public interface WxUserService extends IService<WxUser> {
@@ -56,4 +58,25 @@ public interface WxUserService extends IService<WxUser> {
 	 */
 	void tagging(String taggingType, Long tagId, String[] openIds) throws WxErrorException;
 
+	/**
+	 * 根据openId获取用户
+	 * @param openId
+	 * @return
+	 */
+	WxUser getByOpenId(String openId);
+
+	/**
+	 * 小程序登录
+	 * @param appId
+	 * @param jsCode
+	 * @return
+	 */
+	WxUser loginMa(String appId, String jsCode) throws WxErrorException;
+
+	/**
+	 * 新增、更新微信用户
+	 * @param wxOpenDataDTO
+	 * @return
+	 */
+	WxUser saveOrUptateWxUser(WxOpenDataDTO wxOpenDataDTO);
 }

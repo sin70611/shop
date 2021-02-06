@@ -6,14 +6,13 @@
 
     <groupId>com.joolun</groupId>
     <artifactId>joolun-wx</artifactId>
-    <version>3.3.0</version>
+    <version>3.3.1</version>
 
     <name>joolun-wx</name>
     <url>http://www.joolun.com</url>
     <description>JooLun微信管理系统</description>
     
     <properties>
-        <joolun.version>3.3.0</joolun.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -35,6 +34,7 @@
         <mybatis-plus.version>3.3.2</mybatis-plus.version>
         <hutool.version>5.1.0</hutool.version>
         <weixin-java.version>3.7.0</weixin-java.version>
+        <ttl.version>2.11.4</ttl.version>
     </properties>
 	
     <!-- 依赖声明 -->
@@ -166,42 +166,49 @@
             <dependency>
                 <groupId>com.joolun</groupId>
                 <artifactId>joolun-quartz</artifactId>
-                <version>${joolun.version}</version>
+                <version>${project.version}</version>
             </dependency>
 	
             <!-- 代码生成-->
             <dependency>
                 <groupId>com.joolun</groupId>
                 <artifactId>joolun-generator</artifactId>
-                <version>${joolun.version}</version>
+                <version>${project.version}</version>
             </dependency>
 			
             <!-- 核心模块-->
             <dependency>
                 <groupId>com.joolun</groupId>
                 <artifactId>joolun-framework</artifactId>
-                <version>${joolun.version}</version>
+                <version>${project.version}</version>
             </dependency>
 			
             <!-- 系统模块-->
             <dependency>
                 <groupId>com.joolun</groupId>
                 <artifactId>joolun-system</artifactId>
-                <version>${joolun.version}</version>
+                <version>${project.version}</version>
             </dependency>
 			
             <!-- 通用工具-->
             <dependency>
                 <groupId>com.joolun</groupId>
                 <artifactId>joolun-common</artifactId>
-                <version>${joolun.version}</version>
+                <version>${project.version}</version>
             </dependency>
 
             <!-- 微信模块-->
             <dependency>
                 <groupId>com.joolun</groupId>
                 <artifactId>joolun-weixin</artifactId>
-                <version>${joolun.version}</version>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- 商城模块-->
+            <dependency>
+                <groupId>com.joolun</groupId>
+                <artifactId>joolun-mall</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <!--mybatis plus extension,包含了mybatis plus core-->
@@ -234,6 +241,24 @@
                 <artifactId>weixin-java-mp</artifactId>
                 <version>${weixin-java.version}</version>
             </dependency>
+            <!--weixin-java-miniapp-->
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-miniapp</artifactId>
+                <version>${weixin-java.version}</version>
+            </dependency>
+            <!--weixin-java-pay-->
+            <dependency>
+                <groupId>com.github.binarywang</groupId>
+                <artifactId>weixin-java-pay</artifactId>
+                <version>${weixin-java.version}</version>
+            </dependency>
+            <!--TTL-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${ttl.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -245,6 +270,7 @@
         <module>joolun-generator</module>
         <module>joolun-common</module>
         <module>joolun-weixin</module>
+        <module>joolun-mall</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -1,16 +1,12 @@
-## 开发
+### [阿里云领取￥2000红包，服务器低至￥91.80/年](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=ktp7i3ac)
 
-```bash
-# 克隆项目
-git clone https://gitee.com/y_project/RuoYi-Vue
+### 注意
+1. 本软件为 www.joolun.com 开发研制，项目使用请保留此说明和代码头部版权
 
-# 进入项目目录
-cd ruoyi-ui
+### 重要信息
+1. 商业版功能更完善，代码更严谨，详情请访问（https://www.joolun.com/）
 
 # 安装依赖
-npm install
-
-# 建议不要直接使用 cnpm 安装依赖，会有各种诡异的 bug。可以通过如下操作解决 npm 下载速度慢的问题
 npm install --registry=https://registry.npm.taobao.org
 
 # 启动服务

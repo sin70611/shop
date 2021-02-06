@@ -25,7 +25,7 @@ package com.joolun.weixin.constant;
 
 /**
  * 全局常量
- * @author JL
+ * @author www.joolun.com
  * 2019年1月21日
  */
 public interface ConfigConstant {
@@ -93,4 +93,14 @@ public interface ConfigConstant {
 	 */
 	String WX_MENU_TYPE_1 = "1";
 	String WX_MENU_TYPE_2 = "2";
+
+	/**
+	 * header中的app-id
+	 */
+	String HEADER_APP_ID = "app-id";
+
+	/**
+	 * header中的third-session
+	 */
+	String HEADER_THIRDSESSION = "third-session";
 }

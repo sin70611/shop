@@ -39,7 +39,7 @@ import java.text.SimpleDateFormat;
 /**
  * 微信账号配置
  *
- * @author JL
+ * @author www.joolun.com
  * @date 2019-03-23 21:26:35
  */
 @Slf4j

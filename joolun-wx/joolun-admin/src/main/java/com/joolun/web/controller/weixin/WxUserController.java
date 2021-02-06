@@ -43,7 +43,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 微信用户
  *
- * @author JL
+ * @author www.joolun.com
  * @date 2019-03-25 15:39:39
  */
 @Slf4j

@@ -10,6 +10,10 @@ import '@/assets/styles/ruoyi.scss' // ruoyi css
 import App from './App'
 import store from './store'
 import router from './router'
+
+import axios from '@/utils/request'
+window.axios = axios
+
 import permission from './directive/permission'
 
 import './assets/icons' // icon
@@ -25,6 +29,7 @@ import moment from 'moment'//导入文件
 Vue.prototype.$moment = moment//赋值使用
 // 自定义表格工具扩展
 import RightToolbar from "@/components/RightToolbar"
+import {ossAli} from '@/config/env'
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts
@@ -70,7 +75,9 @@ Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
 })
 
-Vue.use(Avue)
+Vue.use(Avue, {
+  ali: ossAli
+})
 
 Vue.config.productionTip = false
 

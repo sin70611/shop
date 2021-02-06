@@ -1,11 +1,5 @@
 # 项目相关配置
 ruoyi:
-  # 名称
-  name: JooLun-wx
-  # 版本
-  version: 3.3.0
-  # 版权年份
-  copyrightYear: 2021
   # 实例演示开关
   demoEnabled: true
   # 文件路径 示例（ Windows配置D:/joolun/uploadPath，Linux配置 /home/joolun/uploadPath）
@@ -17,7 +11,7 @@ ruoyi:
 
 # 开发环境配置
 server:
-  # 服务器的HTTP端口，默认为8080
+  # 服务器的HTTP端口，默认为7500
   port: 7500
   servlet:
     # 应用的访问路径
@@ -65,7 +59,7 @@ spring:
     # 数据库索引
     database: 0
     # 密码
-    password: 
+    password:
     # 连接超时时间
     timeout: 10s
     lettuce:
@@ -126,9 +120,23 @@ xss:
   urlPatterns: /system/*,/monitor/*,/tool/*
 
 wx:
+  # 公众号配置
   mp:
     configs:
-      - appId: wxfd19ebed74478150
-        secret: f06d8ecfd945f20025d935ef9eb1ea07
-        token: gh_7b270bf6cf5b
-        aesKey: 111
+      - appId: xxxxxxxx
+        secret: xxxxxxxxxxxxxxxxxxxxxxxxxx
+        token: xxxxxxxxxx
+        aesKey: xxxxxxxxxxxxxxxxxxxx
+  # 小程序配置
+  ma:
+    configs:
+      - appId: xxxxxxxxxxxxxxxx
+        secret: xxxxxxxxxxxxx
+        # 微信支付商户号，请去微信支付平台申请
+        mchId: 1588227511
+        # 微信支付商户密钥，请去微信支付平台申请
+        mchKey: xxxxxxxxxxxxxxxxxxxxx
+
+mall:
+  # 支付、物流回调地址，即后台服务7500端口的外网访问域名，要保证外网能访问
+  notify-host: http://xx.xxxx.com

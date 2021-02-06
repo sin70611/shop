@@ -38,7 +38,7 @@ import java.time.LocalDateTime;
 /**
  * 微信用户
  *
- * @author JL
+ * @author www.joolun.com
  * @date 2019-03-25 15:39:39
  */
 @Data
@@ -170,8 +170,4 @@ private static final long serialVersionUID = 1L;
    * 会话密钥
    */
     private String sessionKey;
-	/**
-	 * 商城用户ID
-	 */
-	private String mallUserId;
 }

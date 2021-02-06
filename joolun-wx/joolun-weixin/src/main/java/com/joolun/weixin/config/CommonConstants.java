@@ -40,4 +40,8 @@ public interface CommonConstants {
 	 * 树形父类ID
 	 */
 	String PARENT_ID = "0";
+	/**
+	 * 编码
+	 */
+	String UTF8 = "UTF-8";
 }
