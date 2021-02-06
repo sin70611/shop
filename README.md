@@ -10,6 +10,7 @@
 * 支持加载动态权限菜单，多方式轻松权限控制。
 * 高效率开发，使用代码生成器可以一键生成前后端代码。
 * 阿里云优惠券：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=ktp7i3ac)
+* 遇到问题或发现bug请发[Issues](https://gitee.com/joolun/JooLun-wx/issues)提出来
 
 ### 开源版（MIT开源，可以免费使用，项目使用请保留代码头部版权和代码原始作者即可），在线体验
 
