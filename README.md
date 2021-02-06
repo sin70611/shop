@@ -27,14 +27,6 @@ test/123456
 |  小程序商城版  |  http://demo.joolun.com  |  ![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114507_937fd986_5079715.jpeg "qrcode_for_gh_6999ad5cfb2f_258.jpg")  |
 |  uniapp多店版  |  http://demo1.joolun.com  |  ![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114525_cefaeb06_5079715.jpeg "qrcode_for_gh_ae23ad0d32af_258.jpg")  |
 
-- 小程序商城版：后台演示地址：http://demo.joolun.com
-
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114507_937fd986_5079715.jpeg "qrcode_for_gh_6999ad5cfb2f_258.jpg")
-
-- uniapp多店版：后台演示地址：http://demo1.joolun.com
-
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114525_cefaeb06_5079715.jpeg "qrcode_for_gh_ae23ad0d32af_258.jpg")
-
 ### 系统需求
 
 JDK >= 1.8
