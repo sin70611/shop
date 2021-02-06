@@ -13,10 +13,9 @@
 * 开源版没有人工服务，遇到问题或发现bug请发[Issues](https://gitee.com/joolun/JooLun-wx/issues)提出来，我们会定期处理
 
 ### 开源版（MIT开源，可以免费使用，项目使用请保留代码头部版权和代码原始作者即可），在线体验
-
-演示公众号：![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/171054_0a84eb49_5079715.jpeg "qrcode_for_gh_e18eb0ef9a2d_258.jpg")
-
-后台演示地址：http://demo2.joolun.com
+|  后台演示地址  |  商城演示二维码  |
+|---|---|
+|  http://demo2.joolun.com  |  ![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/171054_0a84eb49_5079715.jpeg "qrcode_for_gh_e18eb0ef9a2d_258.jpg")  |
 ```
 账号/密码
 test/123456
