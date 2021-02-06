@@ -26,13 +26,13 @@ test/123456
 
 后台演示地址：http://demo.joolun.com
 
-演示商城：![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114507_937fd986_5079715.jpeg "qrcode_for_gh_6999ad5cfb2f_258.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114507_937fd986_5079715.jpeg "qrcode_for_gh_6999ad5cfb2f_258.jpg")
 
 - uniapp多店版：
 
 后台演示地址：http://demo1.joolun.com
 
-演示商城：![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114525_cefaeb06_5079715.jpeg "qrcode_for_gh_ae23ad0d32af_258.jpg")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114525_cefaeb06_5079715.jpeg "qrcode_for_gh_ae23ad0d32af_258.jpg")
 
 ### 系统需求
 
