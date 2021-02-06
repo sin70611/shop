@@ -12,6 +12,7 @@
 * 高效率开发，使用代码生成器可以一键生成前后端代码。
 * 阿里云优惠券：[点我领取](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=ktp7i3ac)
 * 开源版没有人工服务，遇到问题或发现bug请发[Issues](https://gitee.com/joolun/JooLun-wx/issues)提出来，我们会定期处理
+* 请按照自己业务需求进行测试后再使用，因框架问题造成的任何损失JooLun概不负责
 
 ### 开源版（MIT开源，可以免费使用，项目使用请保留代码头部版权和代码原始作者即可），在线体验
 |  后台演示地址  |  商城演示二维码  |  包含终端  |
