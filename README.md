@@ -1,5 +1,5 @@
 ### [阿里云领取￥2000红包，服务器低至￥91.80/年](https://promotion.aliyun.com/ntms/yunparter/invite.html?userCode=ktp7i3ac)
-
+### 如果对您有帮助，记得点右上角 "Star" ❤️ 支持一下哦 谢谢！
 ## 平台简介
 * 基于[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)二开，集成了[MybatisPlus](https://github.com/baomidou/mybatis-plus)、[Avue](https://gitee.com/smallweigit/avue)、[WxJava](https://gitee.com/binary/weixin-java-tools) SDK
 * MIT开源的微信二开利器，放心使用
