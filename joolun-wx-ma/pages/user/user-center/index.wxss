@@ -37,3 +37,7 @@ page{
   margin: auto;
   box-shadow: 0rpx 0rpx 50rpx 10rpx rgba(211, 211, 211, 0.5);
 }
+
+.titles-color{
+  color:rgb(107, 107, 107);
+}

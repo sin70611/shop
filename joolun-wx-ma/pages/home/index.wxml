@@ -40,13 +40,13 @@
 <navigator hover-class="none" url='/pages/goods/goods-detail/index?id=1355440649314263041'>
   <image class="margin-top-sm goods-image" src="http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/goods-1.png"></image>
   <view class="flex justify-between margin-top goods-buy">
-    <view class="cu-btn bg-gray round text-blue">立即购买</view>
+    <view class="cu-btn round text-white buy-now">立即购买</view>
   </view>
 </navigator>
 <navigator hover-class="none" url='/pages/goods/goods-detail/index?id=1355412081553190914'>
   <image class="margin-top-sm goods-image" src="http://joolun-open.oss-cn-zhangjiakou.aliyuncs.com/goods-2.png"></image>
   <view class="flex justify-between margin-top goods-buy">
-    <view class="cu-btn bg-gray round text-blue">立即购买</view>
+    <view class="cu-btn round text-white buy-now">立即购买</view>
   </view>
 </navigator>
   <view class='wrapper bg-white margin-top-sm'>
@@ -69,7 +69,7 @@
             </view>
             <view class="flex justify-between margin-top">
               <view class="text-sm padding-top-sm">购买 <text class="text-price">{{item.salesPrice}}</text> 起</view>
-              <view class="cu-btn bg-gray round text-blue">立即购买</view>
+              <view class="cu-btn round shadow-blur text-white buy-now">立即购买</view>
             </view>
           </navigator>
         </block>  

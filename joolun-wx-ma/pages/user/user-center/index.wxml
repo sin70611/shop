@@ -4,7 +4,7 @@
   - 注意：
   - 本软件为www.joolun.com开发研制，项目使用请保留此说明
 -->
-<view class="cu-list menu-avatar bg-red padding-bottom">
+<view class="cu-list menu-avatar bg-white padding-bottom">
   <view class='flex justify-end margin-right'>
     <view class="text-xl margin-top" bindtap="settings">
       <text class="cuIcon-settingsfill text-black"></text>
@@ -22,7 +22,7 @@
 <view class="cu-list card-menu radius order-list">
   <view class="cu-bar bg-white solid-bottom">
     <view class="action">
-      <text class="cuIcon-titles text-red"></text>我的订单
+      <text class="cuIcon-titles titles-color"></text>我的订单
     </view>
     <navigator class="action" url="/pages/order/order-list/index" hover-class="none">
       全部订单<text class="cuIcon-right"></text>
@@ -39,7 +39,7 @@
     </view>
     <view class="cu-item">
       <navigator url="/pages/order/order-list/index?status=1" hover-class="none">
-        <view class="cuIcon-send text-red">
+        <view class="cuIcon-send text-yellow">
           <view wx:if="{{orderCountAll[1]>0}}" class="cu-tag badge">{{orderCountAll[1]}}</view>
         </view>
         <text>待发货</text>
@@ -47,7 +47,7 @@
     </view>
     <view class="cu-item">
       <navigator url="/pages/order/order-list/index?status=2" hover-class="none">
-        <view class="cuIcon-deliver text-red">
+        <view class="cuIcon-deliver text-blue">
           <view wx:if="{{orderCountAll[2]>0}}" class="cu-tag badge">{{orderCountAll[2]}}</view>
         </view>
         <text>待收货</text>
@@ -55,7 +55,7 @@
     </view>
     <view class="cu-item">
       <navigator url="/pages/order/order-list/index?status=4" hover-class="none">
-        <view class="cuIcon-evaluate text-red">
+        <view class="cuIcon-evaluate text-orange">
           <view wx:if="{{orderCountAll[3]>0}}" class="cu-tag badge">{{orderCountAll[3]}}</view>
         </view>
         <text>已完成</text>
@@ -66,7 +66,7 @@
 <view class="cu-list menu card-menu radius address">
   <navigator class="cu-item arrow" url="/pages/user/user-address/list/index" hover-class="none">
     <view class="content">
-      <text class="cuIcon-location text-green"></text>
+      <text class="cuIcon-location text-green text-xl"></text>
       <text class="text-grey">收货地址</text>
     </view>
   </navigator>

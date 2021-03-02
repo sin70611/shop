@@ -1,6 +1,7 @@
 .row-img{
-  width: 200rpx!important;
-  height: 200rpx!important;
+  width: 600rpx!important;
+  height: 600rpx!important;
+  margin: auto !important;
   border-radius: 10rpx
 }
 .row-info{
@@ -21,4 +22,7 @@
 }
 .status-desc{
   font-size: 38rpx!important;
+}
+.font-weight{
+  font-weight: 300;
 }

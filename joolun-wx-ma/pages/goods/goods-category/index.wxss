@@ -3,22 +3,25 @@
   white-space: initial;
 }
 .VerticalNav.nav .cu-item {
+  font-size:14px;
+  font-weight:300;
+  color: #333333;
   width: 100%;
   text-align: center;
-  background-color: #fff;
+  background-color: #f1f1f1;
   margin: 0;
   border: none;
   height: 50px;
   position: relative;
 }
 .VerticalNav.nav .cu-item.cur {
-  background-color: #f1f1f1;
+  font-size:15px;
+  font-weight:500;
+  border-radius: 10rpx 0 0 10rpx;
+  background-color: #fff;
 }
 .VerticalNav.nav .cu-item.cur::after {
   content: "";
-  width: 8rpx;
-  height: 30rpx;
-  border-radius: 10rpx 0 0 10rpx;
   position: absolute;
   background-color: currentColor;
   top: 0;
@@ -30,7 +33,7 @@
   display: flex;
 }
 .VerticalMain{
-  background-color: #f1f1f1;
+  background-color: #fff;
 }
 .img-banner{
   width: 94%;

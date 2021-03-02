@@ -6,13 +6,13 @@
 -->
 <view class="margin-bottom-bar">
   <view class="bg-white padding">
-    <view class="status-desc text-red margin-left text-bold cuIcon-{{orderInfo.status == '0' ? 'pay' : orderInfo.status == '1' ? 'send' : orderInfo.status == '2' ? 'deliver' : orderInfo.status == '3' ? 'evaluate' : orderInfo.status == '4' ? 'upstage' : orderInfo.status == '5' ? 'roundclose' : ''}}">
+    <view class="status-desc text-red margin-left text-bold text-center cuIcon-{{orderInfo.status == '0' ? 'pay' : orderInfo.status == '1' ? 'send' : orderInfo.status == '2' ? 'deliver' : orderInfo.status == '3' ? 'evaluate' : orderInfo.status == '4' ? 'upstage' : orderInfo.status == '5' ? 'roundclose' : ''}}">
       {{orderInfo.statusDesc}}
     </view>
-    <view class="text-black margin-left" wx:if="{{orderInfo.isPay == '0' && !orderInfo.status}}">
+    <view class="text-black margin-left text-center" wx:if="{{orderInfo.isPay == '0' && !orderInfo.status}}">
       请在<count-down outTime="{{1000 * orderInfo.outTime}}" bind:countDownDone="countDownDone"/>内付款，超时订单将自动取消
     </view>
-    <view class="text-black margin-left" wx:if="{{orderInfo.status == '2'}}">
+    <view class="text-black margin-left text-center" wx:if="{{orderInfo.status == '2'}}">
       还剩<count-down outTime="{{1000 * orderInfo.outTime}}" bind:countDownDone="countDownDone"/>自动确认
     </view>
   </view>
@@ -33,13 +33,13 @@
       </view>
     </navigator>
     <view class="cu-item">
-      <view class="cu-avatar round cuIcon-location bg-orange"></view>
+      <view class="cu-avatar round cuIcon-location bg-black"></view>
       <view class="content loc-content">
         <view class="flex">
           <view class="text-black">{{orderInfo.orderLogistics.userName}}</view>
           <view class="text-gray text-sm margin-left-sm">{{orderInfo.orderLogistics.telNum}}</view>
         </view>
-        <view class="text-black text-sm overflow-2 loc-info">
+        <view class="text-gray text-sm overflow-2 loc-info">
 					{{orderInfo.orderLogistics.address}}
         </view>
       </view>
@@ -50,45 +50,37 @@
       <view class="cu-list menu">
         <view wx:for="{{ orderInfo.listOrderItem }}" wx:key="index">
           <navigator hover-class='none' url='/pages/goods/goods-detail/index?id={{item.spuId}}' class="cu-item">
-            <view class="flex align-center">
-              <view class="content response">
+            <view class="align-center">
+              <view class="flex align-center">
                 <image src="{{item.picUrl ? item.picUrl : '/public/img/no_pic.png'}}" mode="aspectFill" class="row-img margin-top-xs"></image>
+              </view>
                 <view class="desc row-info">
-                  <view class="text-black margin-top-sm overflow-2">
-                    {{item.spuName}}
-                  </view>
+                  <view class="text-black margin-left margin-top-sm overflow-2">{{item.spuName}}</view>
                   <view class="text-gray text-sm margin-top-sm overflow-2" wx:if="{{item.specInfo}}">{{item.specInfo}}</view>
                   <view class="flex justify-between">
-                    <view class="text-price text-bold text-red margin-top-sm padding-lr-sm">{{item.salesPrice}}</view>
-                    <view class="text-black text-sm margin-top-sm padding-lr-sm">x{{item.quantity}}</view>
+                    <view class="text-bold text-gray margin-top-sm margin-left-xs padding-lr-sm font-weight">数量</view>
+                    <view class="text-black text-sm margin-top-sm margin-right-xs padding-lr-sm">x{{item.quantity}}</view>
                   </view>
                 </view>
-              </view>
             </view>
           </navigator>
         </view>
-        <view class="cu-item">
-          <view class="content">
-            <text class="text-grey">订单金额</text>
-          </view>
+        <view class="cu-item margin-top-xs">
+            <text class="text-gray font-weight">订单金额</text>
           <view class="action">
             <text class="text-price">{{orderInfo.salesPrice}}</text>
           </view>
         </view>
-        <view class="cu-item">
-          <view class="content">
-            <text class="text-grey">运费</text>
-          </view>
+        <view class="cu-item margin-top-xs">
+            <text class="text-gray font-weight">运费金额</text>
           <view class="action">
             + <text class="text-price">{{orderInfo.freightPrice}}</text>
           </view>
         </view>
-        <view class="cu-item">
-          <view class="content">
-            <text class="text-grey">支付金额</text>
-          </view>
+        <view class="cu-item margin-top-xs">
+            <text class="text-gray font-weight">支付金额</text>
           <view class="action">
-            <text class="text-price text-red text-bold">{{orderInfo.paymentPrice}}</text>
+            <text class="text-price text-xl text-blue text-bold">{{orderInfo.paymentPrice}}</text>
           </view>
         </view>
       </view>
@@ -98,23 +90,22 @@
     <view class="cu-item">
       <view class="cu-bar bg-white">
         <view class="action">
-          <text class="cuIcon-titles text-orange "></text> 订单信息
+          <text class="cuIcon-titles text-black"></text>订单信息
         </view>
       </view>
       <view class="margin flex">
-        <text class="flex-sub">订单编号</text>
-        <view class="flex-twice">
-          {{orderInfo.orderNo}}
+        <text class="flex-sub text-gray font-weight">订单编号</text>
+        <view class="action">{{orderInfo.orderNo}}
           <button class="cu-btn sm" bindtap="copyData" data-data="{{orderInfo.orderNo}}">复制</button>
         </view>
       </view>
       <view class="margin flex">
-        <text class="flex-sub">创建时间</text>
-        <view class="flex-twice">{{orderInfo.createTime}}</view>
+        <text class="flex-sub text-gray font-weight">创建时间</text>
+        <view class="action">{{orderInfo.createTime}}</view>
       </view>
       <view class="margin flex" wx:if="{{orderInfo.paymentTime}}">
-        <text class="flex-sub">付款时间</text>
-        <view class="flex-twice">{{orderInfo.paymentTime}}</view>
+        <text class="flex-sub text-gray font-weight">付款时间</text>
+        <view class="action">{{orderInfo.paymentTime}}</view>
       </view>
     </view>
   </view>
@@ -149,7 +140,7 @@
     </view>
 	</view>
 </view>
-<view class="cu-bar bg-white border foot">
+<view class="cu-bar tabbar bg-white border foot">
   <order-operate
     class="response"
     orderInfo="{{orderInfo}}"

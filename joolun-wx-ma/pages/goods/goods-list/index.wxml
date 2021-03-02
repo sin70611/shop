@@ -13,20 +13,20 @@
   </view>
   <view class="action">
     <view class="text-xxl">
-      <text class="cuIcon-{{viewType ? 'list' : 'cascades'}} text-red" bindtap="viewTypeEdit"></text>
+      <text class="cuIcon-{{viewType ? 'list' : 'cascades'}} text-black" bindtap="viewTypeEdit"></text>
     </view>
   </view>
 </view>
 <view class="cu-bar justify-center bg-white fixed" style="margin-top:80rpx">
   <view class="grid response text-center align-start">
-    <view class="flex-sub padding-sm margin-xs radius text-red text-bold">{{title}}</view>
+    <view class="flex-sub padding-sm margin-xs radius text-blue text-bold">{{title}}</view>
     <view class="flex-sub padding-sm margin-xs radius">
       <view class="grid text-center" bindtap="sortHandle" data-type='price'>
         价格
         <view class="margin-left-xs">
-          <view class="cuIcon-triangleupfill {{price=='asc' ? 'text-red' : ''}}" data-type='price'/>
+          <view class="cuIcon-triangleupfill {{price=='asc' ? 'text-blue' : ''}}" data-type='price'/>
           <view class="basis-df"/>
-          <view class="cuIcon-triangledownfill {{price=='desc' ? 'text-red' : ''}}" data-type='price'/>
+          <view class="cuIcon-triangledownfill {{price=='desc' ? 'text-blue' : ''}}" data-type='price'/>
         </view>
       </view>
     </view>
@@ -34,14 +34,14 @@
       <view class="grid text-center" bindtap="sortHandle" data-type='sales'>
         销量
         <view class="margin-left-xs">
-          <view class="cuIcon-triangleupfill {{sales=='asc' ? 'text-red' : ''}}" data-type='sales'/>
+          <view class="cuIcon-triangleupfill {{sales=='asc' ? 'text-blue' : ''}}" data-type='sales'/>
           <view class="basis-df"/>
-          <view class="cuIcon-triangledownfill {{sales=='desc' ? 'text-red' : ''}}" data-type='sales'/>
+          <view class="cuIcon-triangledownfill {{sales=='desc' ? 'text-blue' : ''}}" data-type='sales'/>
         </view>
       </view>
     </view>
     <view class="flex-sub padding-sm margin-xs radius">
-      <view class="{{createTime=='desc' ? 'text-red text-bold' : ''}}" bindtap="sortHandle" data-type='createTime'>
+      <view class="{{createTime=='desc' ? 'text-blue text-bold' : ''}}" bindtap="sortHandle" data-type='createTime'>
         新上架
       </view>
     </view>

@@ -67,7 +67,13 @@
 }
 
 .goods-buy{
-  margin-left: 540rpx;
+  margin-left: 500rpx;
   margin-top: -120rpx;
   padding-bottom: 50rpx;
+}
+
+.buy-now{
+  background-color: #2967ff !important;
+  font-weight:300;
+  width:220rpx;
 }

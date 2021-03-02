@@ -62,7 +62,7 @@ SOFTWARE.
                     currentPage: 1, // 当前页数
                     pageSize: 20, // 每页显示多少条
                     ascs: [],
-                    descs: 'subscribe_time'
+                    descs: 'create_time'
                 },
                 paramsSearch: {},
                 tableLoading: false,

@@ -6,6 +6,7 @@ package com.joolun.web.controller.mall;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.joolun.common.core.controller.BaseController;
 import com.joolun.common.core.domain.AjaxResult;
 import com.joolun.mall.entity.GoodsCategory;
 import com.joolun.mall.service.GoodsCategoryService;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RequestMapping("/goodscategory")
 @Api(value = "goodscategory", tags = "商品类目管理")
-public class GoodsCategoryController {
+public class GoodsCategoryController extends BaseController {
 
     private final GoodsCategoryService goodsCategoryService;
 

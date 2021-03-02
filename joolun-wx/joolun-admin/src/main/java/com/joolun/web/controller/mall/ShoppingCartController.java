@@ -8,6 +8,7 @@ package com.joolun.web.controller.mall;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.joolun.common.core.controller.BaseController;
 import com.joolun.common.core.domain.AjaxResult;
 import com.joolun.mall.entity.ShoppingCart;
 import com.joolun.mall.service.ShoppingCartService;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RequestMapping("/shoppingcart")
 @Api(value = "shoppingcart", tags = "购物车管理")
-public class ShoppingCartController {
+public class ShoppingCartController extends BaseController {
 
 	private final ShoppingCartService shoppingCartService;
 

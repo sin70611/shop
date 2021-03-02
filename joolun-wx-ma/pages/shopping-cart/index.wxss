@@ -4,7 +4,9 @@
   margin-right: 10rpx!important
 }
 .settle-bt{
-  width: 200rpx
+  background-color: #2967ff !important;
+  font-weight:300;
+  width:220rpx;
 }
 .row-img{
   width: 30%!important;
@@ -19,4 +21,22 @@
 }
 .cu-tag {
   white-space: unset!important
+}
+.without {
+  margin: auto;
+}
+.without image {
+  padding-top: 50rpx;
+  width: 360rpx;
+  height: 305rpx;
+}
+.collection{
+  background-color: #2d2d2f !important;
+  font-weight:300;
+  width:220rpx;
+}
+.delete{
+  background-color: #2967ff !important;
+  font-weight:300;
+  width:220rpx;
 }

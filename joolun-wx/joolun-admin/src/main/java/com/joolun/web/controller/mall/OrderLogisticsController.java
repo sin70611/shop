@@ -8,6 +8,7 @@ package com.joolun.web.controller.mall;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.joolun.common.core.controller.BaseController;
 import com.joolun.common.core.domain.AjaxResult;
 import com.joolun.mall.entity.OrderLogistics;
 import com.joolun.mall.enums.OrderLogisticsEnum;
@@ -30,7 +31,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RequestMapping("/orderlogistics")
 @Api(value = "orderlogistics", tags = "订单物流管理")
-public class OrderLogisticsController {
+public class OrderLogisticsController extends BaseController {
 
     private final OrderLogisticsService orderLogisticsService;
 

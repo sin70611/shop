@@ -3,9 +3,10 @@
   margin-right: 10rpx!important
 }
 .row-img{
-  width: 200rpx!important;
-  height: 200rpx!important;
-  border-radius: 10rpx
+  width: 600rpx!important;
+  height: 600rpx!important;
+  margin:0 auto;
+  border-radius: 10rpx;
 }
 .row-info{
   display: block!important;
@@ -29,4 +30,8 @@
 }
 .delivery-way{
   justify-content: unset !important
+}
+.address{
+  line-height:160%;
+  font-weight:300;
 }

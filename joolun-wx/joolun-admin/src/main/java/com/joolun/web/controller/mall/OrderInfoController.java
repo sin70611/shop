@@ -8,6 +8,7 @@ package com.joolun.web.controller.mall;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.joolun.common.core.controller.BaseController;
 import com.joolun.common.core.domain.AjaxResult;
 import com.joolun.mall.config.CommonConstants;
 import com.joolun.mall.constant.MallConstants;
@@ -38,7 +39,7 @@ import java.util.Map;
 @AllArgsConstructor
 @RequestMapping("/orderinfo")
 @Api(value = "orderinfo", tags = "商城订单管理")
-public class OrderInfoController {
+public class OrderInfoController extends BaseController {
 
     private final OrderInfoService orderInfoService;
 	private final OrderLogisticsService orderLogisticsService;

@@ -8,6 +8,7 @@ package com.joolun.web.controller.mall;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.joolun.common.core.controller.BaseController;
 import com.joolun.common.core.domain.AjaxResult;
 import com.joolun.mall.entity.UserAddress;
 import com.joolun.mall.service.UserAddressService;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @RequestMapping("/useraddress")
 @Api(value = "useraddress", tags = "用户收货地址管理")
-public class UserAddressController {
+public class UserAddressController extends BaseController {
 
     private final UserAddressService userAddressService;
 

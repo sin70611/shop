@@ -9,6 +9,7 @@ package com.joolun.web.controller.mall;
 import cn.hutool.core.convert.Convert;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.joolun.common.core.controller.BaseController;
 import com.joolun.common.core.domain.AjaxResult;
 import com.joolun.mall.entity.GoodsSpu;
 import com.joolun.mall.service.GoodsSpuService;
@@ -32,7 +33,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/goodsspu")
 @Api(value = "goodsspu", tags = "spu商品管理")
-public class GoodsSpuController {
+public class GoodsSpuController extends BaseController {
 
     private final GoodsSpuService goodsSpuService;
 
