@@ -521,7 +521,7 @@
                     endTime: this.date[1]
                 }, params, this.paramsSearch)).then(response => {
                     this.tableData = response.data.records
-                    this.page.total = response.data.data.total
+                    this.page.total = response.data.total
                     this.page.currentPage = page.currentPage
                     this.page.pageSize = page.pageSize
                     this.tableLoading = false
