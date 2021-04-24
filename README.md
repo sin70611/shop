@@ -29,7 +29,7 @@
 |  版本  |  基本框架  |  相应功能  |  包含终端  |  了解更多  |
 |---|---|---|---|---|
 |  开源版  |  RuoYi SpringBoot单应用   |  功能简单，单租户（单商城）、单公众号、单小程序  |  只有小程序  |  https://gitee.com/joolun/JooLun-wx  |
-|  商业版  |  SpringCloud微服务、vue前后端分离、uniapp  |  功能强大、模块完善，多租户（多商城）、多店铺、多公众号、多小程序等等  |  小程序、公众号h5、安卓、ios等  |  https://www.joolun.com/  |
+|  商业版  |  SpringCloud微服务、vue前后端分离、uniapp  |  功能强大、模块完善，多租户（多商城）、多店铺、多公众号、多小程序等等  |  小程序、公众号h5、安卓、ios、商户app等  |  https://www.joolun.com/  |
 
 ### 系统需求
 
