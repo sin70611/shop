@@ -26,7 +26,7 @@
 |  uniapp多店版  |  http://demo1.joolun.com  |  ![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114525_cefaeb06_5079715.jpeg "qrcode_for_gh_ae23ad0d32af_258.jpg")  |  微信小程序、H5、安卓、ios App  |
 
 ### 开源版和商业版的区别
-|  产品名  |  基本框架  |  功能模块  |  包含终端  |
+|  版本  |  基本框架  |  功能模块  |  包含终端  |
 |---|---|---|---|
 |  开源版  |  RuoYi boot单应用   |  商城功能简单，单租户商城、单公众号、单小程序  |  只有小程序  |
 |  商业版  |  SpringCloud微服务、uniapp  |  功能强大，多租户商城、多公众号、多小程序  |  小程序、公众号h5、安卓、ios  |
