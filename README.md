@@ -32,6 +32,9 @@
 |  开源版  |  RuoYi SpringBoot单应用   |  功能简单，单租户（单商城）、单公众号、单小程序  |  只有小程序  |  https://gitee.com/joolun/JooLun-wx  |
 |  商业版  |  SpringCloud微服务、Nacos、Sentinel、vue前后端分离、uniapp等  |  功能强大、模块完善，多样化的营销工具，商城自定义拖拽装修，支持阿里oss、七牛云、腾讯cos、minio多种存储方式，多租户（多商城）、多店铺、多公众号、多小程序等等  |  小程序、公众号h5、安卓app、ios app、商户端app等  |  https://www.joolun.com/  |
 
+## 官方QQ群：
+* <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=0b0NQL8Li2G1leiLyi-kqaghfnJhwRxO&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="JooLun小程序商城开源版" title="JooLun小程序商城开源版"></a>：838130518
+
 ### 系统需求
 
 JDK >= 1.8
@@ -78,9 +81,6 @@ Maven >= 3.0
 16. 缓存监控：对系统的缓存信息查询，命令统计等。
 17. 在线构建器：拖动表单元素生成相应的HTML代码。
 18. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
-
-## 官方QQ群：
-* <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=0b0NQL8Li2G1leiLyi-kqaghfnJhwRxO&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="JooLun小程序商城开源版" title="JooLun小程序商城开源版"></a>：838130518
 
 ## 演示图
 ### 截图
