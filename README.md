@@ -79,7 +79,8 @@ Maven >= 3.0
 17. 在线构建器：拖动表单元素生成相应的HTML代码。
 18. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
 
-QQ交流群：838130518
+* 官方QQ群：
+    * <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=HNLRmaIdvnj2e_TGkMspORvIn-AHNZCb&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="乔伦科技 ①群" title="乔伦科技 ①群"></a>：838130518
 
 ## 演示图
 ### 截图
