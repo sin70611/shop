@@ -24,7 +24,7 @@
 |  产品名  |  后台演示地址  |  商城演示二维码  |  包含终端  |
 |---|---|---|---|
 |  小程序商城单店版  |  http://demo.joolun.com  |  ![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114507_937fd986_5079715.jpeg "qrcode_for_gh_6999ad5cfb2f_258.jpg")  |  微信小程序  |
-|  uniapp多店版  |  http://demo1.joolun.com  |  ![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114525_cefaeb06_5079715.jpeg "qrcode_for_gh_ae23ad0d32af_258.jpg")  |  微信小程序、H5、安卓、ios App  |
+|  uniapp多店版  |  http://demo1.joolun.com  |  ![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114525_cefaeb06_5079715.jpeg "qrcode_for_gh_ae23ad0d32af_258.jpg")  |  微信小程序、H5、安卓、ios App、PC端  |
 
 ### 开源版和商业版的区别
 |  版本  |  基本框架  |  相应功能  |  包含终端  |  了解更多  |
