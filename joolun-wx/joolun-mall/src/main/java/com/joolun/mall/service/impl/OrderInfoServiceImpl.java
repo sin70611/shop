@@ -159,7 +159,8 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
 		placeOrderDTO.getSkus().forEach(orderGoods -> {//过滤
 			GoodsSpu goodsSpu = goodsSpuService.getOne(Wrappers.<GoodsSpu>lambdaQuery()
 					.eq(GoodsSpu::getId,orderGoods.getSpuId())
-					.eq(GoodsSpu::getShelf, CommonConstants.YES));
+					.eq(GoodsSpu::getShelf, CommonConstants.YES)
+					.ge(GoodsSpu::getStock,orderGoods.getQuantity()));
 			if(goodsSpu != null){
 				OrderItem orderItem = new OrderItem();
 				orderItem.setOrderId(orderInfo.getId());
