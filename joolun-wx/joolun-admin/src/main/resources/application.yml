@@ -1,7 +1,7 @@
 # 项目相关配置
 ruoyi:
   # 实例演示开关
-  demoEnabled: true
+  demoEnabled: false
   # 文件路径 示例（ Windows配置D:/joolun/uploadPath，Linux配置 /home/joolun/uploadPath）
   profile: D:/joolun/uploadPath
   # 获取ip地址开关
