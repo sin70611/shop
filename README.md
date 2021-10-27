@@ -20,8 +20,8 @@
 |---|---|---|
 |  http://demo2.joolun.com （账号/密码：test/123456）  |  ![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/171054_0a84eb49_5079715.jpeg "qrcode_for_gh_e18eb0ef9a2d_258.jpg")  |  微信小程序  |
 
-### 官方QQ群：
-* <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=0b0NQL8Li2G1leiLyi-kqaghfnJhwRxO&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="JooLun小程序商城开源版" title="JooLun小程序商城开源版"></a>：838130518
+### QQ群：
+* 没有QQ群，有问题可以直接发[Issues](https://gitee.com/joolun/JooLun-wx/issues)
 
 ### 系统需求
 
