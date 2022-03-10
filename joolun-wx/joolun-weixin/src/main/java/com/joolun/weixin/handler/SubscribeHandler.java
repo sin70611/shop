@@ -95,7 +95,9 @@ public class SubscribeHandler extends AbstractHandler {
         wxUser.setAppType(ConfigConstant.WX_APP_TYPE_2);;
         wxUser.setSubscribe(ConfigConstant.SUBSCRIBE_TYPE_YES);
         wxUser.setSubscribeScene(userWxInfo.getSubscribeScene());
-        wxUser.setSubscribeTime(LocalDateTimeUtils.timestamToDatetime(userWxInfo.getSubscribeTime()*1000));
+        if(null != userWxInfo.getSubscribeTime()){
+            wxUser.setSubscribeTime(LocalDateTimeUtils.timestamToDatetime(userWxInfo.getSubscribeTime()*1000));
+        }
         wxUser.setOpenId(userWxInfo.getOpenId());
         wxUser.setNickName(userWxInfo.getNickname());
         wxUser.setSex(String.valueOf(userWxInfo.getSex()));
