@@ -39,14 +39,6 @@ export function addObj(obj) {
   })
 }
 
-export function materialNewsUpdate(obj) {
-  return request({
-    url: '/wxmaterial/materialNews',
-    method: 'put',
-    data: obj
-  })
-}
-
 export function getObj(id) {
   return request({
     url: '/wxmaterial/' + id,
