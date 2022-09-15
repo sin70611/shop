@@ -83,7 +83,7 @@ Maven >= 3.0
 18. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
 
 ### 演示图
-### 截图
+### 开源版截图
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/113219_bd774cf3_5079715.png "QQ截图20210206113004.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/113232_e3bcb374_5079715.png "QQ截图20210206113046.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/113243_3f8c1ec2_5079715.png "QQ截图20210206113140.png")
