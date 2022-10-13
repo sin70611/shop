@@ -183,6 +183,23 @@ export default {
       version: "3.3.0",
     };
   },
+  created() {
+    this.$notify({
+      title: '云服务器抢购',
+      dangerouslyUseHTMLString: true,
+      duration: 0,
+      position: 'bottom-right',
+      message:
+        '<el-row :gutter="20">' +
+        '<el-col :sm="24" :lg="24">' +
+        '<a href="https://www.aliyun.com/minisite/goods?userCode=wnw8gle1" target="_blank">' +
+        '<img style="width: 280px" src="https://images.gitee.com/uploads/images/2021/0622/110750_59b42ced_5079715.jpeg">' +
+        '</a>' +
+        '<p><a style="color: red" href="https://www.aliyun.com/minisite/goods?userCode=wnw8gle1" type="danger" target="_blank">阿里云领取￥2000红包，服务器低至￥91.80/年</a></p>' +
+        '</el-col>' +
+        '</el-row>'
+    })
+  },
   methods: {
     goTarget(href) {
       window.open(href, "_blank");
