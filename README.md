@@ -97,10 +97,6 @@ Maven >= 3.0
         <td><img src="https://images.gitee.com/uploads/images/2020/0305/161111_71e7f26a_5079715.png"/></td>
         <td><img src="https://images.gitee.com/uploads/images/2020/0305/161331_bae82a4f_5079715.png"/></td>
     </tr>
-    <tr>
-        <td><img src="https://images.gitee.com/uploads/images/2020/0305/161342_d8e42604_5079715.png"/></td>
-        
-    </tr>
 </table>
 ### 商业版截图
 ![输入图片说明](https://23592599.s21i.faiusr.com/2/ABUIABACGAAgsuzXmgYohsWjzgIwgA847gU.jpg)
