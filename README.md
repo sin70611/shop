@@ -102,14 +102,6 @@ Maven >= 3.0
         <td></td>
     </tr>
 </table>
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/113219_bd774cf3_5079715.png "QQ截图20210206113004.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/113232_e3bcb374_5079715.png "QQ截图20210206113046.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/113243_3f8c1ec2_5079715.png "QQ截图20210206113140.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/113256_cf5bb28b_5079715.png "QQ截图20210206113121.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/161111_71e7f26a_5079715.png "QQ截图20200305161005.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/161314_7f067064_5079715.png "QQ截图20200305160938.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/161331_bae82a4f_5079715.png "QQ截图20200305160904.png")
-![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/161342_d8e42604_5079715.png "QQ截图20200305160731.png")
 ### 商业版截图
 ![输入图片说明](https://23592599.s21i.faiusr.com/2/ABUIABACGAAgsuzXmgYohsWjzgIwgA847gU.jpg)
 ![输入图片说明](https://23592599.s21i.faiusr.com/4/ABUIABAEGAAgw5ThmAYox7iypAEwsAk4iAQ.png.webp)
