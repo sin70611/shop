@@ -99,7 +99,7 @@ Maven >= 3.0
     </tr>
     <tr>
         <td><img src="https://images.gitee.com/uploads/images/2020/0305/161342_d8e42604_5079715.png"/></td>
-        <td></td>
+        
     </tr>
 </table>
 ### 商业版截图
