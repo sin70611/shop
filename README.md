@@ -21,6 +21,7 @@
 |  http://demo2.joolun.com （账号/密码：test/123456）  |  ![输入图片说明](https://images.gitee.com/uploads/images/2020/0305/171054_0a84eb49_5079715.jpeg "qrcode_for_gh_e18eb0ef9a2d_258.jpg")  |  微信小程序  |
 
 ### [商业版](https://www.joolun.com/)（全新微服务架构、代码更规范、设计更合理、功能更强大），在线体验
+![输入图片说明](https://joolun-plus-1313274050.cos.ap-nanjing.myqcloud.com/joolun-uniapp-wx-ui/Joolun_Plus_13.png)
 |  产品名  |  后台演示地址  |  商城演示二维码  |  包含终端  |
 |---|---|---|---|
 |  小程序商城单店版  |  http://demo.joolun.com  |  ![输入图片说明](https://images.gitee.com/uploads/images/2021/0206/114507_937fd986_5079715.jpeg "qrcode_for_gh_6999ad5cfb2f_258.jpg")  |  微信小程序  |
