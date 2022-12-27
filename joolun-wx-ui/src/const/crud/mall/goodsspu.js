@@ -135,7 +135,7 @@ export const tableOption = {
                 label: '商品图片',
                 prop: 'picUrls',
                 listType: 'picture-card',
-                dataType: 'string',
+                dataType: 'array',
                 type: 'upload',
                 width: 250,
                 rules: [{
