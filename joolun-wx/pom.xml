@@ -31,7 +31,7 @@
         <velocity.version>1.7</velocity.version>
         <jwt.version>0.9.1</jwt.version>
         <swagger.version>2.9.2</swagger.version>
-        <mybatis-plus.version>3.3.2</mybatis-plus.version>
+        <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <hutool.version>5.1.0</hutool.version>
         <weixin-java.version>4.2.8.B</weixin-java.version>
         <ttl.version>2.11.4</ttl.version>
