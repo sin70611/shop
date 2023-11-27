@@ -34,7 +34,7 @@
     "url": "https://gitee.com/y_project/RuoYi-Vue.git"
   },
   "dependencies": {
-    "@smallwei/avue": "2.4.0",
+    "@smallwei/avue": "2.10.5",
     "@riophae/vue-treeselect": "0.4.0",
     "axios": "0.21.0",
     "clipboard": "2.0.6",
@@ -58,7 +58,7 @@
     "vuedraggable": "2.24.3",
     "vuex": "3.6.0",
     "stompjs": "^2.3.3",
-    "vue-video-player": "^5.0.2",
+    "vue-video-player": "^6.0.0",
     "moment": "^2.24.0",
     "vue-quill-editor": "3.0.6",
     "benz-amr-recorder": "^1.0.14"
